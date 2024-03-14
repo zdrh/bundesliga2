@@ -9,6 +9,7 @@ use Psr\Log\LoggerInterface;
 
 use App\Models\Menu;
 
+
 class BaseFrontendController extends BaseController
 {
     
@@ -18,5 +19,11 @@ class BaseFrontendController extends BaseController
         parent::initController($request, $response, $logger);
         $menu = new Menu();
         $this->data['menu'] = $menu->where('type', 1)->orderBy('priority', 'desc')->findAll();
+        $logged = $this->ionAuth->loggedIn();
+        if($logged) {
+            $this->data['logged'] = true;
+        } else {
+            $this->data['logged'] = false;
+        }
     }
 }

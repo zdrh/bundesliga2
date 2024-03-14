@@ -16,14 +16,32 @@ class Auth extends BaseFrontendController
 
     public function login()
     {
-        if($this->session->message) {
-            $this->data['message'] = $this->session->message;
-            $this->data['type'] = $this->session->type;
+        $this->data["error"] = $this->session->error;
+        echo view('frontend/auth/login', $this->data);
+        
+    }
+
+    public function loginComplete() {
+        $login = $this->request->getPost('login');
+        $password = $this->request->getPost('pswd');
+
+        $loggedIn = $this->ionAuth->login($login, $password);
+        if($loggedIn) {
+            return redirect()->to('admin/dashboard');
+        } else {
+            $error = array(
+                'message' => "Špatné uživatelské jméno nebo heslo",
+                'class' => "danger",
+                'real' => true
+            );
+            $this->session->setFlashdata('error', $error);
+            return redirect()->to('login');
         }
-        echo view('frontend/auth/loginform', $this->data);
     }
 
     public function logout()
     {
+        $this->ionAuth->logout();
+        return redirect()->to('/');
     }
 }

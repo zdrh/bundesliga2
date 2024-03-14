@@ -25,47 +25,54 @@ use \IonAuth\Libraries\IonAuth;
  */
 abstract class BaseController extends Controller
 {
-    /**
-     * Instance of the main Request object.
-     *
-     * @var CLIRequest|IncomingRequest
-     */
-    protected $request;
+   /**
+    * Instance of the main Request object.
+    *
+    * @var CLIRequest|IncomingRequest
+    */
+   protected $request;
 
-    /**
-     * An array of helpers to be loaded automatically upon
-     * class instantiation. These helpers will be available
-     * to all other controllers that extend BaseController.
-     *
-     * @var array
-     */
-    protected $helpers = ['html', 'form'];
-    protected $ionAuth;
-    protected $data;
-    /**
-     * Be sure to declare properties for any property fetch you initialized.
-     * The creation of dynamic property is deprecated in PHP 8.2.
-     */
-    // protected $session;
-    protected $session;
-    
-    /**
-     * @return void
-     */
-    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
-    {
-        // Do Not Edit This Line
-        parent::initController($request, $response, $logger);
+   /**
+    * An array of helpers to be loaded automatically upon
+    * class instantiation. These helpers will be available
+    * to all other controllers that extend BaseController.
+    *
+    * @var array
+    */
+   protected $helpers = ['html', 'form', 'myform'];
+   protected $ionAuth;
+   protected $data;
+   /**
+    * Be sure to declare properties for any property fetch you initialized.
+    * The creation of dynamic property is deprecated in PHP 8.2.
+    */
+   // protected $session;
+   protected $session;
 
-        // Preload any models, libraries, etc, here.
+   /**
+    * @return void
+    */
+   public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+   {
+      // Do Not Edit This Line
+      parent::initController($request, $response, $logger);
 
-         $this->session = \Config\Services::session();
-         $this->ionAuth = new IonAuth();
-         if($this->ionAuth->loggedIn()) {
-            $this->data['profile'] = 'layout/profile';
-         } else {
-            $this->data['profile'] = 'layout/notLogged';
-         }
-        
-    }
+      // Preload any models, libraries, etc, here.
+
+      $this->session = \Config\Services::session();
+      $this->ionAuth = new IonAuth();
+      if ($this->ionAuth->loggedIn()) {
+         $this->data['profile'] = 'layout/profile';
+      } else {
+         $this->data['profile'] = 'layout/notLogged';
+      }
+      if (!isset($this->session->error)) {
+         $error = array(
+            'message' => "",
+            'class' => "",
+            'real' => false
+         );
+         $this->session->setFlashdata('error', $error);
+      }
+   }
 }

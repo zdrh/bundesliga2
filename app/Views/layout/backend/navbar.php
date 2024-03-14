@@ -18,9 +18,7 @@
         ?>
 
     </ul>
-        <?= $this->include($profile);
-        
-
-         ?>
+   
+        <?= $this->include($profile); ?>
    
 </nav>
