@@ -30,12 +30,33 @@ class Main extends BaseConfig
 
     //tlačítka pro přidávání, editaci a mazání a třídy pro daná tlačítka;
     var $form = array(
-        'addBtn' =>'<i class="fa-solid fa-circle-plus fa-xs"></i> Přidat',
+        'addBtn' => '<i class="fa-solid fa-circle-plus fa-xs"></i> Přidat',
         'editBtn' => '<i class="fa-solid fa-pen fa-2xs"></i> Upravit',
         'deleteBtn' => '<i class="fa-solid fa-trash fa-2xs"></i> Smazat',
         'addClass' => 'btn btn-primary',
         'editClass' => 'btn btn-warning',
-        'deleteClass' => 'btn btn-danger'
+        'deleteClass' => 'btn btn-danger',
+        'divInputClass' => 'mb-3',
+        'submitButton' => array(
+            'name' => 'send',
+            'id' => 'send',
+            'type' => 'submit',
+            'class' => 'btn btn-primary',
+            'content' => 'Odeslat'
+        ),
+
     );
-    
+
+
+    //nastavení povolených hodnot
+    public $year = array(
+        'assoc_foundation_min' => 1895,
+        'assoc_foundation_max' => 2001,
+        'league_season_min' => 1945,
+        'league_season_max' => 2035,
+        'team_foundation_min' => 1850,
+        'team_foundation_max' => 2015,
+        'team_dissolve_min' => 1950,
+        'team_dissolve_max' => 2025
+    );
 }
