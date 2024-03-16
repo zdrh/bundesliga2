@@ -23,4 +23,12 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->get('sezona/(:num)/edit', 'Season::edit/$1');
     $routes->put('sezona/update', 'Season::update');
     $routes->delete('sezona/(:num)/delete', 'Season::delete/$1');
+
+    //svazy
+    $routes->get('seznam-svazu', 'Association::index');
+    $routes->get('svaz/pridat', 'Association::add');
+    $routes->post('svaz/create', 'Association::create');
+    $routes->get('svaz/(:num)/edit', 'Association::edit/$1');
+    $routes->put('svaz/update', 'Association::update');
+    $routes->delete('svaz/(:num)/delete', 'Association::delete/$1');
 });

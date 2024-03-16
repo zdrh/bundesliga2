@@ -26,7 +26,7 @@ if (!function_exists('form_modal')) {
         $result .= "<div class=\"modal-footer\">\n";
         $result .= form_open($route);
         $result .= "<input type=\"hidden\" name=\"_method\" value=\"DELETE\">";
-        $result .= "<input type=\"hidden\" name=\"id\" value=\"".$idRow."\">";
+        $result .= "<input type=\"hidden\" name=\"id\" value=\"" . $idRow . "\">";
         $result .= "<button type=\"submit\" class=\"btn btn-" . $type . "\" data-bs-dismiss=\"modal\">" . $buttonText . "</button>\n";
         $result .= "</form>\n";
         $result .= "</div>\n</div>\n</div>\n</div>\n";
@@ -36,7 +36,7 @@ if (!function_exists('form_modal')) {
 }
 
 
-if (! function_exists('form_input_bs')) {
+if (!function_exists('form_input_bs')) {
     /**
      * Text Input Field. If 'type' is passed in the $type field, it will be
      * used as the input type, for making 'email', 'phone', etc input fields.
@@ -45,42 +45,62 @@ if (! function_exists('form_input_bs')) {
      * @param string $bs - třídy pro div, ve kterém celý input bude
      * @param string $label - text v labelu inputu
      * @param string $type - type inputu - text, number, password apod.
+     * @param boolean $floating - jestli to má být floating label nebo ne
      * @param boolean $notation - jestli se mají před uvozovky přidávat \ (pokud to cchi použít v javascriptu, dát false)
      */
-    function form_input_bs($data = '', string $bs = '', string $label = '',  string $type = 'text', $notation = true): string
+    function form_input_bs($data = '', string $bs = '', string $label = '',  string $type = 'text', $floating = true,  $notation = true): string
     {
-        if($notation) {
+        if ($notation) {
             $quot = "\"";
             $endL = "\n";
             $tab = "\t";
         } else {
-            $quot = "\\\"";
+            $quot = "";
             $endL = "";
             $tab = "";
         }
         $defaults = [
             'type'  => $type,
             'name'  => is_array($data) ? '' : $data,
-           
+
         ];
-        if($bs == '') {
-            $return = "<div>".$endL;
+        if ($bs == '') {
+            if (!$floating) {
+                $return = "<div>" . $endL;
+               
+            } else {
+                $return = "<div class=" . $quot . "form-floating" . $quot . ">" . $endL;
+                
+            }
         } else {
-            $return = '<div class='.$quot.$bs.$quot.'>'.$endL;
+            if (!$floating) {
+                $return = '<div class=' . $quot . $bs . $quot . '>' . $endL;
+                
+            } else {
+                $return = "<div class=\"" . $bs .  " form-floating\">" . $endL;
+               
+            }
         }
 
-        if($label != '') {
+        $input = $tab . '<input class=' . $quot . 'form-control' . $quot . ' ' . my_parse_form_attributes($data, $defaults, $quot) . " />" . $endL;
+
+        if ($label != '') {
             $for = $data["id"];
-            $return .= $tab.'<label for='.$quot.$for.$quot.' class='.$quot.'form-label'.$quot.'>'.$label."</label>".$endL;
+            if ($floating) {
+                $return .= $input. $tab . '<label for=' . $quot . $for . $quot . '>' . $label . "</label>" . $endL;
+            } else {
+                $return .= $tab . '<label for=' . $quot . $for . $quot . ' class=' . $quot . 'form-label' . $quot . '>' . $label . "</label>" . $endL.$input;
+            }
         }
+        $return .= "</div>" . $endL;
 
-        $return .= $tab.'<input class='.$quot.'form-control'.$quot.' ' . my_parse_form_attributes($data, $defaults, $quot) . " />".$endL."</div>".$endL;
+        
         return $return;
     }
 }
 
 
-if (! function_exists('my_parse_form_attributes')) {
+if (!function_exists('my_parse_form_attributes')) {
     /**
      * Parse the form attributes
      *
@@ -98,7 +118,7 @@ if (! function_exists('my_parse_form_attributes')) {
                     unset($attributes[$key]);
                 }
             }
-            if (! empty($attributes)) {
+            if (!empty($attributes)) {
                 $default = array_merge($default, $attributes);
             }
         }
@@ -106,19 +126,18 @@ if (! function_exists('my_parse_form_attributes')) {
         $att = '';
 
         foreach ($default as $key => $val) {
-            if (! is_bool($val)) {
+            if (!is_bool($val)) {
                 if ($key === 'value') {
                     $val = esc($val);
-                } elseif ($key === 'name' && ! strlen($default['name'])) {
+                } elseif ($key === 'name' && !strlen($default['name'])) {
                     continue;
                 }
-                $att .= $key . '='.$notation . $val . $notation . ($key === array_key_last($default) ? '' : ' ');
+                $att .= $key . '=' . $notation . $val . $notation . ($key === array_key_last($default) ? '' : ' ');
             } else {
                 $att .= $key . ' ';
             }
         }
 
         return $att;
-    
     }
 }

@@ -8,19 +8,18 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 use App\Models\Season as SeasonModel;
-use Config\Main as MainConfig;
+
+
 class Season extends BaseBackendController
 {
     var $seasonModel;
-    var $mainConfig;
+    
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         parent::initController($request, $response, $logger);
         $this->seasonModel = new SeasonModel();
-        $this->mainConfig = new MainConfig();
-        $this->data["form"] = $this->mainConfig->form;
-        $this->data["year"] = $this->mainConfig->year;
-        $this->data["tableTemplate"] = $this->mainConfig->template;
+        
+       
     }
 
     public function index()

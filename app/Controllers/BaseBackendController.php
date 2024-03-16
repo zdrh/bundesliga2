@@ -8,13 +8,21 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 use App\Models\Menu;
+use Config\Main as MainConfig;
 
 class BaseBackendController extends BaseController
 {
+    var $mainConfig;
+
     function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         parent::initController($request, $response, $logger);
         $menu = new Menu();
         $this->data['menu'] = $menu->where('type', 2)->orderBy('priority', 'desc')->findAll();
+        
+        $this->mainConfig = new MainConfig();
+        $this->data["form"] = $this->mainConfig->form;
+        $this->data["year"] = $this->mainConfig->year;
+        $this->data["tableTemplate"] = $this->mainConfig->template;
     }
 }

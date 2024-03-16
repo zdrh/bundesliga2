@@ -36,7 +36,8 @@ class Main extends BaseConfig
         'addClass' => 'btn btn-primary',
         'editClass' => 'btn btn-warning',
         'deleteClass' => 'btn btn-danger',
-        'divInputClass' => 'mb-3',
+        'divInputClass' => "mb-3",
+        
         'submitButton' => array(
             'name' => 'send',
             'id' => 'send',

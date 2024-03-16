@@ -32,8 +32,8 @@
         );
         ?>
 
-        <?= form_input_bs($dataStart, $form["divInputClass"], "Začátek", "number"); ?>
-        <?= form_input_bs($dataFinish, $form["divInputClass"], "Konec", "number"); ?>
+        <?= form_input_bs($dataStart, $form["divInputClass"], "Začátek", "number", false); ?>
+        <?= form_input_bs($dataFinish, $form["divInputClass"], "Konec", "number", false); ?>
         <?= form_hidden('id_season', $sezona->id_season); ?>
         
         <?php
