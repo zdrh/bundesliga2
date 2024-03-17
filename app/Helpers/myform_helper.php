@@ -100,6 +100,118 @@ if (!function_exists('form_input_bs')) {
 }
 
 
+if (! function_exists('form_dropdown_bs')) {
+    /**
+     * Drop-down Menu, není multiselect
+     *
+     * @param string $name - name selectu
+     * @param mixed $options - asociativní pole možností dropdownu, klíčem je value v option, hodnotou zobrazovaná hodnota
+     * @param string $bs - třídy v rámci divu, který obalí celý dropdown
+     * @param string $label - hodnota v rámci značky label
+     * @param mixed $selected - pole nebo hodnota, která je vybraná
+     * @param mixed $disabled - pole klíčů hodnot, které budou mít atribut disabled
+     * @param mixed $extra - dodatečné atributy ve značce select, asociativní pole
+     * @param boolean $notation - pokud do javascriptu, pak false, jinak true
+     * 
+     */
+    function form_dropdown_bs($name = '', $options = [], $extra = '', string $bs = '', string $label = '', $disabled = [],$selected = [] , $notation = true): string
+    {
+        
+        if($notation) {
+            $quot = "\"";
+            $endL = "\n";
+            $tab = "\t";
+        } else {
+            $quot = "\\\"";
+            $endL = "";
+            $tab = "";
+        }
+        
+        $defaults = ['name' => $name];
+
+        if (! is_array($selected)) {
+            $selected = [$selected];
+        }
+        if (! is_array($disabled)) {
+            $disabled = [$disabled];
+        }
+        if (! is_array($options)) {
+            $options = [$options];
+        }
+      
+        
+
+        // Standardize selected as strings, like the option keys will be
+        foreach ($selected as $key => $item) {
+            $selected[$key] = (string) $item;
+        }
+
+        // Standardize selected as strings, like the option keys will be
+        foreach ($disabled as $key => $item) {
+            $disabled[$key] = (string) $item;
+        }
+
+        $extra2    = stringify_attributes($extra, false, $notation);
+        
+
+        //počáteční div
+        if($bs == '') {
+            $form = "<div>".$endL;
+        } else {
+            $form = '<div class='.$quot.$bs.$quot.'>'.$endL;
+        }
+
+        //label
+        if($label != '') {
+            
+            $form.= '<label for='.$quot.$extra['id'].$quot.' class='.$quot.'form-label'.$quot.'>'.$label."</label>".$endL;
+        }
+
+        //počíteční select
+        $form     .= '<select name='.$quot.$name.$quot.' class='.$quot.'form-select'.$quot . $extra2  . '>'.$endL;
+        //options
+        foreach ($options as $key => $val) {
+            // Keys should always be strings for strict comparison
+            $key = (string) $key;
+           
+            if (is_array($val)) {
+                if (empty($val)) {
+                    continue;
+                }
+
+                
+                
+                
+                foreach ($val as $optgroupKey => $optgroupVal) {
+                    // Keys should always be strings for strict comparison
+                    $optgroupKey = (string) $optgroupKey;
+
+                    $sel = in_array($optgroupKey, $selected, true) ? ' selected='.$quot.'selected'.$quot : '';
+                    $dis = in_array($optgroupKey, $disabled, true) ? ' disabled='.$quot.'disabled'.$quot : '';
+                   
+                    $form .= '<option value='.$quot . htmlspecialchars($optgroupKey) . $quot . $sel .$dis. '>' . $optgroupVal . '</option>'.$endL;
+                    
+                    
+                }
+
+               
+            } else {
+                $form .= '<option value='.$quot . htmlspecialchars($key).$quot
+                    . (in_array($key, $selected, true) ? ' selected='.$quot.'selected'.$quot : '') 
+                    . (in_array($key, $disabled, true) ? ' disabled='.$quot.'disabled'.$quot : '') . 
+                    '>'
+                    . $val . '</option>'.$endL;
+            }
+        }
+
+        $form .= '</select>'.$endL;
+        $form .= '</div>'.$endL;
+
+        return $form;
+    }
+}
+
+
 if (!function_exists('my_parse_form_attributes')) {
     /**
      * Parse the form attributes

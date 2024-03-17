@@ -1,0 +1,9 @@
+img.table {
+    width: 40px;
+
+}
+
+option:disabled {
+    color: white;
+    background-color: silver;
+}

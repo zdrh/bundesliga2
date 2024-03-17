@@ -33,9 +33,11 @@ class Main extends BaseConfig
         'addBtn' => '<i class="fa-solid fa-circle-plus fa-xs"></i> Přidat',
         'editBtn' => '<i class="fa-solid fa-pen fa-2xs"></i> Upravit',
         'deleteBtn' => '<i class="fa-solid fa-trash fa-2xs"></i> Smazat',
+        'listBtn' => '<i class="fa-solid fa-table"></i>',
         'addClass' => 'btn btn-primary',
         'editClass' => 'btn btn-warning',
         'deleteClass' => 'btn btn-danger',
+        'listClass' => 'btn btn-info',
         'divInputClass' => "mb-3",
         
         'submitButton' => array(
@@ -60,4 +62,7 @@ class Main extends BaseConfig
         'team_dissolve_min' => 1950,
         'team_dissolve_max' => 2025
     );
+
+    //cesta k uploadocaným souborů
+    public $uploadPath = "upload/";
 }

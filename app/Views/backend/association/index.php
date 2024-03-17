@@ -4,7 +4,7 @@
 
 <h1>Seznam asociací</h1>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-10">
 
 
         <?php
@@ -30,9 +30,11 @@
             echo "<!-- začátek modalu -->\n";
             echo form_modal("modal" . $key, $row->id_association, "Smazat svaz", "Chceš opravdu smazat svaz " . $row->general_name ."?", "admin/svaz/" . $row->id_association . "/delete");
             echo "<!-- konec modalu -->\n";
-
-
-            $table->addRow($row->general_name, $row->short_name, $row->founded, $editBtn . $deleteBtn);
+            $data = array(
+                'class' => $form['listClass'].' ms-3'
+            );
+            $listSeasonAsocBtn = anchor("admin/svaz/".$row->id_association."/seznam-sezon",  $form['listBtn']." Sezony", $data);
+            $table->addRow($row->general_name, $row->short_name, $row->founded, $editBtn . $deleteBtn. $listSeasonAsocBtn);
         }
 
 
