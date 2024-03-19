@@ -8,11 +8,13 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 use App\Models\Menu;
-use Config\Main as MainConfig;
+use App\Libraries\ErrorMessage;
+
 
 class BaseBackendController extends BaseController
 {
     var $mainConfig;
+    var $errorMessage;
 
     function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -20,7 +22,8 @@ class BaseBackendController extends BaseController
         $menu = new Menu();
         $this->data['menu'] = $menu->where('type', 2)->orderBy('priority', 'desc')->findAll();
         
-        $this->mainConfig = new MainConfig();
+        $this->errorMessage = new ErrorMessage();
+        
         $this->data["form"] = $this->mainConfig->form;
         $this->data["year"] = $this->mainConfig->year;
         $this->data["tableTemplate"] = $this->mainConfig->template;

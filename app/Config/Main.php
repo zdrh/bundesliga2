@@ -64,5 +64,23 @@ class Main extends BaseConfig
     );
 
     //cesta k uploadocaným souborů
-    public $uploadPath = "upload/";
+    public $uploadPath  = array(
+        'general' => 'upload',
+        'logoAssoc' => 'upload/logo/association/'
+    );
+
+    //error hlášky
+    public $errorMessage = array(
+        'generalError' => 'Bohužel něco se pokazilo',
+        'generalSuccess' => 'Vše proběhlo v pořádku',
+        'dbAddError' => 'Záznam se nepřidal',
+        'dbEditError' => 'Záznam se neaktulizoval',
+        'dbDeleteError' => 'Záznam se nesmazal',
+        'dbAddSuccess' => 'Záznam byl přidán do databáze',
+        'dbEditsuccess' => 'Zaznam se aktualizoval',
+        'dbDeleteSuccess' => 'Záznam byl smazán',
+        'uploadError' => 'Nepodařilo se nahrát obrázek',
+        'uploadSuccess' => 'Upload proběhl v pořádku'
+    );
+
 }

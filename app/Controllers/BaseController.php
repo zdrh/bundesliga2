@@ -10,6 +10,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 use \IonAuth\Libraries\IonAuth;
+use Config\Main as MainConfig;
 
 
 
@@ -42,6 +43,8 @@ abstract class BaseController extends Controller
    protected $helpers = ['html', 'form', 'myform'];
    protected $ionAuth;
    protected $data;
+   protected $mainConfig;
+   
    /**
     * Be sure to declare properties for any property fetch you initialized.
     * The creation of dynamic property is deprecated in PHP 8.2.
@@ -67,12 +70,17 @@ abstract class BaseController extends Controller
          $this->data['profile'] = 'layout/notLogged';
       }
       if (!isset($this->session->error)) {
-         $error = array(
+         $error[] = array(
             'message' => "",
             'class' => "",
             'real' => false
          );
          $this->session->setFlashdata('error', $error);
+         
+        //var_dump($this->session->error);
       }
+      $this->data["error"] = $this->session->error;
+      $this->mainConfig = new MainConfig();
+      $this->data['uploadPath'] = $this->mainConfig->uploadPath;
    }
 }

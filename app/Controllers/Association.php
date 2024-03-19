@@ -42,7 +42,10 @@ class Association extends BaseBackendController
             'founded' => $founded
         );
 
-        $this->asocModel->save($data);
+        $result =  $this->asocModel->save($data);
+
+        $pole[] = [$result, 'dbAdd'];
+        $this->errorMessage->makeErrorMessage($pole);
 
         return redirect()->route('admin/seznam-svazu');
     }
@@ -66,13 +69,21 @@ class Association extends BaseBackendController
             'founded' => $founded,
             'id_association' => $id_association
         );
-        $this->asocModel->save($data);
+        $result = $this->asocModel->save($data);
+
+        $pole[] = [$result, 'dbEdit'];
+        $this->errorMessage->makeErrorMessage($pole);
+
         return redirect()->route('admin/seznam-svazu');
     }
 
     public function delete($id)
     {
-        $this->asocModel->delete($id);
+        $result = $this->asocModel->delete($id);
+
+        $pole[] = [$result, 'dbDelete'];
+        $this->errorMessage->makeErrorMessage($pole);
+
         return redirect()->route('admin/seznam-svazu');
     }
 }

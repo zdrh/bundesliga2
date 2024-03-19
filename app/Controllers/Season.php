@@ -47,8 +47,13 @@ class Season extends BaseBackendController
                 'start' => $row,
                 'finish' => $finish[$key]
             );
-            $this->seasonModel->save($data);
+           $result =  $this->seasonModel->save($data);
         }
+
+        //generování hlášek
+        
+        $pole[] = [$result, 'dbAdd'];
+        $this->errorMessage->makeErrorMessage($pole);
         
        
         return redirect()->route('admin/seznam-sezon');
@@ -69,12 +74,21 @@ class Season extends BaseBackendController
             'finish' => $finish,
             'id_season' => $id_season
         );
-        $this->seasonModel->save($data);
+        $result = $this->seasonModel->save($data);
+
+        $pole[] = [$result, 'dbEdit'];
+        $this->errorMessage->makeErrorMessage($pole);
+
+
         return redirect()->route('admin/seznam-sezon');
     }
 
     public function delete($id) {
-        $this->seasonModel->delete($id);
+        $result = $this->seasonModel->delete($id);
+
+        $pole[] = [$result, 'dbDelete'];
+        $this->errorMessage->makeErrorMessage($pole);
+
         return redirect()->route('admin/seznam-sezon');
     }
 }
