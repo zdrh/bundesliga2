@@ -10,6 +10,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 use \IonAuth\Libraries\IonAuth;
+use App\Libraries\ErrorMessage;
 use Config\Main as MainConfig;
 
 
@@ -44,6 +45,7 @@ abstract class BaseController extends Controller
    protected $ionAuth;
    protected $data;
    protected $mainConfig;
+   protected $errorMessage;
    
    /**
     * Be sure to declare properties for any property fetch you initialized.
@@ -64,11 +66,14 @@ abstract class BaseController extends Controller
 
       $this->session = \Config\Services::session();
       $this->ionAuth = new IonAuth();
+
       if ($this->ionAuth->loggedIn()) {
          $this->data['profile'] = 'layout/profile';
       } else {
          $this->data['profile'] = 'layout/notLogged';
       }
+
+      $this->errorMessage = new ErrorMessage();
       if (!isset($this->session->error)) {
          $error[] = array(
             'message' => "",
@@ -77,7 +82,7 @@ abstract class BaseController extends Controller
          );
          $this->session->setFlashdata('error', $error);
          
-        //var_dump($this->session->error);
+        
       }
       $this->data["error"] = $this->session->error;
       $this->mainConfig = new MainConfig();

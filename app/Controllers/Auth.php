@@ -16,7 +16,7 @@ class Auth extends BaseFrontendController
 
     public function login()
     {
-        $this->data["error"] = $this->session->error;
+       
         echo view('frontend/auth/login', $this->data);
         
     }
@@ -29,12 +29,9 @@ class Auth extends BaseFrontendController
         if($loggedIn) {
             return redirect()->to('admin/dashboard');
         } else {
-            $error = array(
-                'message' => "Špatné uživatelské jméno nebo heslo",
-                'class' => "danger",
-                'real' => true
-            );
-            $this->session->setFlashdata('error', $error);
+            $pole[] = [$loggedIn, 'login'];
+            $this->errorMessage->makeErrorMessage($pole);
+        
             return redirect()->to('login');
         }
     }

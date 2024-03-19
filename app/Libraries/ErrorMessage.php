@@ -33,7 +33,7 @@ class ErrorMessage
                 $mess = $row[1].'Error';
                 $result[] = array(
                     'message' => $this->config->errorMessage[$mess],
-                    'class' => 'error',
+                    'class' => 'danger',
                     'real' => true
                 );
             }

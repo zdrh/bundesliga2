@@ -3,6 +3,10 @@ img.table {
 
 }
 
+img.edit {
+    width: 100px;
+}
+
 option:disabled {
     color: white;
     background-color: silver;

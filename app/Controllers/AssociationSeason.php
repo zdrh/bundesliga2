@@ -38,7 +38,7 @@ class AssociationSeason extends BaseBackendController
     public function index($id_association)
     {
         $this->data['svaz'] = $this->association->find($id_association);
-        $sezony = $this->assocSeason->select('association_season.name as assoc_name, association_season.logo, season.start, season.finish, season.id_season, league_season.league_name_in_season, league.name as league_name')->join('season', 'season.id_season=association_season.id_season', 'inner')->join('league_season', 'league_season.id_assoc_season=association_season.id_assoc_season', 'inner')->join('league', 'league.id_league=league_season.id_league', 'inner')->where('association_season.id_association', $id_association)->orderBy('start', 'asc')->orderBy('league.level', 'asc')->findAll();
+        $sezony = $this->assocSeason->select('association_season.name as assoc_name, association_season.logo, season.start, season.finish, season.id_season, league_season.league_name_in_season, league.name as league_name')->join('season', 'season.id_season=association_season.id_season', 'inner')->join('league_season', 'league_season.id_assoc_season=association_season.id_assoc_season', 'left')->join('league', 'league.id_league=league_season.id_league', 'left')->where('association_season.id_association', $id_association)->orderBy('start', 'asc')->orderBy('league.level', 'asc')->findAll();
         $this->data['sezony'] = $this->arrayLib->groupArray($sezony, 'id_season');
 
         echo view('backend/association_season/index', $this->data);
@@ -83,5 +83,72 @@ class AssociationSeason extends BaseBackendController
         $this->errorMessage->makeErrorMessage($pole);
 
         return redirect()->to('admin/svaz/' . $id_association . '/seznam-sezon');
+    }
+
+    public function edit($id_association, $id_season)
+    {
+
+        $this->data['svaz'] = $this->association->join('association_season', 'association_season.id_association=association.id_association', 'inner')->where('id_season', $id_season)->find($id_association);
+        $this->data['sezony'] = $this->sql->query1($id_association);
+        $this->data['aktualniSezona'] = $id_season;
+        echo view('backend/association_season/edit', $this->data);
+    }
+
+    public function update()
+    {
+        $name = $this->request->getPost('name');
+        $logo = $this->request->getFile('logo');
+        $id_season = $this->request->getPost('id_season');
+        $id_association = $this->request->getPost('id_association');
+        $assoc = $this->association->find($id_association);
+        //$newName = "logo_" . $assoc->short_name . "_" . $id_association . "_" . $season;
+        //test jestli se uploadovalo
+        if ($logo->getName() != "") {
+            $assoc = $this->association->find($id_association);
+            $newName = "logo_" . $assoc->short_name . "_" . $id_association . "_" . $id_season;
+
+            $logoUpload = $this->fileLib->uploadFile($logo, $this->data['uploadPath']['logoAssoc'], $newName);
+
+            //protože se uploadovalo, tak uděláte test úspěšnosti uploadu
+            if (!$logoUpload["uploaded"]) {
+                $result = false;
+            } else {
+                $data = array(
+                    'id_season' => $id_season,
+                    'id_association' => $id_association,
+                    'name' => $name,
+                    'logo' => $logoUpload["name"]
+                );
+            }
+            $pole[] = [$logoUpload['uploaded'], 'upload'];
+        } else {
+            //neuploadovalo se
+            $data = array(
+                'id_season' => $id_season,
+                'id_association' => $id_association,
+                'name' => $name
+            );
+            
+        }
+
+        $result = $this->assocSeason->save($data);
+
+        //generování hlášek
+        
+        $pole[] = [$result, 'dbEdit'];
+        $this->errorMessage->makeErrorMessage($pole);
+
+        return redirect()->to('admin/svaz/' . $id_association . '/seznam-sezon');
+    }
+
+    public function delete($id_association, $id_season) {
+       $id_assoc_season =  $this->assocSeason->where('id_association', $id_association)->where('id_season', $id_season)->findAll()[0]->id_assoc_season;
+       $result = $this->assocSeason->delete($id_assoc_season);
+
+       $pole[] = [$result, 'dbDelete'];
+       $this->errorMessage->makeErrorMessage($pole);
+
+       return redirect()->to('admin/svaz/' . $id_association . '/seznam-sezon');
+
     }
 }

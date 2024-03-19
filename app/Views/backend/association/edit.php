@@ -8,7 +8,7 @@
         <?php
         echo form_open('admin/svaz/update');
         $dataName = array(
-            'name' => 'name',
+            'name' => 'general_name',
             'id' => 'name',
             'required' => 'required',
             'value' => $svaz->general_name
@@ -36,6 +36,7 @@
         <?= form_input_bs($dataShortName, $form["divInputClass"], "Zkratka asociace", "text"); ?>
         <?= form_input_bs($dataFounded, $form["divInputClass"], "Rok založení", "number", false); ?>
         <?= form_hidden('id_association', $svaz->id_association); ?>
+        <?= form_hidden('_method', 'PUT'); ?>
         
         <?php
 

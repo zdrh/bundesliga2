@@ -36,4 +36,16 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->get('svaz/(:num)/seznam-sezon', 'AssociationSeason::index/$1');
     $routes->get('svaz/(:num)/sezona/pridat', 'AssociationSeason::add/$1');
     $routes->post('svaz/sezona/create', 'AssociationSeason::create');
+    $routes->get('svaz/(:num)/sezona/(:num)/edit', 'AssociationSeason::edit/$1/$2');
+    $routes->put('svaz/sezona/update', 'AssociationSeason::update');
+    $routes->delete('svaz/(:num)/sezona/(:num)/delete', 'AssociationSeason::delete/$1/$2');
+
+    //ligy
+    $routes->get('seznam-lig', 'League::index');
+    $routes->get('liga/pridat', 'League::add');
+    $routes->post('liga/create', 'League::create');
+    $routes->get('liga/(:num)/edit', 'League::edit/$1');
+    $routes->put('liga/update', 'League::update');
+    $routes->delete('liga/(:num)/delete', 'League::delete/$1');
+
 });

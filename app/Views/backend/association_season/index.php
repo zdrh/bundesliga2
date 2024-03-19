@@ -30,12 +30,16 @@
             $logo = img($dataImg);
             //sloupec soutěže
             $soutez = "";
+
             foreach ($row as $key3 => $row3) {
-                if ($key3 > 0) {
-                    $soutez .= " ";
+                if (!is_null($row3->league_name)) {
+                    if ($key3 > 0) {
+                        $soutez .= " ";
+                    }
+                    $soutez .= $row3->league_name_in_season . " (" . $row3->league_name . ")";
                 }
-                $soutez .= $row3->league_name_in_season . " (" . $row3->league_name . ")";
             }
+
             //buttony
             $dataEdit = array(
                 'class' => $form['editClass'],

@@ -73,11 +73,12 @@ class Main extends BaseConfig
     public $errorMessage = array(
         'generalError' => 'Bohužel něco se pokazilo',
         'generalSuccess' => 'Vše proběhlo v pořádku',
+        'loginError' => 'Špatné uživatelské jméno nebo heslo',
         'dbAddError' => 'Záznam se nepřidal',
         'dbEditError' => 'Záznam se neaktulizoval',
         'dbDeleteError' => 'Záznam se nesmazal',
         'dbAddSuccess' => 'Záznam byl přidán do databáze',
-        'dbEditsuccess' => 'Zaznam se aktualizoval',
+        'dbEditSuccess' => 'Zaznam se aktualizoval',
         'dbDeleteSuccess' => 'Záznam byl smazán',
         'uploadError' => 'Nepodařilo se nahrát obrázek',
         'uploadSuccess' => 'Upload proběhl v pořádku'
