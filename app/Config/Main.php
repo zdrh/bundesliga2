@@ -66,7 +66,8 @@ class Main extends BaseConfig
     //cesta k uploadocaným souborů
     public $uploadPath  = array(
         'general' => 'upload',
-        'logoAssoc' => 'upload/logo/association/'
+        'logoAssoc' => 'upload/logo/association/',
+        'logoLeague' => 'upload/logo/league/'
     );
 
     //error hlášky

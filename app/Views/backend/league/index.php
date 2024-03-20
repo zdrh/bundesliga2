@@ -34,7 +34,10 @@
                 'class' => $form['listClass'].' ms-3'
             );
            
-            $table->addRow($row->name, $row->level, $row->active, $row->general_name, $editBtn . $deleteBtn);
+           
+            $listSeasonBtn = anchor("admin/liga/".$row->id_league."/seznam-sezon",  $form['listBtn']." Sezony", $data);
+
+            $table->addRow($row->name, $row->level, $row->active, $row->general_name, $editBtn . $deleteBtn. $listSeasonBtn);
         }
 
 
