@@ -45,7 +45,9 @@ class Association extends BaseBackendController
         $result =  $this->asocModel->save($data);
 
         $pole[] = [$result, 'dbAdd'];
-        $this->errorMessage->makeErrorMessage($pole);
+        $data2[] =  $this->errorMessage->prepareMessage($pole);
+        $this->session->setFlashdata('error', $data2);
+
 
         return redirect()->route('admin/seznam-svazu');
     }
@@ -72,7 +74,10 @@ class Association extends BaseBackendController
         $result = $this->asocModel->save($data);
 
         $pole[] = [$result, 'dbEdit'];
-        $this->errorMessage->makeErrorMessage($pole);
+        $data2[] =  $this->errorMessage->prepareMessage($pole);
+        $this->session->setFlashdata('error', $data2);
+
+
 
         return redirect()->route('admin/seznam-svazu');
     }
@@ -82,7 +87,8 @@ class Association extends BaseBackendController
         $result = $this->asocModel->delete($id);
 
         $pole[] = [$result, 'dbDelete'];
-        $this->errorMessage->makeErrorMessage($pole);
+        $data[] =  $this->errorMessage->prepareMessage($pole);
+        $this->session->setFlashdata('error', $data);
 
         return redirect()->route('admin/seznam-svazu');
     }

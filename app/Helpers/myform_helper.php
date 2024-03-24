@@ -122,7 +122,7 @@ if (! function_exists('form_dropdown_bs')) {
             $endL = "\n";
             $tab = "\t";
         } else {
-            $quot = "\\\"";
+            $quot = "";
             $endL = "";
             $tab = "";
         }

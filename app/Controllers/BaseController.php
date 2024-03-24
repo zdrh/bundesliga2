@@ -12,8 +12,7 @@ use Psr\Log\LoggerInterface;
 use \IonAuth\Libraries\IonAuth;
 use App\Libraries\ErrorMessage;
 use Config\Main as MainConfig;
-
-
+use stdClass;
 
 /**
  * Class BaseController
@@ -47,6 +46,7 @@ abstract class BaseController extends Controller
    protected $mainConfig;
    protected $errorMessage;
    
+   
    /**
     * Be sure to declare properties for any property fetch you initialized.
     * The creation of dynamic property is deprecated in PHP 8.2.
@@ -75,17 +75,15 @@ abstract class BaseController extends Controller
 
       $this->errorMessage = new ErrorMessage();
       if (!isset($this->session->error)) {
-         $error[] = array(
-            'message' => "",
-            'class' => "",
-            'real' => false
-         );
-         $this->session->setFlashdata('error', $error);
+         $chyba[] = $this->errorMessage->prepareMessage('', '', '', false);
+
+         $this->session->setFlashdata('error', $chyba);
          
         
       }
       $this->data["error"] = $this->session->error;
       $this->mainConfig = new MainConfig();
       $this->data['uploadPath'] = $this->mainConfig->uploadPath;
+      $this->session->set('lastPage', current_url());
    }
 }

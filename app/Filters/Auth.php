@@ -30,7 +30,7 @@ class Auth implements FilterInterface
         $this->ionAuth = new IonAuth();
         if (!$this->ionAuth->loggedIn()) {
 
-           // $this->session->setFlashdata('lastPage', current_url());
+           
             return redirect()->to('login');
         }
     }

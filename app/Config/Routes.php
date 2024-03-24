@@ -51,6 +51,7 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     //sezony lig
     $routes->get('liga/(:num)/seznam-sezon', 'LeagueSeason::index/$1');
     $routes->get('liga/(:num)/sezona/pridat', 'LeagueSeason::add/$1');
+    $routes->post('liga/sezona/create', 'LeagueSeason::create');
     $routes->get('liga/(:num)/sezona/(:num)/edit', 'LeagueSeason::edit/$1/$2');
     $routes->delete('liga/(:num)/sezona/(:num)/delete', 'LeagueSeason::delete/$1/$2');
 

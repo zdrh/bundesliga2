@@ -78,9 +78,10 @@ class AssociationSeason extends BaseBackendController
         }
 
         //generování hlášek
-        $pole[] = [$logoUpload['uploaded'], 'upload'];
-        $pole[] = [$result, 'dbAdd'];
-        $this->errorMessage->makeErrorMessage($pole);
+        $data2[] =  $this->errorMessage->prepareMessage($logoUpload['uploaded'], 'upload');
+        $data2[] = $this->errorMessage->prepareMessage($result, 'dbAdd');
+        $this->session->setFlashdata('error', $data2);
+
 
         return redirect()->to('admin/svaz/' . $id_association . '/seznam-sezon');
     }
@@ -120,7 +121,7 @@ class AssociationSeason extends BaseBackendController
                     'logo' => $logoUpload["name"]
                 );
             }
-            $pole[] = [$logoUpload['uploaded'], 'upload'];
+            $data2[] =  $this->errorMessage->prepareMessage($logoUpload['uploaded'], 'upload');
         } else {
             //neuploadovalo se
             $data = array(
@@ -135,8 +136,11 @@ class AssociationSeason extends BaseBackendController
 
         //generování hlášek
         
-        $pole[] = [$result, 'dbEdit'];
-        $this->errorMessage->makeErrorMessage($pole);
+       
+       
+        $data2[] =  $this->errorMessage->prepareMessage($result, 'dbEdit');
+        $this->session->setFlashdata('error', $data2);
+
 
         return redirect()->to('admin/svaz/' . $id_association . '/seznam-sezon');
     }
@@ -146,7 +150,9 @@ class AssociationSeason extends BaseBackendController
        $result = $this->assocSeason->delete($id_assoc_season);
 
        $pole[] = [$result, 'dbDelete'];
-       $this->errorMessage->makeErrorMessage($pole);
+       $data[] =  $this->errorMessage->prepareMessage($pole);
+        $this->session->setFlashdata('error', $data);
+
 
        return redirect()->to('admin/svaz/' . $id_association . '/seznam-sezon');
 

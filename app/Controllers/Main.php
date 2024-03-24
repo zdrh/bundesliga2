@@ -22,7 +22,7 @@ class Main extends BaseFrontendController
 
     public function index()
     {
-        
+       // var_dump($this->session->lastPage);
         echo view('frontend/main/index', $this->data);
     }
 }

@@ -24,6 +24,7 @@ class League extends BaseBackendController
     }
     public function index()
     {
+        
         $this->data['ligy'] = $this->league->join('association', 'association.id_association=league.id_association')->orderBy('active', 'DESC')->orderBy('level', 'ASC')->orderBy('name', 'asc')->findAll();
 
         echo view('backend/league/index', $this->data);
@@ -51,7 +52,9 @@ class League extends BaseBackendController
         $result =  $this->league->save($data);
 
         $pole[] = [$result, 'dbAdd'];
-        $this->errorMessage->makeErrorMessage($pole);
+        $data2[] =  $this->errorMessage->prepareMessage($pole);
+        $this->session->setFlashdata('error', $data2);
+
 
         return redirect()->route('admin/seznam-lig');
     }
@@ -80,7 +83,9 @@ class League extends BaseBackendController
         $result =  $this->league->save($data);
 
         $pole[] = [$result, 'dbEdit'];
-        $this->errorMessage->makeErrorMessage($pole);
+        $data2[] =  $this->errorMessage->prepareMessage($pole);
+        $this->session->setFlashdata('error', $data2);
+
 
         return redirect()->route('admin/seznam-lig');
     }
@@ -90,7 +95,9 @@ class League extends BaseBackendController
         $result = $this->league->delete($id_league);
 
         $pole[] = [$result, 'dbDelete'];
-        $this->errorMessage->makeErrorMessage($pole);
+        $data[] =  $this->errorMessage->prepareMessage($pole);
+        $this->session->setFlashdata('error', $data);
+
 
         return redirect()->route('admin/seznam-lig');
     }

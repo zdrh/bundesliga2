@@ -53,7 +53,9 @@ class Season extends BaseBackendController
         //generování hlášek
         
         $pole[] = [$result, 'dbAdd'];
-        $this->errorMessage->makeErrorMessage($pole);
+        $data2[] =  $this->errorMessage->prepareMessage($pole);
+        $this->session->setFlashdata('error', $data2);
+
         
        
         return redirect()->route('admin/seznam-sezon');
@@ -77,7 +79,9 @@ class Season extends BaseBackendController
         $result = $this->seasonModel->save($data);
 
         $pole[] = [$result, 'dbEdit'];
-        $this->errorMessage->makeErrorMessage($pole);
+        $data2[] =  $this->errorMessage->prepareMessage($pole);
+        $this->session->setFlashdata('error', $data2);
+
 
 
         return redirect()->route('admin/seznam-sezon');
@@ -87,7 +91,9 @@ class Season extends BaseBackendController
         $result = $this->seasonModel->delete($id);
 
         $pole[] = [$result, 'dbDelete'];
-        $this->errorMessage->makeErrorMessage($pole);
+        $data[] =  $this->errorMessage->prepareMessage($pole);
+        $this->session->setFlashdata('error', $data);
+
 
         return redirect()->route('admin/seznam-sezon');
     }
