@@ -2,19 +2,19 @@
 
 <?= $this->section('content'); ?>
 
-<h1>Přidat sezónu ligy <?= $liga->name ?></h1>
+<h1>Editovat sezónu ligy <?= $league->name ?></h1>
 <div class="row">
     <div class="col-md-4">
         <?php
 
-        echo form_open_multipart('admin/liga/sezona/create');
+        echo form_open_multipart('admin/liga/sezona/update');
 
         $dataGeneralName = array(
             'name' => 'general_name',
             'id' => 'general_name',
             'required' => 'required',
             'disabled' => 'disabled',
-            'value' => $liga->name
+            'value' => $league->name
         );
 
 
@@ -30,14 +30,12 @@
             'name' => 'name',
             'id' => 'name',
             'required' => 'required',
-            'placeholder' => 'b'
+            'value' =>  $league_season->league_name_in_season
         );
-
 
         $dataLogo = array(
             'name' => 'logo',
             'id' => 'logo',
-            'required' => 'required',
             'accept' => '.jpg, .png'
         );
 
@@ -46,7 +44,8 @@
             0 => "Vyber hodnotu"
         );
         $disabled = array(0 => 0);
-        $selected[] = 0;
+
+        $selected[] = $league_season->id_league_season;
         $extra = array(
             'class' => 'form-select',
             'id' => 'league'
@@ -58,19 +57,13 @@
             1 =>  'Nemá skupiny',
             2 => 'Má skupiny'
         );
+
+        $selectedGroups[] = $league_season->groups;
         $disabledGroups = array(0 => 0);
 
         $extraGroups = array(
             'class' => 'form-select',
             'id' => 'groups'
-        );
-        //data pro input se skupinama
-        $dataGroups = array(
-            'name' => 'groupsList[]',
-            'id' => 'groupsList',
-            'required' => 'required',
-            'placeholder' => 'b',
-            'class' => 'remove'
         );
         //dropdown pro skupiny
         $optionsGroupsType = array(
@@ -78,6 +71,14 @@
             1 =>  'Základní skupina',
             2 => 'Finálová část'
         );
+ //data pro input se skupinama
+ $dataGroups = array(
+    'name' => 'groupsList[]',
+    'id' => 'groupsList',
+    'required' => 'required',
+    
+    'class' => 'remove'
+);
 
         $extraGroupsType = array(
             'class' => 'form-select remove',
@@ -95,7 +96,7 @@
         foreach ($sezony as $sezona) {
             $casSezony = $sezona->start . "-" . $sezona->finish;
             $options[$sezona->id_season] = $casSezony;
-            if (is_null($sezona->deleted_at)) {
+            if (!is_null($sezona->id_league_season)) {
                 $disabled[] = $sezona->id_season;
             }
         }
@@ -106,14 +107,29 @@
         <?= form_input_bs($dataGeneralName, $form["divInputClass"], "Obecný název ligy"); ?>
         <?= form_button($data_button_general_name); ?>
         <?= form_input_bs($dataName, $form["divInputClass"], "Název ligy v sezóně"); ?>
+        <div>
+
+            <?php
+
+            $data = array(
+                'src' => $uploadPath["logoLeague"] . $league_season->logo,
+                'class' => 'edit'
+            );
+            echo img($data);
+
+            ?>
+        </div>
         <?= form_input_bs($dataLogo, $form["divInputClass"], "Logo ligy v této sezóně", 'file', false); ?>
         <?= form_dropdown_bs('season', $options, $extra, 'mb-3', "Vyber sezónu", $disabled, $selected) ?>
-        <?= form_dropdown_bs('groups', $optionsGroups, $extraGroups, 'mb-3', "Skupiny", $disabledGroups, $selected) ?>
-        <?= form_hidden('id_league', $liga->id_league) ?>
-        <?= form_hidden('id_association', $liga->id_association) ?>
-        <div id="groupsDiv"></div>
+        <?= form_dropdown_bs('groups', $optionsGroups, $extraGroups, 'mb-3', "Skupiny", $disabledGroups, $selectedGroups) ?>
+        <?= form_hidden('id_league_season', $league_season->id_league_season) ?>
+        <?= form_hidden('id_league', $league->id_league) ?>
+        <?= form_hidden('id_assoc_season', $league_season->id_assoc_season) ?>
+        <?= form_hidden('_method', 'PUT') ?>
+       
+           
 
-        <?= form_button($data_button_add) ?>
+       
         <?= form_button($form["submitButton"]) ?>
 
         <?php
@@ -122,40 +138,14 @@
     </div>
 </div>
 <script>
-    $(document).ready(function(){
-        $('#add_group').hide();
-    });
+  
 
     $("#general_name_button").click(function() {
         let text = $('#general_name').val();
         $('#name').val(text);
     });
 
-    $("#groups").change(function() {
-        let groups = $('#groups').val()
-        if (groups == 2) {
-            let input = '<?= form_input_bs($dataGroups, $form["divInputClass"], "Název skupiny", 'text', true, false);  ?>';
-            let dropDown = '<?= form_dropdown_bs('groupsType[]', $optionsGroupsType, $extraGroupsType, "mb-3", "Typ skupiny", $disabledGroups, $selected, false);  ?>';
-
-
-            $('#groupsDiv').prepend(dropDown);
-            $('#groupsDiv').prepend(input);
-            $('#add_group').show();
-
-        } else {
-            $('#groupsDiv').children().empty('.remove');
-            $('#add_group').hide();
-        }
-    });
-
-    $('#add_group').click(function() {
-        let input = '<?= form_input_bs($dataGroups, $form["divInputClass"], "Název skupiny", 'text', true, false);  ?>';
-        let dropDown = $('<?= form_dropdown_bs('groupsType[]', $optionsGroupsType, $extraGroupsType, "mb-3", "Typ skupiny", $disabledGroups, $selected, false);  ?>');
-
-        $('#groupsDiv').append(input);
-        $('#groupsDiv').append(dropDown);
-        
-    });
+   
 </script>
 
 <?= $this->endSection(); ?>

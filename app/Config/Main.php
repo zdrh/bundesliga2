@@ -85,4 +85,20 @@ class Main extends BaseConfig
         'uploadSuccess' => 'Upload proběhl v pořádku'
     );
 
+    //relace mezi tabulkami
+    public $joinTable = array(
+        'season_association_season' => 'season.id_season=association_season.id_season',
+        'association_season_season' => 'season.id_season=association_season.id_season',
+        'association_association_season' => 'association.id_association=association_season.id_association',
+        'association_season_association' => 'association.id_association=association_season.id_association',
+        'association_league' => 'league.id_association=association.id_league',
+        'league_association' => 'league.id_association=association.id_league',
+        'league_league_season' => 'league.id_league=league_season.id_league',
+        'league_season_league' => 'league.id_league=league_season.id_league',
+        'league_season_association_season' => 'league_season.id_assoc_season=association_season.id_assoc_season',
+        'association_season_league_season' => 'league_season.id_assoc_season=association_season.id_assoc_season',
+        'league_season_league_season_group' => 'league_season.id_league_season=league_season_group.id_league_season',
+        'league_season_group_league_season' => 'league_season.id_league_season=league_season_group.id_league_season',
+    );
+
 }

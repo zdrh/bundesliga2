@@ -15,7 +15,7 @@
         );
         echo anchor('admin/liga/' . $liga->id_league . '/sezona/pridat', $form['addBtn'], $data);
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('Sezóna', 'Název ligy', 'Logo', 'Organizátor', 'Skupiny','');
+        $table->setHeading('Sezóna', 'Název ligy', 'Logo', 'Organizátor', 'Skupiny (Počet)','');
         foreach ($sezony as $key =>  $row) {
 
             //sloupec sezona
@@ -29,8 +29,15 @@
             //sloupec skupiny
             if ($row->groups == 2) {
                 $skupiny = "ano";
+                if($row->pocet == 0) {
+                    $pocet = " <span class=\"text-bg-danger\">(".$row->pocet."</span>)";
+                } else {
+                    $pocet = " (".$row->pocet.")";
+                }
+                
             } else {
                 $skupiny = "ne";
+                $pocet = "";
             }
 
             //buttony
@@ -51,7 +58,7 @@
 
             //button na správu skupin
             if ($row->groups == 2) {
-                $listBtn = anchor('admin/liga/' . $liga->id_league . '/sezona/' . $row->id_season . '/sprava-skupin', $form['listBtn']." Správa skupin", $dataList);
+                $listBtn = anchor('admin/liga/' . $liga->id_league . '/sezona/' . $row->id_season . '/seznam-skupin', $form['listBtn']." Správa skupin", $dataList);
             } else {
                
                 $listBtn = "";
@@ -65,10 +72,10 @@
 
 
             echo "<!-- začátek modalu -->\n";
-            echo form_modal("modal" . $key, $liga->id_league, "Smazat sezonu ligy", "Chceš opravdu smazat sezonu " . $sezonaCas . " pro ligu " . $row->league_name . "?", "admin/ligaz/" . $liga->id_league . "/sezona/" . $row->id_season . "/delete");
+            echo form_modal("modal" . $key, $row->id_league_season, "Smazat sezonu ligy", "Chceš opravdu smazat sezonu " . $sezonaCas . " pro ligu " . $row->league_name . "?", "admin/liga/" . $liga->id_league . "/sezona/" . $row->id_season . "/delete");
             echo "<!-- konec modalu -->\n";
            
-            $table->addRow($sezonaCas, $row->league_name_in_season, $logo, $row->association_name, $skupiny, $editBtn . $deleteBtn . $listBtn . $listSeasonBtn);
+            $table->addRow($sezonaCas, $row->league_name_in_season, $logo, $row->association_name, $skupiny.$pocet, $editBtn . $deleteBtn . $listBtn . $listSeasonBtn);
         }
 
 

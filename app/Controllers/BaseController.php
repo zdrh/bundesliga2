@@ -45,6 +45,7 @@ abstract class BaseController extends Controller
    protected $data;
    protected $mainConfig;
    protected $errorMessage;
+  
    
    
    /**
@@ -84,6 +85,7 @@ abstract class BaseController extends Controller
       $this->data["error"] = $this->session->error;
       $this->mainConfig = new MainConfig();
       $this->data['uploadPath'] = $this->mainConfig->uploadPath;
+      $this->data['join'] = $this->mainConfig->joinTable;
       $this->session->set('lastPage', current_url());
    }
 }

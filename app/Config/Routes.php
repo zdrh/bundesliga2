@@ -53,8 +53,14 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->get('liga/(:num)/sezona/pridat', 'LeagueSeason::add/$1');
     $routes->post('liga/sezona/create', 'LeagueSeason::create');
     $routes->get('liga/(:num)/sezona/(:num)/edit', 'LeagueSeason::edit/$1/$2');
+    $routes->put('liga/sezona/update', 'LeagueSeason::update');
     $routes->delete('liga/(:num)/sezona/(:num)/delete', 'LeagueSeason::delete/$1/$2');
 
     //skupiny ligy
-    $routes->get('liga/(:num)/sezona/(:num)/sprava-skupin', 'LeagueSeasonGroup::index/$1/$2');
+    $routes->get('liga/(:num)/sezona/(:num)/seznam-skupin', 'LeagueSeasonGroup::index/$1/$2');
+    $routes->get('liga/(:num)/sezona/(:num)/skupina/pridat', 'LeagueSeasonGroup::add/$1/$2');
+    $routes->post('liga/sezona/skupina/create', 'LeagueSeasonGroup::create');
+    $routes->get('liga/(:num)/sezona/(:num)/skupina/(:num)/edit', 'LeagueSeasonGroup::edit/$1/$2/$3');
+    $routes->put('liga/sezona/skupina/update', 'LeagueSeasonGroup::update');
+    $routes->delete('liga/(:num)/sezona/(:num)/skupina/$3/smazat', 'LeagueSeasonGroup::delete/$1/$2/$3');
 });
