@@ -196,7 +196,7 @@ class LeagueSeason extends BaseBackendController
     public function delete($id_league, $id_season) {
         $id_assoc_season = $this->associationSeason->join('association', 'association_season.id_association=association.id_association', 'inner')->join('league', 'league.id_association=association.id_association', 'inner')->where('league.id_league', $id_league)->where('association_season.id_season', $id_season)->findAll()[0]->id_assoc_season;
         $id_league_season = $this->leagueSeason->where('id_league', $id_league)->where('id_assoc_season', $id_assoc_season)->findAll()[0]->id_league_season;
-        var_dump($id_league_season);
+        
         
         $this->leagueSeason->transStart();
         $result = $this->leagueSeason->delete($id_league_season);

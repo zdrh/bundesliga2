@@ -62,5 +62,5 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->post('liga/sezona/skupina/create', 'LeagueSeasonGroup::create');
     $routes->get('liga/(:num)/sezona/(:num)/skupina/(:num)/edit', 'LeagueSeasonGroup::edit/$1/$2/$3');
     $routes->put('liga/sezona/skupina/update', 'LeagueSeasonGroup::update');
-    $routes->delete('liga/(:num)/sezona/(:num)/skupina/$3/smazat', 'LeagueSeasonGroup::delete/$1/$2/$3');
+    $routes->delete('liga/(:num)/sezona/(:num)/skupina/(:num)/delete', 'LeagueSeasonGroup::delete/$1/$2/$3');
 });
