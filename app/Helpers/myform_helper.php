@@ -55,7 +55,7 @@ if (!function_exists('form_input_bs')) {
             $endL = "\n";
             $tab = "\t";
         } else {
-            $quot = "";
+            $quot = "\\\"";
             $endL = "";
             $tab = "";
         }
@@ -77,7 +77,7 @@ if (!function_exists('form_input_bs')) {
                 $return = '<div class=' . $quot . $bs . $quot . '>' . $endL;
                 
             } else {
-                $return = "<div class=\"" . $bs .  " form-floating\">" . $endL;
+                $return = "<div class=". $quot . $bs .  " form-floating".$quot.">" . $endL;
                
             }
         }
@@ -122,7 +122,7 @@ if (! function_exists('form_dropdown_bs')) {
             $endL = "\n";
             $tab = "\t";
         } else {
-            $quot = "";
+            $quot = "\\\"";
             $endL = "";
             $tab = "";
         }
@@ -150,9 +150,8 @@ if (! function_exists('form_dropdown_bs')) {
         foreach ($disabled as $key => $item) {
             $disabled[$key] = (string) $item;
         }
-
-        $extra2    = stringify_attributes($extra, false, $notation);
-        
+        $default = array();
+        $extra2    = my_parse_form_attributes($extra, $default, $quot);
 
         //počáteční div
         if($bs == '') {

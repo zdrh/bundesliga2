@@ -63,4 +63,15 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->get('liga/(:num)/sezona/(:num)/skupina/(:num)/edit', 'LeagueSeasonGroup::edit/$1/$2/$3');
     $routes->put('liga/sezona/skupina/update', 'LeagueSeasonGroup::update');
     $routes->delete('liga/(:num)/sezona/(:num)/skupina/(:num)/delete', 'LeagueSeasonGroup::delete/$1/$2/$3');
+
+    //týmy
+    $routes->get('seznam-tymu', 'Team::index');
+    $routes->get('tym/pridat', 'Team::add');
+    $routes->post('tym/create', 'Team::create');
+    $routes->get('tym/import', 'Team::import');
+    $routes->post('tym/createImport', 'Team::createImport');
+    $routes->get('tym/(:num)/edit', 'Team::edit/$1');
+    $routes->put('tym/update', 'Team::update');
+    $routes->delete('tym/(:num)/delete', 'Team::delete/$1');
+
 });

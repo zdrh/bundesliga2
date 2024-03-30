@@ -31,6 +31,7 @@ class Main extends BaseConfig
     //tlačítka pro přidávání, editaci a mazání a třídy pro daná tlačítka;
     var $form = array(
         'addBtn' => '<i class="fa-solid fa-circle-plus fa-xs"></i> Přidat',
+        'importBtn' => '<i class="fa-solid fa-circle-plus fa-xs"></i> Importovat',
         'editBtn' => '<i class="fa-solid fa-pen fa-2xs"></i> Upravit',
         'deleteBtn' => '<i class="fa-solid fa-trash fa-2xs"></i> Smazat',
         'listBtn' => '<i class="fa-solid fa-table"></i>',
@@ -100,5 +101,8 @@ class Main extends BaseConfig
         'league_season_league_season_group' => 'league_season.id_league_season=league_season_group.id_league_season',
         'league_season_group_league_season' => 'league_season.id_league_season=league_season_group.id_league_season',
     );
+
+    //stránkování
+    public $perPage = 20;
 
 }

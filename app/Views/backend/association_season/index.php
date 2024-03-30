@@ -32,11 +32,11 @@
             $soutez = "";
 
             foreach ($row as $key3 => $row3) {
-                if (!is_null($row3->league_name)) {
+                if (!is_null($row3->name)) {
                     if ($key3 > 0) {
                         $soutez .= " ";
                     }
-                    $soutez .= $row3->league_name_in_season . " (" . $row3->league_name . ")";
+                    $soutez .= $row3->league_name_in_season . " (" . $row3->name . ")";
                 }
             }
 

@@ -7,9 +7,12 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
+use CodeIgniter\Database\RawSql;
+
 use App\Models\AssociationSeason as AsocSeason;
 use App\Models\Association;
 use App\Models\Season;
+use App\Models\LeagueSeason;
 use App\Models\Sql;
 
 use App\Libraries\ArrayLibrary;
@@ -20,6 +23,7 @@ class AssociationSeason extends BaseBackendController
     var $assocSeason;
     var $association;
     var $season;
+    var $leagueSeason;
     var $arrayLib;
     var $sql;
     var $fileLib;
@@ -30,6 +34,7 @@ class AssociationSeason extends BaseBackendController
         $this->assocSeason = new AsocSeason();
         $this->association = new Association();
         $this->season = new Season();
+        $this->leagueSeason = new LeagueSeason();
         $this->sql = new Sql();
         $this->arrayLib = new ArrayLibrary();
         $this->fileLib = new  FileLibrary();
@@ -37,10 +42,14 @@ class AssociationSeason extends BaseBackendController
 
     public function index($id_association)
     {
-        $this->data['svaz'] = $this->association->find($id_association);
-        $sezony = $this->assocSeason->select('association_season.name as assoc_name, association_season.logo, season.start, season.finish, season.id_season, league_season.league_name_in_season, league.name as league_name')->join('season', 'season.id_season=association_season.id_season', 'inner')->join('league_season', 'league_season.id_assoc_season=association_season.id_assoc_season', 'left')->join('league', 'league.id_league=league_season.id_league', 'left')->where('association_season.id_association', $id_association)->orderBy('start', 'asc')->orderBy('league.level', 'asc')->findAll();
-        $this->data['sezony'] = $this->arrayLib->groupArray($sezony, 'id_season');
 
+        $this->data['svaz'] = $this->association->find($id_association);
+
+        
+        $sql = '(SELECT league_season.id_assoc_season, league_season.league_name_in_season, league_season.logo, league.name, league.level FROM league_season INNER JOIN league ON league.id_league=league_season.id_league WHERE league_season.deleted_at is null)ls';
+        $sezony = $this->assocSeason->select('association_season.name as assoc_name, association_season.logo, season.start, season.finish, association_season.id_season, ls.league_name_in_season, ls.name')->join('season', $this->data['join']['association_season_season'], 'inner')->join($sql,'ls.id_assoc_season=association_season.id_assoc_season','left')->where('association_season.id_association', $id_association)->where('association_season.deleted_at IS NULL')->orderBy('start', 'asc')->orderBy('ls.level', 'asc')->findAll();
+        $this->data['sezony'] = $this->arrayLib->groupArray($sezony, 'id_season');
+       
         echo view('backend/association_season/index', $this->data);
     }
 

@@ -769,6 +769,8 @@ if (! function_exists('parse_form_attributes')) {
      * @param array|string $attributes List of attributes
      * @param array        $default    Default values
      */
+
+     
     function parse_form_attributes($attributes, array $default): string
     {
         if (is_array($attributes)) {
