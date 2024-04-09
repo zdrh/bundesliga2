@@ -40,11 +40,12 @@ abstract class BaseController extends Controller
     *
     * @var array
     */
-   protected $helpers = ['html', 'form', 'myform'];
+   protected $helpers = ['html', 'form', 'myform', 'myhtml'];
    protected $ionAuth;
    protected $data;
    protected $mainConfig;
    protected $errorMessage;
+   protected $delRows;
   
    
    
@@ -87,5 +88,8 @@ abstract class BaseController extends Controller
       $this->data['uploadPath'] = $this->mainConfig->uploadPath;
       $this->data['join'] = $this->mainConfig->joinTable;
       $this->session->set('lastPage', current_url());
+      $this->delRows = $this->mainConfig->deletedRows;
+      $this->data["form"] = $this->mainConfig->form;
+      $this->data["tableTemplate"] = $this->mainConfig->template;
    }
 }

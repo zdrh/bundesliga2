@@ -14,6 +14,7 @@
         "benedmunds/codeigniter-ion-auth": "4.x-dev",
         "codeigniter4/framework": "^4.0",
         "components/font-awesome": "^6.5",
+        "istvan-ujjmeszaros/bootstrap-duallistbox": "v4.x-dev",
         "twbs/bootstrap": "^5.3"
     },
     "require-dev": {

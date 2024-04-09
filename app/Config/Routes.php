@@ -11,6 +11,11 @@ $routes->post('login-complete', 'Auth::loginComplete');
 $routes->get('logout', 'Auth::logout');
 
 
+//frontend
+$routes->get('seznam-sezon', 'SeasonF::index');
+$routes->post('sezona/view','SeasonF::view');
+$routes->get('sezona/zobraz/(:any)/(:num)', 'SeasonF::show/$2');
+$routes->get('sezona/(:any)/zobraz/liga/(:num)', 'LeagueSeasonF::show/$2');
 
 //administrace
 $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
@@ -73,5 +78,23 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->get('tym/(:num)/edit', 'Team::edit/$1');
     $routes->put('tym/update', 'Team::update');
     $routes->delete('tym/(:num)/delete', 'Team::delete/$1');
+    
+    //Správa lig - přidání týmů, zápasů atd
+    $routes->get('liga/(:num)/info', 'TeamLeagueSeason::index/$1');
+    //seznam týmů skupiny
+    $routes->get('liga/(:num)/seznam-tymu', 'TeamLeagueSeason::showGroup/$1');
+    $routes->get('liga/(:num)/tym/pridat', 'TeamLeagueSeason::add/$1');
+    $routes->post('liga/tym/create', 'TeamLeagueSeason::create');
+    $routes->get('liga/(:num)/tym/(:num)/edit', 'TeamLeagueSeason::edit/$1/$2');
+    $routes->put('liga/tym/update', 'TeamLeagueSeason::update');
 
+    //sezony týmu
+    $routes->get('tym/(:num)/seznam-sezon', 'TeamSeason::index/$1');
+    
+    //zápasy
+    $routes->get('liga/skupina/(:num)/zapasy/pridat', 'Game::add/$1');
+    $routes->post('liga/skupina/zapasy/create', 'Game::create');
+    $routes->get('liga/skupina/(:num)/zapasy/(:num)/edit', 'Game::edit/$2');
+
+    
 });

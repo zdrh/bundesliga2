@@ -39,7 +39,7 @@
             'class' => 'dissolve form-control'
         );
 
-        $options[0] = "Vyber tým";
+        $options[''] = "Vyber tým";
         foreach ($tymy as $row) {
             $options[$row->id_team] = $row->general_name;
         }
@@ -47,8 +47,8 @@
             'id' => 'team'
         );
 
-        $disabled[] = 0;
-        $selected[] = 0;
+        $disabled[] = '';
+        $selected[] = '';
 
         $dataAddNext = array(
             'name' => 'add-next',
@@ -74,9 +74,17 @@
         </form>
 
         <script>
+            let count = 0;
             $('#add-team').click(function() {
+                count++;
                 value = "<hr><?php echo form_input_bs($dataName, $form["divInputClass"], "Obecný název klubu", 'text', 'true', false) . form_input_bs($dataShortName, $form["divInputClass"], "Zkratka klubu", 'text', 'true', false) . form_input_bs($dataFounded, $form["divInputClass"], "Rok založení", "number", false, false) . form_input_bs($dataDissolved, $form["divInputClass"], "Rok rozpuštění", "number", false, false) . form_dropdown_bs('follower[]', $options, $extra, 'mb-3', 'Vyber nástupce', $disabled, $selected, false) ?>";
                 $('div#add-new').append(value);
+
+            });
+            $('#send').click(function() {
+                $('select').each(function () {
+                    
+                });
             });
         </script>
 

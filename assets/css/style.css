@@ -11,3 +11,15 @@ option:disabled {
     color: white;
     background-color: silver;
 }
+
+.no-padding {
+    padding: 0px;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0px;
+}
+
+tr.fixture {
+    font-size: 14px;
+}

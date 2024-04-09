@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24c3d91325625c49ce0040130e0eb491",
+    "content-hash": "3f0a9571f251a4e4ab8fd9b09c23d240",
     "packages": [
         {
             "name": "benedmunds/codeigniter-ion-auth",
@@ -169,6 +169,51 @@
                 "source": "https://github.com/components/font-awesome/tree/6.5.1"
             },
             "time": "2023-12-11T15:51:37+00:00"
+        },
+        {
+            "name": "istvan-ujjmeszaros/bootstrap-duallistbox",
+            "version": "v4.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox.git",
+                "reference": "3d7896239dc1c91dfafe858e3e840fea4812b1e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/istvan-ujjmeszaros/bootstrap-duallistbox/zipball/3d7896239dc1c91dfafe858e3e840fea4812b1e5",
+                "reference": "3d7896239dc1c91dfafe858e3e840fea4812b1e5",
+                "shasum": ""
+            },
+            "suggest": {
+                "components/jquery": "2.0.*",
+                "twbs/bootstrap": "3.*"
+            },
+            "default-branch": true,
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "István Ujj-Mészáros",
+                    "homepage": "https://github.com/istvan-ujjmeszaros"
+                }
+            ],
+            "description": "A responsive dual listbox widget optimized for Twitter Bootstrap. It works on all modern browsers and on touch devices.",
+            "homepage": "https://www.virtuosoft.eu/code/bootstrap-duallistbox/",
+            "keywords": [
+                "bootstrap",
+                "bootstrap duallistbox",
+                "bootstrap select",
+                "duallistbox",
+                "select"
+            ],
+            "support": {
+                "issues": "https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox/issues",
+                "source": "https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox/tree/v4"
+            },
+            "time": "2021-05-07T20:34:55+00:00"
         },
         {
             "name": "laminas/laminas-escaper",

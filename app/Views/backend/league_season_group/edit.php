@@ -40,7 +40,7 @@
         ?>
 
        
-        <?= form_input_bs($dataName, $form["divInputClass"], "Název skupiny"); ?>
+        <?= form_input_bs($dataName, $form["divInputClass"], "Název skupiny");?>
         
         <?= form_dropdown_bs('regular', $optionsGroups, $extraGroups, 'mb-3', "Skupiny", $disabledGroups, $selectedGroups) ?>
         <?= form_hidden('id_league_season_group', $league_season_group->id_league_season_group) ?>

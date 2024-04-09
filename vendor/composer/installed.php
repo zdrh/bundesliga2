@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'codeigniter4/appstarter',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '3a8beab5a3cf200854163493df03c667ac991c62',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -20,9 +20,9 @@
             'dev_requirement' => false,
         ),
         'codeigniter4/appstarter' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '3a8beab5a3cf200854163493df03c667ac991c62',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -63,6 +63,17 @@
             'install_path' => __DIR__ . '/../fakerphp/faker',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'istvan-ujjmeszaros/bootstrap-duallistbox' => array(
+            'pretty_version' => 'v4.x-dev',
+            'version' => '4.9999999.9999999.9999999-dev',
+            'reference' => '3d7896239dc1c91dfafe858e3e840fea4812b1e5',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../istvan-ujjmeszaros/bootstrap-duallistbox',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => false,
         ),
         'laminas/laminas-escaper' => array(
             'pretty_version' => '2.12.0',

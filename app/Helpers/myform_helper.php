@@ -109,12 +109,12 @@ if (! function_exists('form_dropdown_bs')) {
      * @param string $bs - třídy v rámci divu, který obalí celý dropdown
      * @param string $label - hodnota v rámci značky label
      * @param mixed $selected - pole nebo hodnota, která je vybraná
-     * @param mixed $disabled - pole klíčů hodnot, které budou mít atribut disabled
+     * @param mixed $hidden - pole klíčů hodnot, které budou mít atribut disabled
      * @param mixed $extra - dodatečné atributy ve značce select, asociativní pole
      * @param boolean $notation - pokud do javascriptu, pak false, jinak true
      * 
      */
-    function form_dropdown_bs($name = '', $options = [], $extra = '', string $bs = '', string $label = '', $disabled = [],$selected = [] , $notation = true): string
+    function form_dropdown_bs($name = '', $options = [], $extra = '', string $bs = '', string $label = '', $hidden = [],$selected = [] , $notation = true): string
     {
         
         if($notation) {
@@ -132,8 +132,8 @@ if (! function_exists('form_dropdown_bs')) {
         if (! is_array($selected)) {
             $selected = [$selected];
         }
-        if (! is_array($disabled)) {
-            $disabled = [$disabled];
+        if (! is_array($hidden)) {
+            $disabled = [$hidden];
         }
         if (! is_array($options)) {
             $options = [$options];
@@ -147,8 +147,8 @@ if (! function_exists('form_dropdown_bs')) {
         }
 
         // Standardize selected as strings, like the option keys will be
-        foreach ($disabled as $key => $item) {
-            $disabled[$key] = (string) $item;
+        foreach ($hidden as $key => $item) {
+            $hidden[$key] = (string) $item;
         }
         $default = array();
         $extra2    = my_parse_form_attributes($extra, $default, $quot);
@@ -186,9 +186,9 @@ if (! function_exists('form_dropdown_bs')) {
                     $optgroupKey = (string) $optgroupKey;
 
                     $sel = in_array($optgroupKey, $selected, true) ? ' selected='.$quot.'selected'.$quot : '';
-                    $dis = in_array($optgroupKey, $disabled, true) ? ' disabled='.$quot.'disabled'.$quot : '';
+                    $hid = in_array($optgroupKey, $hidden, true) ? ' hidden='.$quot.'hidden'.$quot : '';
                    
-                    $form .= '<option value='.$quot . htmlspecialchars($optgroupKey) . $quot . $sel .$dis. '>' . $optgroupVal . '</option>'.$endL;
+                    $form .= '<option value='.$quot . htmlspecialchars($optgroupKey) . $quot . $sel .$hid. '>' . $optgroupVal . '</option>'.$endL;
                     
                     
                 }
@@ -197,7 +197,7 @@ if (! function_exists('form_dropdown_bs')) {
             } else {
                 $form .= '<option value='.$quot . htmlspecialchars($key).$quot
                     . (in_array($key, $selected, true) ? ' selected='.$quot.'selected'.$quot : '') 
-                    . (in_array($key, $disabled, true) ? ' disabled='.$quot.'disabled'.$quot : '') . 
+                    . (in_array($key, $hidden, true) ? ' hidden='.$quot.'hidden'.$quot : '') . 
                     '>'
                     . $val . '</option>'.$endL;
             }
@@ -252,3 +252,63 @@ if (!function_exists('my_parse_form_attributes')) {
         return $att;
     }
 }
+
+
+    if (!function_exists('form_pill')) {
+        /**
+         * vygeneruje prvek pill
+         *
+         * @param $url - url adresa daného pillu,  
+         * @param $type - true, jestli to má být klasická url adresa nebo false, jestli to má být pouze odkaz na id
+         * 
+         */
+        function form_pill($url, $type, $text, $active = false): string
+        {
+            $result = "";
+            $result.= "<li class=\"nav-item\">\n";
+            if($active) {
+                $activeString = " active";
+            } else {
+                $activeString = "";
+            }
+            $result .= "<a class=\"nav-link".$activeString."\" href=\"".base_url($url)."\">".$text."</a>\n";
+            $result .=  "</li>\n";
+
+
+            return $result;
+        }
+}
+
+
+if (!function_exists('form_tabs')) {
+    /**
+     * vygeneruje prvek pill
+     *
+     * @param $id - id daného tabu  
+     * @param $text - txt, na který se kliká
+     * @param $active - jestli se jedná o aktivní tab
+     * 
+    
+ */
+      
+     
+    function form_tabs($id, $text, $active = false): string
+    {
+        $result = "";
+        $result.= "<li class=\"nav-item\">\n";
+        if($active) {
+            $activeString = " active";
+        } else {
+            $activeString = "";
+        }
+        $result .= "<a class=\"nav-link".$activeString."\" data-bs-toggle=\"tab\" href=\"#".$id."\">".$text."</a>\n";
+        $result .=  "</li>\n";
+
+
+        return $result;
+    }
+}
+
+
+
+

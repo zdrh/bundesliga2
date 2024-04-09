@@ -24,9 +24,10 @@ class BaseBackendController extends BaseController
         
        
         
-        $this->data["form"] = $this->mainConfig->form;
+       
         $this->data["year"] = $this->mainConfig->year;
-        $this->data["tableTemplate"] = $this->mainConfig->template;
+       
+        $this->data["tableTemplateFixture"] = $this->mainConfig->templateFixture;
         $this->data["uploadFolder"] = $this->mainConfig->uploadPath;
     }
 }

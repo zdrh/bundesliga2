@@ -16,6 +16,7 @@
         echo anchor('admin/liga/' . $liga->id_league . '/sezona/'.$liga->id_season.'/skupina/pridat', $form['addBtn'], $data);
         $table = new \CodeIgniter\View\Table();
         $table->setHeading('Název skupiny', 'Typ','');
+       
         foreach ($skupiny as $key => $row) {
             if($row->regular == 1) {
                 $type = 'Základní skupina';

@@ -30,9 +30,9 @@
             $data = array(
                 'class' => $form['listClass'].' ms-3'
             );
-           
+            $listSeasonBtn = anchor("admin/tym/".$row->id_team."/seznam-sezon",  $form['listBtn']." Sezony", $data);
 
-            $table->addRow($row->general_name, $row->short_name, $row->founded, $row->dissolve, $row->follower, $editBtn . $deleteBtn);
+            $table->addRow($row->general_name, $row->short_name, $row->founded, $row->dissolve, $row->follower, $editBtn . $deleteBtn. $listSeasonBtn);
         }
 
 

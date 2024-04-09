@@ -188,7 +188,7 @@ class LeagueSeason extends BaseBackendController
         } else {
             $result = false;
         }
-        $data[] =  $this->errorMessage->prepareMessage($result, 'dbelete');
+        $data[] =  $this->errorMessage->prepareMessage($result, 'dbDelete');
         $this->session->setFlashdata('error', $data);
         return redirect()->to('admin/liga/' . $id_league . '/seznam-sezon');
     }

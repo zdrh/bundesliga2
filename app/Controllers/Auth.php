@@ -44,8 +44,8 @@ class Auth extends BaseFrontendController
                 return redirect()->to('admin/dashboard');
             }
         } else {
-            $pole[] = [$loggedIn, 'login'];
-            $data[] =  $this->errorMessage->prepareMessage($pole);
+            
+            $data[] =  $this->errorMessage->prepareMessage($loggedIn, 'login');
             $this->session->setFlashdata('error', $data);
     
 

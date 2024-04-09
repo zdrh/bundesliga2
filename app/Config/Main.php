@@ -28,11 +28,33 @@ class Main extends BaseConfig
         'table_close' => '</table>'
     );
 
+    var $templateFixture = array(
+        'table_open' => '<table class="table table-bordered no-margin-bottom">',
+        'thead_open' => '<thead>',
+        'thead_close' => '</thead>',
+        'heading_row_start' => '<tr>',
+        'heading_row_end' => ' </tr>',
+        'heading_cell_start' => '<th>',
+        'heading_cell_end' => '</th>',
+        'tbody_open' => '<tbody>',
+        'tbody_close' => '</tbody>',
+        'row_start' => '<tr class="fixture">',
+        'row_end'  => '</tr>',
+        'cell_start' => '<td>',
+        'cell_end' => '</td>',
+        'row_alt_start' => '<tr class="fixture">',
+        'row_alt_end' => '</tr>',
+        'cell_alt_start' => '<td>',
+        'cell_alt_end' => '</td>',
+        'table_close' => '</table>'
+    );
+
     //tlačítka pro přidávání, editaci a mazání a třídy pro daná tlačítka;
     var $form = array(
         'addBtn' => '<i class="fa-solid fa-circle-plus fa-xs"></i> Přidat',
         'importBtn' => '<i class="fa-solid fa-circle-plus fa-xs"></i> Importovat',
         'editBtn' => '<i class="fa-solid fa-pen fa-2xs"></i> Upravit',
+        'editBtnSmall' => '<i class="fa-solid fa-pen fa-2xs"></i>',
         'deleteBtn' => '<i class="fa-solid fa-trash fa-2xs"></i> Smazat',
         'listBtn' => '<i class="fa-solid fa-table"></i>',
         'addClass' => 'btn btn-primary',
@@ -68,7 +90,8 @@ class Main extends BaseConfig
     public $uploadPath  = array(
         'general' => 'upload',
         'logoAssoc' => 'upload/logo/association/',
-        'logoLeague' => 'upload/logo/league/'
+        'logoLeague' => 'upload/logo/league/',
+        'logoTeam' =>   'upload/logo/team/'
     );
 
     //error hlášky
@@ -100,8 +123,25 @@ class Main extends BaseConfig
         'association_season_league_season' => 'league_season.id_assoc_season=association_season.id_assoc_season',
         'league_season_league_season_group' => 'league_season.id_league_season=league_season_group.id_league_season',
         'league_season_group_league_season' => 'league_season.id_league_season=league_season_group.id_league_season',
+        'team_league_season_team' => 'team_league_season.id_team=team.id_team',
+        'team_team_league_season' => 'team_league_season.id_team=team.id_team',
+        'team_league_season_league_season_group' => 'team_league_season.id_league_season_group=league_season_group.id_league_season_group',
+        'league_season_group_team_league_season' => 'team_league_season.id_league_season_group=league_season_group.id_league_season_group',
+        'league_season_group_game' => 'league_season_group.id_league_season_group=game.id_league_season_group',
+        'game_league_season_group' => 'league_season_group.id_league_season_group=game.id_league_season_group',
+        'game_game_team' => 'game.id_game=game_team.id_game',
+        'game_teem_game' => 'game.id_game=game_team.id_game',
+        'game_team_me_team_league_season' =>'game_team.id_team_league_season=team_league_season.id_team_league_season',
+        'team_league_season_game_team_me' =>'game_team.id_team_league_season=team_league_season.id_team_league_season',
+        'game_team_oppo_team_league_season' =>'game_team.id_opponent=team_league_season.id_team_league_season',
+        'team_league_season_game_team_oppo' =>'game_team.id_opponent=team_league_season.id_team_league_season'
     );
-
+    //smazaané položky nezobrazovat
+    public $deletedRows = array(
+        'association_season' => 'association_season.deleted_at IS NULL',
+        'league_season' => 'league_season.deleted_at IS NULL',
+        'league_season_group' => 'league_season_group.deleted_at IS NULL'
+    );
     //stránkování
     public $perPage = 20;
 
