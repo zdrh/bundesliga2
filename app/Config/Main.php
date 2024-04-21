@@ -80,7 +80,7 @@ class Main extends BaseConfig
         'assoc_foundation_max' => 2001,
         'league_season_min' => 1945,
         'league_season_max' => 2035,
-        'team_foundation_min' => 1850,
+        'team_foundation_min' => 1840,
         'team_foundation_max' => 2015,
         'team_dissolve_min' => 1950,
         'team_dissolve_max' => 2025

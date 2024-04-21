@@ -2,6 +2,7 @@
 
 <?= $this->section('content'); ?>
 <?php
+
 if (!is_null($skupina->groupname)) {
     $groupName = " (skupina " . $skupina->groupname . ")";
 } else {
@@ -17,8 +18,14 @@ echo form_open('admin/liga/tym/create');
 
 
 
+if(count($tatoSezonaTymy) == 0){
+    $selectedGroups = $minulaSezonaTymy;
+    $description = "Týmy ve stejné lize v minulé sezóně.";
+} else {
+    $selectedGroups = $tatoSezonaTymy;
+    $description = "Aktuálně přidané týmy v lize.";
+}
 
-$selectedGroups = array();
 $disabledGroups = array();
 $extraGroups = array(
     'class' => 'form-select',
@@ -37,12 +44,12 @@ echo form_close();
 <script>
     let demo2 = $('#team').bootstrapDualListbox({
   nonSelectedListLabel: 'K dispozici',
-  selectedListLabel: 'V soutěži',
+  selectedListLabel: '<?= $description ?>',
   preserveSelectionOnMove: 'moved',
   moveOnSelect: false,
   infoText: "Zobrazeno týmů: {0}",
   infoTextEmpty: "Žádné týmy",
-  selectorMinimalHeight: 200
+  selectorMinimalHeight: 200,
 });
 </script>
 

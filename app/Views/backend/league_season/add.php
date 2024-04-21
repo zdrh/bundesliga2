@@ -43,10 +43,10 @@
 
 
         $options = array(
-            0 => "Vyber hodnotu"
+         '' => "Vyber hodnotu"
         );
-        $disabled = array(0 => 0);
-        $selected[] = 0;
+        $disabled[] = '';
+        $selected[] = '';
         $extra = array(
             'class' => 'form-select',
             'id' => 'league'
@@ -91,15 +91,15 @@
             'class' => 'btn btn-primary',
             'content' => 'Přidat další skupinu'
         );
-
+       // var_dump($sezony);
         foreach ($sezony as $sezona) {
             $casSezony = $sezona->start . "-" . $sezona->finish;
             $options[$sezona->id_season] = $casSezony;
-            if (is_null($sezona->deleted_at)) {
+            if (!is_null($sezona->id_league_season)) {
                 $disabled[] = $sezona->id_season;
             }
         }
-
+       // var_dump($options);
 
         ?>
 
@@ -122,9 +122,9 @@
     </div>
 </div>
 <script>
-    $(document).ready(function(){
+   /* $(document).ready(function(){
         $('#add_group').hide();
-    });
+    });*/
 
     $("#general_name_button").click(function() {
         let text = $('#general_name').val();
@@ -135,7 +135,7 @@
         let groups = $('#groups').val()
         if (groups == 2) {
             let input = '<?= form_input_bs($dataGroups, $form["divInputClass"], "Název skupiny", 'text', true, false);  ?>';
-            let dropDown = '<?= form_dropdown_bs('groupsType[]', $optionsGroupsType, $extraGroupsType, "mb-3", "Typ skupiny", $disabledGroups, $selected, false);  ?>';
+            let dropDown = '<?= form_dropdown_bs('groupsType[]', $optionsGroupsType, $extraGroupsType, "mb-3", "Typ skupiny", $disabledGroups, $selected,[] , false);  ?>';
 
 
             $('#groupsDiv').prepend(dropDown);
@@ -150,7 +150,7 @@
 
     $('#add_group').click(function() {
         let input = '<?= form_input_bs($dataGroups, $form["divInputClass"], "Název skupiny", 'text', true, false);  ?>';
-        let dropDown = $('<?= form_dropdown_bs('groupsType[]', $optionsGroupsType, $extraGroupsType, "mb-3", "Typ skupiny", $disabledGroups, $selected, false);  ?>');
+        let dropDown = $('<?= form_dropdown_bs('groupsType[]', $optionsGroupsType, $extraGroupsType, "mb-3", "Typ skupiny", $disabledGroups, $selected, [], false);  ?>');
 
         $('#groupsDiv').append(input);
         $('#groupsDiv').append(dropDown);

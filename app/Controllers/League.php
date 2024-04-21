@@ -51,8 +51,8 @@ class League extends BaseBackendController
 
         $result =  $this->league->save($data);
 
-        $pole[] = [$result, 'dbAdd'];
-        $data2[] =  $this->errorMessage->prepareMessage($pole);
+        
+        $data2[] =  $this->errorMessage->prepareMessage($result, 'dbAdd');
         $this->session->setFlashdata('error', $data2);
 
 
@@ -82,8 +82,8 @@ class League extends BaseBackendController
 
         $result =  $this->league->save($data);
 
-        $pole[] = [$result, 'dbEdit'];
-        $data2[] =  $this->errorMessage->prepareMessage($pole);
+        
+        $data2[] =  $this->errorMessage->prepareMessage($result, 'dbEdit');
         $this->session->setFlashdata('error', $data2);
 
 
@@ -94,8 +94,8 @@ class League extends BaseBackendController
     {
         $result = $this->league->delete($id_league);
 
-        $pole[] = [$result, 'dbDelete'];
-        $data[] =  $this->errorMessage->prepareMessage($pole);
+       
+        $data[] =  $this->errorMessage->prepareMessage($result, 'dbDelete');
         $this->session->setFlashdata('error', $data);
 
 

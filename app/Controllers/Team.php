@@ -46,15 +46,24 @@ class Team extends BaseBackendController
         $founded = $this->request->getPost('founded');
         $dissolved = $this->request->getPost('dissolved');
         $follower = $this->request->getPost('follower');
-       
         $this->team->transStart();
         foreach ($name as $key => $row) {
+            if($follower[$key] == "") {
+                $follow = NULL;
+            } else {
+                $follow = $follower[$key];
+            }
+            if($dissolved[$key] == "") {
+                $dissolve = NULL;
+            } else {
+                $dissolve = $follower[$key];
+            }
             $dataDb = array(
                 'founded' => $founded[$key],
                 'general_name' => $row,
                 'short_name' => $shortName[$key],
-                'dissolve' => $dissolved[$key],
-                'follower' => $follower[$key]
+                'dissolve' => $dissolve,
+                'follower' => $follow
             );
             $this->team->save($dataDb);
         }

@@ -18,7 +18,10 @@
         $selectedLevel[] = $liga->level;
         $selectedActive = $liga->active;
 
-        $optionsLevel = array(1, 2, 3);
+        $optionsLevel = array(
+            1 => 1,
+            2 => 2,
+            3 => 3);
 
         $optionsActive = array(
             0 => "neaktivní",

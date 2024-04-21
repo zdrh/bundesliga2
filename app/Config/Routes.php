@@ -87,6 +87,7 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->post('liga/tym/create', 'TeamLeagueSeason::create');
     $routes->get('liga/(:num)/tym/(:num)/edit', 'TeamLeagueSeason::edit/$1/$2');
     $routes->put('liga/tym/update', 'TeamLeagueSeason::update');
+    $routes->delete('liga/(:num)/tym/(:num)/delete', 'TeamLeagueSeason::delete/$1/$2');
 
     //sezony týmu
     $routes->get('tym/(:num)/seznam-sezon', 'TeamSeason::index/$1');

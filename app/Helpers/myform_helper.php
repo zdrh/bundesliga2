@@ -114,7 +114,7 @@ if (! function_exists('form_dropdown_bs')) {
      * @param boolean $notation - pokud do javascriptu, pak false, jinak true
      * 
      */
-    function form_dropdown_bs($name = '', $options = [], $extra = '', string $bs = '', string $label = '', $hidden = [],$selected = [] , $notation = true): string
+    function form_dropdown_bs($name = '', $options = [], $extra = '', string $bs = '', string $label = '', $disabled = [],$selected = [] , $hidden = [], $notation = true): string
     {
         
         if($notation) {
@@ -123,7 +123,7 @@ if (! function_exists('form_dropdown_bs')) {
             $tab = "\t";
         } else {
             $quot = "\\\"";
-            $endL = "";
+            $endL = "\\\n";
             $tab = "";
         }
         
@@ -133,7 +133,10 @@ if (! function_exists('form_dropdown_bs')) {
             $selected = [$selected];
         }
         if (! is_array($hidden)) {
-            $disabled = [$hidden];
+            $hidden = [$hidden];
+        }
+        if (! is_array($disabled)) {
+            $disabled = [$disabled];
         }
         if (! is_array($options)) {
             $options = [$options];
@@ -149,6 +152,10 @@ if (! function_exists('form_dropdown_bs')) {
         // Standardize selected as strings, like the option keys will be
         foreach ($hidden as $key => $item) {
             $hidden[$key] = (string) $item;
+        }
+
+        foreach ($disabled as $key => $item) {
+            $disabled[$key] = (string) $item;
         }
         $default = array();
         $extra2    = my_parse_form_attributes($extra, $default, $quot);
@@ -187,8 +194,9 @@ if (! function_exists('form_dropdown_bs')) {
 
                     $sel = in_array($optgroupKey, $selected, true) ? ' selected='.$quot.'selected'.$quot : '';
                     $hid = in_array($optgroupKey, $hidden, true) ? ' hidden='.$quot.'hidden'.$quot : '';
+                    $dis = in_array($optgroupKey, $disabled, true) ? ' disabled='.$quot.'disabled'.$quot : '';
                    
-                    $form .= '<option value='.$quot . htmlspecialchars($optgroupKey) . $quot . $sel .$hid. '>' . $optgroupVal . '</option>'.$endL;
+                    $form .= '<option value='.$quot . htmlspecialchars($optgroupKey) . $quot . $sel .$hid. $dis. '>' . $optgroupVal . '</option>'.$endL;
                     
                     
                 }
@@ -197,7 +205,8 @@ if (! function_exists('form_dropdown_bs')) {
             } else {
                 $form .= '<option value='.$quot . htmlspecialchars($key).$quot
                     . (in_array($key, $selected, true) ? ' selected='.$quot.'selected'.$quot : '') 
-                    . (in_array($key, $hidden, true) ? ' hidden='.$quot.'hidden'.$quot : '') . 
+                    . (in_array($key, $hidden, true) ? ' hidden='.$quot.'hidden'.$quot : '')
+                    . (in_array($key, $disabled, true) ? ' disabled='.$quot.'disabled'.$quot : '') . 
                     '>'
                     . $val . '</option>'.$endL;
             }

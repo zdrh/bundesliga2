@@ -43,8 +43,8 @@ class LeagueSeason extends BaseBackendController
     {
         $this->data['liga'] = $this->league->find($idLeague);
         $this->data['sezony'] = $this->leagueSeasonGroup->select('season.start, season.finish, league.id_league, league.name as league_name, league_season.league_name_in_season, league_season.logo, league_season.groups, season.id_season, association_season.name as association_name, league_season.id_league_season, Count(*) as pocet')->join('league_season', $this->data['join']['league_season_league_season_group'], 'inner')->join('league', $this->data['join']['league_season_league'], 'inner')->join('association_season', $this->data['join']['league_season_association_season'], 'inner')->join('season', $this->data['join']['association_season_season'], 'inner')->where('league.id_league', $idLeague)->groupBy('league_season.id_league_season')->orderBy('start', 'asc')->findAll();
-
-        //var_dump($this->data['sezony']);
+       
+        
         echo view('backend/league_season/index', $this->data);
     }
 
@@ -53,8 +53,10 @@ class LeagueSeason extends BaseBackendController
         $this->data['liga'] = $this->league->find($idLeague);
         $id_association = $this->league->find($idLeague)->id_association;
        // $this->data['sezony'] = $this->sql->query2($idLeague, $id_association);
-       $this->data['sezony'] = $this->season->join('association_season', 'season.id_season=association_season.id_season', 'inner')->join('league_season', 'league_season.id_assoc_season=association_season.id_assoc_season','left')->where('association_season.id_association', $id_association)->where('league_season.id_league', $idLeague)->orderBy('season.start', 'asc')->findAll();
-      // var_dump($this->data['sezony']);
+       //$this->data['sezony'] = $this->season->join('association_season', 'season.id_season=association_season.id_season', 'inner')->join('league_season', 'league_season.id_assoc_season=association_season.id_assoc_season AND league_season.deleted_at IS NULL' ,'left')->where('association_season.id_association', $id_association)->orderBy('season.start', 'asc')->findAll();
+       $this->data['sezony'] = $this->season->join('association_season', 'season.id_season=association_season.id_season', 'inner')->join('league_season', $this->data['join']['league_season_association_season'].' AND league_season.id_league='.$idLeague.' AND league_season.deleted_at IS NULL', 'left')->where('association_season.id_association', $id_association)->orderBy('season.start', 'asc')->findAll();
+      //where('league_season.id_league', $idLeague)->
+       // var_dump($this->data['sezony']);
         echo view('backend/league_season/add', $this->data);
     }
 

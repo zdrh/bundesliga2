@@ -40,14 +40,14 @@ class TeamLeagueSeason extends BaseBackendController
         $this->data['liga'] = $this->league_season->join('league', $this->data['join']['league_season_league'], 'inner')->join('association_season', $this->data['join']['association_season_league_season'], 'inner')->join('season', $this->data['join']['association_season_season'], 'inner')->where('association_season.deleted_at IS NULL')->find($idLeagueSeason);
         $skupiny = $this->league_season_group->where('id_league_season', $idLeagueSeason)->orderBy('regular', 1)->findAll();
         $this->data['skupiny'] = $this->arrayLib->fillNames($skupiny, $this->data['liga']->league_name_in_season);
-       
+
         $tymy = $this->team_league_season->join('league_season_group', $this->data['join']['league_season_group_team_league_season'], 'inner')->join('league_season', $this->data['join']['league_season_group_league_season'], 'inner')->join('team', $this->data['join']['team_team_league_season'], 'inner')->where('league_season.id_league_season', $idLeagueSeason)->where('league_season_group.deleted_at IS NULL')->where('league_season.deleted_at IS NULL')->findAll();
 
         $this->data['tymy'] = $this->footballLib->getRealNamesTeams($this->arrayLib->groupArray($tymy, 'id_league_season_group'));
-        $zapasy = $this->league_season->select('date, time, round, league_season_group.id_league_season_group,team_league_season.team_name_in_season as team, oppo.team_name_in_season as oppo,result_team, result_opponent, game.id_game')->join('league_season_group', $this->data['join']['league_season_league_season_group'],'inner')->join('game', $this->data['join']['game_league_season_group'], 'inner')->join('game_team', $this->data['join']['game_game_team'], 'inner')->join('team_league_season', $this->data['join']['team_league_season_game_team_me'], 'inner')->join('team_league_season as oppo', 'oppo.id_team_league_season=game_team.id_opponent', 'inner')->where('game_team.field', 1)->orderBy('round', 'asc')->findAll();
-       
-        
-        
+        $zapasy = $this->league_season->select('date, time, round, league_season_group.id_league_season_group,team_league_season.team_name_in_season as team, oppo.team_name_in_season as oppo,result_team, result_opponent, game.id_game')->join('league_season_group', $this->data['join']['league_season_league_season_group'], 'inner')->join('game', $this->data['join']['game_league_season_group'], 'inner')->join('game_team', $this->data['join']['game_game_team'], 'inner')->join('team_league_season', $this->data['join']['team_league_season_game_team_me'], 'inner')->join('team_league_season as oppo', 'oppo.id_team_league_season=game_team.id_opponent', 'inner')->where('game_team.field', 1)->orderBy('round', 'asc')->findAll();
+
+
+
         $group1 = new StdClass();
         $group1->column = 'id_league_season_group';
         $group1->orderBy = 'asc';
@@ -56,7 +56,7 @@ class TeamLeagueSeason extends BaseBackendController
         $group2->orderBy = 'asc';
         $this->data['zapasy'] = $this->arrayLib->groupArrayTwolevel($zapasy, $group1, $group2);
 
-           // var_dump($this->data['zapasy']);
+        // var_dump($this->data['zapasy']);
         echo view('backend/team_league_season/index', $this->data);
     }
 
@@ -64,15 +64,21 @@ class TeamLeagueSeason extends BaseBackendController
     {
         $this->data['tymy'] = $this->team_league_season->join('team', $this->data['join']['team_team_league_season'], 'inner')->orderBy('general_name', 'asc')->where('id_league_season_group', $idGroup)->findAll();
         $this->data['liga'] = $this->league_season_group->join('league_season', $this->data['join']['league_season_group_league_season'], 'inner')->join('association_season', $this->data['join']['league_season_association_season'], 'inner')->join('season', $this->data['join']['season_association_season'], 'inner')->where($this->delRows['league_season'])->where($this->delRows['association_season'])->find($idGroup);
-        
+
         echo view('backend/team_league_season/showGroup', $this->data);
     }
 
     public function add($idGroup)
     {
         $this->data['skupina'] = $this->league_season_group->join('league_season', $this->data['join']['league_season_group_league_season'], 'inner')->join('association_season', $this->data['join']['league_season_association_season'], 'inner')->join('season', $this->data['join']['season_association_season'], 'inner')->where('league_season.deleted_at IS NULL')->where('association_season.deleted_at IS NULL')->find($idGroup);
-        $this->data['tymy'] = $this->arrayLib->arrayToDropdown($this->footballLib->getAvailableTeams($idGroup), 'id_team', 'general_name');
+         $this->data['tymy'] = $this->arrayLib->arrayToDropdown($this->footballLib->getAvailableTeams($idGroup), 'id_team', 'general_name');
+       // $tym = $this->footballLib->getAvailableTeams($idGroup);
        
+        $startSezona = $this->data['skupina']->start;
+        $skupina = $this->data['skupina']->id_league_season_group;
+        $this->data['minulaSezonaTymy'] = $this->footballLib->getTeamsFromLastSeason($startSezona, $skupina);
+        $this->data['tatoSezonaTymy'] = $this->arrayLib->transformArray($this->team_league_season->join('team', $this->data['join']['team_league_season_team'], 'inner')->where('id_league_season_group', $idGroup)->findAll(), 'id_team');
+
         echo view('backend/team_league_season/add', $this->data);
     }
 
@@ -81,13 +87,29 @@ class TeamLeagueSeason extends BaseBackendController
         $team = $this->request->getPost('team');
         $id_group = $this->request->getPost('id_group');
         $team = array_unique($team);
+
+        $vlozeneTymy = $this->arrayLib->transformArray($this->team_league_season->where('id_league_season_group', $id_group)->findAll(), 'id_team');
+        $tymy = $this->arrayLib->compareArrays($team, $vlozeneTymy, 'id_team', 'status');
+
         $this->team_league_season->transStart();
-        foreach ($team as $row) {
+        foreach ($tymy as $row) {
             $data = array(
                 'id_league_season_group' => $id_group,
-                'id_team' => $row
+                'id_team' => $row->id_team
             );
-            $this->team_league_season->save($data);
+            switch ($row->status) {
+                case 0:
+                    break;
+                case 1:
+                    $this->team_league_season->save($data);
+                    break;
+                case 2:
+                    $data['id_team_league_season'] = $this->team_league_season->where('id_team', $row->id_team)->where('id_league_season_group', $id_group)->findAll()[0]->id_team_league_season;
+                    $this->team_league_season->save($data);
+                    break;
+                default:
+                    break;
+            }
         }
 
         $this->team_league_season->transComplete();
@@ -143,11 +165,26 @@ class TeamLeagueSeason extends BaseBackendController
         if ($updateDB) {
             $result = $this->team_league_season->save($data);
 
-           
-           
+
+
             $data2[] =  $this->errorMessage->prepareMessage($result, 'dbEdit');
             $this->session->setFlashdata('error', $data2);
-            return redirect()->to('admin/liga/' .$id_league_season_group . '/seznam-tymu');
+            return redirect()->to('admin/liga/' . $id_league_season_group . '/seznam-tymu');
         }
+    }
+    /**
+     * $idTym - id_team_league_season
+     */
+    public function delete($idLiga, $idTym)
+    {
+
+
+        $result = $this->team_league_season->delete($idTym);
+
+        $data[] =  $this->errorMessage->prepareMessage($result, 'dbDelete');
+        $this->session->setFlashdata('error', $data);
+
+
+        return redirect()->to('admin/liga/' . $idLiga . '/seznam-tymu');
     }
 }
