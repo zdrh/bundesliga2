@@ -1,23 +1,25 @@
-<nav class="navbar navbar-dark bg-dark">
-    <ul class="navbar-nav">
-        <?php
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+        
+        <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
 
-
-
-
-        foreach ($menu as $item) {
-        ?>
-            <li class="nav-item">
                 <?php
-                $atr = array('class' => 'nav-link');
-                echo anchor($item->link, $item->name, $atr);
+
+                foreach ($subMenu as $item) {
                 ?>
-            </li>
+                    <li class="nav-item">
+                        <?php
+                        $atr = array('class' => 'nav-link');
+                        echo anchor($item->link, $item->name, $atr);
+                        ?>
+                    </li>
 
-        <?php
-        }
+                <?php
+                }
 
-        ?>
-
-    </ul>
+                ?>
+            </ul>
+        </div>
+    </div>
 </nav>

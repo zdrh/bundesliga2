@@ -1,55 +1,44 @@
-<?= $this->extend('layout/frontend/layout'); ?>
+<?= $this->extend('layout/frontend/layout-league'); ?>
 
 <?= $this->section('content'); ?>
 
-<?php
-echo form_open('sezona/view');
-$options = array();
-$options[''] = "Vyber sezónu";
-$selected[] = $sezona->id_season;
-$disabled[] = '';
-$extra['class'] = 'form-control';
-foreach ($sezony as $key => $row) {
-    $options[$key] = $row;
-}
-
-$divBtn = array(
-    'class' => 'mb-3 mt-3 ms-3'
-);
-echo "<div class ='d-flex'>";
-echo form_dropdown_bs('season', $options, $extra, 'mb-3 mt-3 col-md-4', '', $disabled, $selected);
-echo div($divBtn);
-echo form_button($form['submitButton']);
-echo "</div>";
-echo form_close();
-
-echo "</div>";
-
-?>
 
 
 <h1> <?= $sezona->league_name_in_season ?> - sezóna <?= $sezona->start ?>-<?= $sezona->finish ?></h1>
 
+
+<div class="card-group">
+    <div class="row">
+
 <?php
-
-
-
-$table = new \CodeIgniter\View\Table();
-$table->setHeading('Název týmu', 'Logo', 'Vznik');
-
+//var_dump($sezona);
 foreach($tymy as $row) {
+   // var_dump($row);
+   echo div(['class' => 'col-sm-12 col-lg-6 col-xl-4']);
 
     $data = array(
         'src' => base_url($uploadPath['logoTeam'].$row->logo),
-        'class' => 'img-fluid table'
+        'class' => 'img-fluid card-logo'  
     );
-    $table->addRow($row->team_name_in_season, img($data), $row->founded);
+    $headerContent = "<h4>".img($data)." ".$row->team_name_in_season."</h4>";
+    $linkMatches = "tym/".$row->id_team."/sezona/".$sezona->start."-".$sezona->finish."/".$sezona->id_league_season."/zapasy";
+    $linkRoster = "tym/".$row->id_team."/sezona/".$sezona->start."-".$sezona->finish."/".$sezona->id_league_season."/soupiska";
+    $linkStadium = "tym/".$row->id_team."/sezona/".$sezona->start."-".$sezona->finish."/".$sezona->id_league_season."/stadion";
+    $linkHistory = "tym/".$row->id_team."/historie";
+    $bodyContent = "<div class=\"row\"><div class=\"col-6\"><p>".anchor($linkMatches, "Zápasy")."</p>\n";
+    $bodyContent .= "<p>".anchor($linkRoster, "Soupiska")."</p>\n</div>";
+    $bodyContent .= "<div class=\"col-6\"><p>".anchor($linkStadium, "Stadion")."</p>\n";
+    $bodyContent .= "<p>".anchor($linkHistory, "Historie klubu")."</p>\n</div>\n</div>\n";
+
+
+    $class = "mb-3";
+    echo card($headerContent, $bodyContent, $class);
+    echo "</div>\n";
+    
 }
-
-$table->setTemplate($tableTemplate);
-echo $table->generate();
-?>
-
+        ?>
+    </div>
+</div>
 
 
 <?= $this->endSection(); ?>

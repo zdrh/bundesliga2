@@ -22,6 +22,9 @@ class LeagueSeasonF extends BaseFrontendController
     var $team;
     var $arrayLib;
     var $footballLib;
+    var $frontendNavbar;
+    var $subMenu;
+    
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -31,15 +34,26 @@ class LeagueSeasonF extends BaseFrontendController
         $this->team = new Team();
         $this->arrayLib = new ArrayLibrary();
         $this->footballLib = new FootballLibrary();
+        $this->data['frontendNavbar'] = 'navbar_season';
+        $this->data['subMenu'] = $this->menu->where('type', 3)->orderBy('priority', 'DESC')->findAll();
+        $this->data['id_season'] = NULL;
+        $this->data['id_league_season'] = NULL;
     }
     public function show($id_league_season)
     {
-        $sezony = $this->season->orderBy('start', 'desc')->findAll();
-        $sezony = $this->footballLib->getSeasons($sezony, 'sezona', '-');
-        $this->data['sezony'] = $this->arrayLib->arrayToDropdown($sezony, 'id_season', 'sezona');
+        $this->data['id_league_season'] = $id_league_season;
         $this->data['sezona'] = $this->league_season->join('association_season', $this->data['join']['league_season_association_season'], 'inner')->join('season', $this->data['join']['association_season_season'], 'inner')->join('league', $this->data['join']['league_league_season'], 'inner')->find($id_league_season);
+
+        $this->data['tatoSezona'] = $this->data['sezona']->id_season;
+        $this->data['soutezeTatoSezona'] = $this->league_season->join('league', $this->data['join']['league_season_league'], 'inner')->join('association_season', $this->data['join']['association_season_league_season'], 'inner')->where('association_season.id_season', $this->data['tatoSezona'])->findAll();
+
         $this->data['tymy'] = $this->team->join('team_league_season', $this->data['join']['team_team_league_season'], 'inner')->join('league_season_group', $this->data['join']['team_league_season_league_season_group'], 'inner')->where('league_season_group.id_league_season', $id_league_season)->findAll();
 
+        $sezona = $this->data['sezona']->start."-".$this->data['sezona']->finish;
+        $this->data['navbarLogo'] = array(
+            'url' => 'sezona/zobraz/'.$sezona."/".$this->data["sezona"]->id_season,
+            'text' =>  $this->data['sezona']->league_name_in_season . " - " . $sezona
+        );
         echo view('frontend/league_season/show', $this->data);
     }
 }

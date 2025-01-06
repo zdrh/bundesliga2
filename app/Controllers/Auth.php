@@ -16,6 +16,7 @@ class Auth extends BaseFrontendController
     {
         parent::initController($request, $response, $logger);
         $this->string = new StringLibrary();
+        $this->data['subMenu'] = NULL;
     }
 
     public function login()

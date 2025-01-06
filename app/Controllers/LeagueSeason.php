@@ -145,8 +145,8 @@ class LeagueSeason extends BaseBackendController
         $id_league = $this->request->getPost('id_league');
         $id_assoc_season = $this->request->getPost('id_assoc_season');
         $id_league_season = $this->request->getPost('id_league_season');
-        $groupsList = $this->request->getPost('groupsList');
-        $groupsType = $this->request->getPost('groupsType');
+       // $groupsList = $this->request->getPost('groupsList');
+       // $groupsType = $this->request->getPost('groupsType');
         $data = array(
             'id_league' => $id_league,
             'id_assoc_season' => $id_assoc_season,
@@ -176,22 +176,22 @@ class LeagueSeason extends BaseBackendController
             //vložení skupin do skupin
 
 
-            foreach ($groupsList as $key => $group) {
+          /*  foreach ($groupsList as $key => $group) {
                 $dataGroup = array(
                     'groupname' => $group,
                     'regular' => $groupsType[$key],
                     'id_league_season' => $id_league_season
                 );
                 $this->leagueSeasonGroup->save($dataGroup);
-            }
+            }*/
 
             $this->leagueSeason->transComplete();
             $result = $this->leagueSeason->transStatus();
         } else {
             $result = false;
         }
-        $data[] =  $this->errorMessage->prepareMessage($result, 'dbDelete');
-        $this->session->setFlashdata('error', $data);
+        $data2[] =  $this->errorMessage->prepareMessage($result, 'dbEdit');
+        $this->session->setFlashdata('error', $data2);
         return redirect()->to('admin/liga/' . $id_league . '/seznam-sezon');
     }
 

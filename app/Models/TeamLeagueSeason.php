@@ -12,7 +12,7 @@ class TeamLeagueSeason extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['team_name_in_season', 'logo', 'id_league_season_group', 'id_team', ];
+    protected $allowedFields    = ['team_name_in_season', 'logo', 'id_league_season_group', 'id_team', 'id_stadium', 'stadium_name_in_season'];
 
     protected bool $allowEmptyInserts = false;
 

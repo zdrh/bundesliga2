@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <ul class="navbar-nav">
-
+       
         <?php
 
         foreach ($menu as $item) {
@@ -18,9 +18,9 @@
         ?>
 
     </ul>
-        <?= $this->include($profile);
-        
+    <?= $this->include($profile);
 
-         ?>
-   
+
+    ?>
+
 </nav>

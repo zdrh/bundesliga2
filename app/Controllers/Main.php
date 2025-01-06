@@ -14,15 +14,16 @@ use Psr\Log\LoggerInterface;
 class Main extends BaseFrontendController
 {
     
+    var $submenu;
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         parent::initController($request, $response, $logger);
-        
+        $this->data['subMenu'] = NULL;
     }
 
     public function index()
     {
-       // var_dump($this->session->lastPage);
+       
         echo view('frontend/main/index', $this->data);
     }
 }

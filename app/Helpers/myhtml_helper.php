@@ -18,16 +18,21 @@ if (!function_exists('div')) {
         return $result;
     }
     //vygeneruje kod pro vytvořen jedné karty
+    /**
+     * @param headerContent - obsah karty v hlavičce karty
+     * @param bodyContent - obsah karty v body karty
+     * @param class - dodatečné třídy v divu card
+     */
     function card($headerContent, $bodyContent, $class) {
         $result ="";
-        $result .= "<div class=\"card \">\n";
+        $result .= "<div class=\"card ".$class."\">\n";
         
         $result .= "<div class=\"card-header\">\n";
         $result .= $headerContent;
         $result .= "</div>\n";
 
 
-        $result .= "<div class=\"card-body ".$class."\">\n";
+        $result .= "<div class=\"card-body\">\n";
         $result .= $bodyContent;
         $result .= "</div>\n";
 

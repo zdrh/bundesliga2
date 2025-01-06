@@ -181,14 +181,19 @@
                         //procházíme kola
                         foreach ($zapasy[$row2->id_league_season_group] as $key3 =>  $row3) {
                             $table = new \CodeIgniter\View\Table();
-                            $table->setHeading('Datum','Čas', 'Domácí', 'Hosté', 'Výsledek', '');
+                            $table->setHeading('Datum','Čas', 'Domácí', 'Hosté', 'Výsl.', '');
                             foreach($row3 as $row4) {
                                 $result = $row4->result_team . ":". $row4->result_opponent;
                                 $dataEdit = array(
                                     'class' => $form['editClass']
                                 );
-                                $editBtn = anchor('admin/liga/skupina/' . $row2->id_league_season_group . '/zapasy/'.$row4->id_game.'/edit', $form['editBtnSmall'], $dataEdit);
-                                $table->addRow(date('j.n.Y', strtotime($row4->date)), date('H:i', strtotime($row4->time)), $row4->team, $row4->oppo, $result, $editBtn);
+                                $editBtn = anchor('admin/liga/skupina/' . $row2->id_league_season_group . '/zapas/'.$row4->id_game.'/edit', $form['editBtnSmall'], $dataEdit);
+                                $deleteBtn = "<button type=\"button\" class=\"" . $form['deleteClass'] . " text-black ms-1\" data-bs-toggle=\"modal\" data-bs-target=\"#modal_match" . $row4->id_game . "\">" . $form['deleteBtnSmall'] . "</button>";
+
+                                echo "<!-- začátek modalu -->\n";
+                                echo form_modal("modal_match" . $row4->id_game, $row->id_league_season_group, "Smazat zápas", "Chceš opravdu smazat zápas " .$row4->team." - ".$row4->oppo." pro ligu " . $liga->league_name_in_season . "?", "admin/zapas/" . $row4->id_game . "/delete");
+                                echo "<!-- konec modalu -->\n";
+                                $table->addRow(date('j.n.Y', strtotime($row4->date)), date('H:i', strtotime($row4->time)), $row4->team, $row4->oppo, $result, $editBtn.$deleteBtn);
                             }
                             $table->setTemplate($tableTemplateFixture);
                             $textTable = $table->generate();

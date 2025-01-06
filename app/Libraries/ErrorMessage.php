@@ -16,8 +16,12 @@ class ErrorMessage
         $this->config = new Main();
         $this->session = \Config\Services::session();
     }
-
-    public function prepareMessage($status, $type, $text = '', $real = true) {
+/**
+ * @param status - typ zprávy - true - success, false - error
+ * @param type - typ podle typu operace, která se stala (možnosti v configu main), např dbEdit
+ * @param text - 
+ */
+    public function prepareMessage(bool $status, $type, $text = '', $real = true) {
         $data = new stdClass();
         $data->status = $status;
         if($status) {

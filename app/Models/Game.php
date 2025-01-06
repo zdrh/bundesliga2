@@ -12,7 +12,7 @@ class Game extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['date', 'time', 'id_league_season_group', 'round', 'id_referee', 'id_stadium', 'description'];
+    protected $allowedFields    = ['date', 'time', 'id_league_season_group', 'round', 'id_referee', 'id_stadium', 'description', 'attendance'];
 
     protected bool $allowEmptyInserts = false;
 

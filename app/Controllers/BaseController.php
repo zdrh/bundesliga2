@@ -55,6 +55,7 @@ abstract class BaseController extends Controller
     */
    // protected $session;
    protected $session;
+   protected $pager;
 
    /**
     * @return void
@@ -67,6 +68,7 @@ abstract class BaseController extends Controller
       // Preload any models, libraries, etc, here.
 
       $this->session = \Config\Services::session();
+      $this->pager = \Config\Services::pager();
       $this->ionAuth = new IonAuth();
 
       if ($this->ionAuth->loggedIn()) {
@@ -91,5 +93,6 @@ abstract class BaseController extends Controller
       $this->delRows = $this->mainConfig->deletedRows;
       $this->data["form"] = $this->mainConfig->form;
       $this->data["tableTemplate"] = $this->mainConfig->template;
+      $this->data['perPage'] = $this->mainConfig->perPage;
    }
 }

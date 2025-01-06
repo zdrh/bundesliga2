@@ -52,8 +52,8 @@ class Season extends BaseBackendController
 
         //generování hlášek
         
-        $pole[] = [$result, 'dbAdd'];
-        $data2[] =  $this->errorMessage->prepareMessage($pole);
+        
+        $data2[] =  $this->errorMessage->prepareMessage($result, 'dbAdd');
         $this->session->setFlashdata('error', $data2);
 
         
@@ -78,8 +78,8 @@ class Season extends BaseBackendController
         );
         $result = $this->seasonModel->save($data);
 
-        $pole[] = [$result, 'dbEdit'];
-        $data2[] =  $this->errorMessage->prepareMessage($pole);
+        
+        $data2[] =  $this->errorMessage->prepareMessage($result, 'dbEdit');
         $this->session->setFlashdata('error', $data2);
 
 
@@ -90,8 +90,8 @@ class Season extends BaseBackendController
     public function delete($id) {
         $result = $this->seasonModel->delete($id);
 
-        $pole[] = [$result, 'dbDelete'];
-        $data[] =  $this->errorMessage->prepareMessage($pole);
+        
+        $data[] =  $this->errorMessage->prepareMessage($result, 'dbDelete');
         $this->session->setFlashdata('error', $data);
 
 

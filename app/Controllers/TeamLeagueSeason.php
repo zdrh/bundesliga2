@@ -10,6 +10,7 @@ use Psr\Log\LoggerInterface;
 use App\Models\TeamLeagueSeason as Tls;
 use App\Models\LeagueSeason;
 use App\Models\LeagueSeasonGroup;
+use App\Models\Stadium;
 
 use App\Libraries\ArrayLibrary;
 use App\Libraries\FootballLibrary;
@@ -21,6 +22,7 @@ class TeamLeagueSeason extends BaseBackendController
     var $team_league_season;
     var $league_season;
     var $league_season_group;
+    var $stadium;
     var $arrayLib;
     var $footballLib;
     var $fileLib;
@@ -30,6 +32,7 @@ class TeamLeagueSeason extends BaseBackendController
         $this->team_league_season = new Tls();
         $this->league_season = new LeagueSeason();
         $this->league_season_group = new LeagueSeasonGroup();
+        $this->stadium = new Stadium();
         $this->arrayLib = new ArrayLibrary();
         $this->footballLib = new FootballLibrary();
         $this->fileLib = new FileLibrary();
@@ -56,13 +59,13 @@ class TeamLeagueSeason extends BaseBackendController
         $group2->orderBy = 'asc';
         $this->data['zapasy'] = $this->arrayLib->groupArrayTwolevel($zapasy, $group1, $group2);
 
-        // var_dump($this->data['zapasy']);
+        
         echo view('backend/team_league_season/index', $this->data);
     }
 
     public function showGroup($idGroup)
     {
-        $this->data['tymy'] = $this->team_league_season->join('team', $this->data['join']['team_team_league_season'], 'inner')->orderBy('general_name', 'asc')->where('id_league_season_group', $idGroup)->findAll();
+        $this->data['tymy'] = $this->team_league_season->select('team_league_season.id_team_league_season, team.general_name as general_name, team_league_season.team_name_in_season, team_league_season.logo, stadium.general_name as stadium_general_name, team_league_season.stadium_name_in_season, city.name_de ')->join('team', $this->data['join']['team_team_league_season'], 'inner')->join('stadium', $this->data['join']['team_league_season_stadium'], 'left')->join('city', $this->data['join']['city_stadium'], 'left')->orderBy('team.general_name', 'asc')->where('id_league_season_group', $idGroup)->findAll();
         $this->data['liga'] = $this->league_season_group->join('league_season', $this->data['join']['league_season_group_league_season'], 'inner')->join('association_season', $this->data['join']['league_season_association_season'], 'inner')->join('season', $this->data['join']['season_association_season'], 'inner')->where($this->delRows['league_season'])->where($this->delRows['association_season'])->find($idGroup);
 
         echo view('backend/team_league_season/showGroup', $this->data);
@@ -125,6 +128,10 @@ class TeamLeagueSeason extends BaseBackendController
     {
         $this->data['skupina'] = $this->league_season_group->join('league_season', $this->data['join']['league_season_group_league_season'], 'inner')->join('association_season', $this->data['join']['league_season_association_season'], 'inner')->join('season', $this->data['join']['season_association_season'], 'inner')->where('league_season.deleted_at IS NULL')->where('association_season.deleted_at IS NULL')->find($idGroup);
         $this->data['tym'] = $this->team_league_season->join('team', $this->data['join']['team_team_league_season'], 'inner')->find($idTeam);
+        $this->data['stadion'] = $this->stadium->join('city', $this->data['join']['city_stadium'], 'inner')->orderBy('name_de', 'asc')->findAll();
+        $stadiumName = $this->stadium->orderBy('general_name', 'asc')->findAll(); 
+        $this->data['stadiumName'] = json_encode($this->arrayLib->arrayToDropdown($stadiumName, 'id_stadium', 'general_name'));
+
 
         echo view('backend/team_league_season/edit', $this->data);
     }
@@ -134,11 +141,15 @@ class TeamLeagueSeason extends BaseBackendController
 
         $name = $this->request->getPost('name_in_season');
         $logo = $this->request->getFile('logo');
+        $stadium = $this->request->getPost('stadium');
         $id_team_in_season = $this->request->getPost('id_team_in_season');
+        $stadium_name_in_season = $this->request->getPost('stadium_name_in_season');
 
         $data = array(
             'team_name_in_season' => $name,
-            'id_team_league_season' => $id_team_in_season
+            'id_team_league_season' => $id_team_in_season,
+            'id_stadium' => $stadium,
+            'stadium_name_in_season' => $stadium_name_in_season
         );
         $updateDB = true;
 
@@ -186,5 +197,9 @@ class TeamLeagueSeason extends BaseBackendController
 
 
         return redirect()->to('admin/liga/' . $idLiga . '/seznam-tymu');
+    }
+
+    public function editAll($idGroup) {
+
     }
 }

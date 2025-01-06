@@ -1,6 +1,10 @@
 img.table {
-    width: 40px;
+    max-width: 20px;
 
+}
+
+img.card-logo {
+    max-height: 50px;
 }
 
 img.edit {
@@ -23,3 +27,11 @@ option:disabled {
 tr.fixture {
     font-size: 14px;
 }
+
+nav.navbar {
+    border-bottom: solid grey 1px;
+}
+
+.container{
+    max-width: 1600px!important;
+  }

@@ -1,5 +1,5 @@
 <?php
-
+//var_dump($error);
 foreach ($error as $row) {
     if ($row->real) {
 ?>
@@ -9,6 +9,6 @@ foreach ($error as $row) {
         </div>
 
 <?php
-    }
+   }
 }
 ?>

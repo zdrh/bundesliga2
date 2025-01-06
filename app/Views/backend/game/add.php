@@ -85,7 +85,7 @@ $rocnik = $skupina->start . "-" . $skupina->finish;
             <?php
             for ($i = 0; $i < $pocetZapasu; $i++) {
             ?>
-                <div class="d-flex">
+                <div class="d-flex" id='matches_form'>
                     <?= form_dropdown_bs('home[]', $optionsHome, $extraHome, 'mb-3 me-1 col-md-4', "Domácí tým", $disabled, $selected) ?>
                     <?= form_dropdown_bs('away[]', $optionsAway, $extraAway, 'mb-3 me-1 col-md-4', "Hostující tým", $disabled, $selected) ?>
                     <?= form_input_bs($dataGoalsHome, $form["divInputClass"], "Góly domácí", 'number', false); ?>
@@ -102,7 +102,7 @@ $rocnik = $skupina->start . "-" . $skupina->finish;
     </div>
 </div>
 <script>
-    selects = $('div#round_form').find('select');
+    selects = $('div#matches_form').find('select');
     selects.on('change', function() {
         let selected = [];
 
@@ -114,7 +114,7 @@ $rocnik = $skupina->start . "-" . $skupina->finish;
         });
 
         for (var index in selected) {
-            $('div#round_form').find('option[value="' + selected[index] + '"]:not(:selected)')
+            $('div#matches_form').find('option[value="' + selected[index] + '"]:not(:selected)')
                 .prop("disabled", true);
         }
     });

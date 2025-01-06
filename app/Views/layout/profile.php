@@ -1,4 +1,4 @@
-<ul class="navbar-nav ms-auto">
+<ul class="navbar-nav ms-auto clearfix">
             <li class="nav-item">
                 <?php
                 $data = array(

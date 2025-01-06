@@ -1,11 +1,11 @@
-<?= $this->extend('layout/frontend/layout'); ?>
+<?= $this->extend('layout/frontend/layout-season'); ?>
 
 <?= $this->section('content'); ?>
 
 <h1>Vyber sezónu, kterou chceš zobrazit</h1>
 
 <?php
-    echo form_open('sezona/view');
+  /*  echo form_open('sezona/view');
     $options = array();
     $options[''] = "Vyber sezónu";
     $selected[] = '';
@@ -17,7 +17,7 @@
 
     echo form_dropdown_bs('season', $options,$extra, 'mb-3', '',$disabled, $selected);
     echo form_button($form['submitButton']);
-    echo form_close();
+    echo form_close();*/
 ?>
 
 

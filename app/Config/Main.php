@@ -56,6 +56,7 @@ class Main extends BaseConfig
         'editBtn' => '<i class="fa-solid fa-pen fa-2xs"></i> Upravit',
         'editBtnSmall' => '<i class="fa-solid fa-pen fa-2xs"></i>',
         'deleteBtn' => '<i class="fa-solid fa-trash fa-2xs"></i> Smazat',
+        'deleteBtnSmall' => '<i class="fa-solid fa-trash fa-2xs"></i>',
         'listBtn' => '<i class="fa-solid fa-table"></i>',
         'addClass' => 'btn btn-primary',
         'editClass' => 'btn btn-warning',
@@ -134,7 +135,11 @@ class Main extends BaseConfig
         'game_team_me_team_league_season' =>'game_team.id_team_league_season=team_league_season.id_team_league_season',
         'team_league_season_game_team_me' =>'game_team.id_team_league_season=team_league_season.id_team_league_season',
         'game_team_oppo_team_league_season' =>'game_team.id_opponent=team_league_season.id_team_league_season',
-        'team_league_season_game_team_oppo' =>'game_team.id_opponent=team_league_season.id_team_league_season'
+        'team_league_season_game_team_oppo' =>'game_team.id_opponent=team_league_season.id_team_league_season',
+        'city_stadium' => 'city.id_city=stadium.id_city',
+        'stadium_city' => 'city.id_city=stadium.id_city',
+        'team_league_season_stadium' => 'stadium.id_stadium=team_league_season.id_stadium',
+        'stadium_team_league_season' => 'stadium.id_stadium=team_league_season.id_stadium'
     );
     //smazaané položky nezobrazovat
     public $deletedRows = array(

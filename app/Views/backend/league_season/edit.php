@@ -92,13 +92,14 @@
             'class' => 'btn btn-primary',
             'content' => 'Přidat další skupinu'
         );
-
+       
         foreach ($sezony as $sezona) {
             $casSezony = $sezona->start . "-" . $sezona->finish;
             $options[$sezona->id_season] = $casSezony;
-            if (!is_null($sezona->id_league_season)) {
+            if (!is_null($sezona->id_league_season) and $sezona->id_league_season != $league_season->id_league_season) {
+                
                 $disabled[] = $sezona->id_season;
-            }
+            } 
         }
 
 

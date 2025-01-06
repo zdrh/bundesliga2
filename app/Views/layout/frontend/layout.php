@@ -10,6 +10,11 @@
 
 <body>
     <?= $this->include('layout/frontend/navbar'); ?>
+    <?php
+    if(!is_null($subMenu)) {
+        echo $this->include('layout/frontend/'.$frontendNavbar);
+    }
+     ?>
     <div class="container">
     <?= $this->include('layout/backend/alert'); ?>
         <?= $this->renderSection('content'); ?>

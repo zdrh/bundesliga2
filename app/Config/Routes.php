@@ -16,6 +16,12 @@ $routes->get('seznam-sezon', 'SeasonF::index');
 $routes->post('sezona/view','SeasonF::view');
 $routes->get('sezona/zobraz/(:any)/(:num)', 'SeasonF::show/$2');
 $routes->get('sezona/(:any)/zobraz/liga/(:num)', 'LeagueSeasonF::show/$2');
+$routes->get('sezona/(:any)/liga/(:any)/(:num)/tabulka/zobrazit', 'TableF:show/$3');
+$routes->get('tym/(:num)/sezona/(:any)/(:num)/zapasy', 'TeamLeagueSeasonF::showMatches/$1/$3');
+$routes->get('tym/(:num)/sezona/(:any)/(:num)/soupiska', 'TeamLeagueSeasonF::showRoster/$1/$3');
+$routes->get('tym/(:num)/sezona/(:any)/(:num)/stadion', 'TeamLeagueSeasonF::showStadium/$1/$3');
+$routes->get('tym/(:num)/historie', 'TeamF::showHistory/$1');
+
 
 //administrace
 $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
@@ -79,13 +85,31 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->put('tym/update', 'Team::update');
     $routes->delete('tym/(:num)/delete', 'Team::delete/$1');
     
+    //stadiony
+    $routes->get('seznam-stadionu', 'Stadium::index');
+    $routes->get('stadion/pridat', 'Stadium::add');
+    $routes->post('stadion/create', 'Stadium::create');
+    $routes->get('stadion/(:num)/edit', 'Stadium::edit/$1');
+    $routes->put('stadion/update', 'Stadium::update');
+    $routes->delete('stadion/(:num)/delete', 'Stadium::delete/$1');
+
+    //města
+    $routes->get('seznam-mest', 'City::index');
+    $routes->get('mesto/pridat', 'City::add');
+    $routes->post('mesto/create', 'City::create');
+    $routes->get('mesto/(:num)/edit', 'City::edit/$1');
+    $routes->put('mesto/update', 'City::update');
+    $routes->delete('mesto/(:num)/delete', 'City::delete/$1');
+
     //Správa lig - přidání týmů, zápasů atd
     $routes->get('liga/(:num)/info', 'TeamLeagueSeason::index/$1');
+    
     //seznam týmů skupiny
     $routes->get('liga/(:num)/seznam-tymu', 'TeamLeagueSeason::showGroup/$1');
     $routes->get('liga/(:num)/tym/pridat', 'TeamLeagueSeason::add/$1');
     $routes->post('liga/tym/create', 'TeamLeagueSeason::create');
     $routes->get('liga/(:num)/tym/(:num)/edit', 'TeamLeagueSeason::edit/$1/$2');
+    $routes->get('liga/(:num)/tym/edit', 'TeamLeagueSeason::editAll/$1'); //chybi
     $routes->put('liga/tym/update', 'TeamLeagueSeason::update');
     $routes->delete('liga/(:num)/tym/(:num)/delete', 'TeamLeagueSeason::delete/$1/$2');
 
@@ -95,7 +119,9 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     //zápasy
     $routes->get('liga/skupina/(:num)/zapasy/pridat', 'Game::add/$1');
     $routes->post('liga/skupina/zapasy/create', 'Game::create');
-    $routes->get('liga/skupina/(:num)/zapasy/(:num)/edit', 'Game::edit/$2');
+    $routes->get('liga/skupina/(:num)/zapas/(:num)/edit', 'Game::edit/$2');
+    $routes->put('zapas/update', 'Game::update');
+    $routes->delete('zapas/(:num)/delete', 'Game::delete/$1');
 
     
 });
