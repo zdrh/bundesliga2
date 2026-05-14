@@ -40,4 +40,10 @@ if (!function_exists('div')) {
         return $result;
     }
 
+    function flagIcon($country, $margin = "me-2") {
+        $result = "<span class=\"fi fi-".$country." ".$margin."\"></span>";
+
+        return $result;
+    }
+
 }

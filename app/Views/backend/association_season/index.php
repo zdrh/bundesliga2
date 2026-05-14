@@ -1,6 +1,15 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
+<?php
+/**
+ *  @var array $form
+ *  @var object $svaz
+ *  @var array $sezony
+ *  @var array $uploadPath
+ *  @var array $tableTemplate
+ */
+?>
 
 <h1><?= $svaz->general_name ?></h1>
 <h2>Přehled soutěží</h2>
@@ -8,9 +17,9 @@
 <h2>Přehled sezón</h2>
 <div class="row">
     <div class="col-md-10">
-
-
         <?php
+
+
         $data = array(
             'class' => $form['addClass'] . " mb-3"
         );
@@ -54,7 +63,7 @@
 
 
             echo "<!-- začátek modalu -->\n";
-            echo form_modal("modal" . $key, $svaz->id_association, "Smazat sezonu", "Chceš opravdu smazat sezonu " . $sezonaCas . " pro svaz " . $row2->assoc_name . "?", "admin/svaz/" . $svaz->id_association . "/sezona/" . $row2->id_season . "/delete");
+            echo form_modal_delete("modal" . $key, $svaz->id_association, "Smazat sezonu", "Chceš opravdu smazat sezonu " . $sezonaCas . " pro svaz " . $row2->assoc_name . "?", "admin/svaz/" . $svaz->id_association . "/sezona/" . $row2->id_season . "/delete");
             echo "<!-- konec modalu -->\n";
             $data = array(
                 'class' => $form['listClass'] . ' ms-3'

@@ -42,7 +42,7 @@
         }
 
         $extra = array(
-            'class' => 'form-select',
+            'class' => 'form-select select2-basic-single',
             'id' => 'city'
         );
 
@@ -78,6 +78,10 @@
         $("#stadium_form").append(newDiv);
 
     });
+
+    $(document).ready(function() {
+    $('.select2-basic-single').select2();
+});
 </script>
 
 <?= $this->endSection(); ?>

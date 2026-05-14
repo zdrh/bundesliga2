@@ -16,6 +16,9 @@
             "email": "benoit.vrignaud@tangue.fr"
         }
     ],
+    "require": {
+	"codeigniter4/framework" : "^v4.3"
+    },
 	"require-dev": {
         "phpunit/phpunit": "^7.3",
         "codeigniter4/codeigniter4-standard": "^1.0",

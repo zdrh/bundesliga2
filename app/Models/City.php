@@ -12,7 +12,7 @@ class City extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name_de', 'name_cz'];
+    protected $allowedFields    = ['name_de', 'name_cz', 'league', 'country'];
 
     protected bool $allowEmptyInserts = false;
 

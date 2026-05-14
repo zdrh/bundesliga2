@@ -8,7 +8,7 @@
         <?php
 
         echo form_open_multipart('admin/liga/sezona/create');
-
+    var_dump($uploadPath["logoLeague"]);
         $dataGeneralName = array(
             'name' => 'general_name',
             'id' => 'general_name',
@@ -43,7 +43,7 @@
 
 
         $options = array(
-         '' => "Vyber hodnotu"
+            '' => "Vyber hodnotu"
         );
         $disabled[] = '';
         $selected[] = '';
@@ -91,7 +91,31 @@
             'class' => 'btn btn-primary',
             'content' => 'Přidat další skupinu'
         );
-       // var_dump($sezony);
+
+        $data_copy_previous_season = array(
+            'name' => 'copy_previous',
+            'id' => 'copy_previous',
+            'type' => 'button',
+            'class' => 'btn btn-primary mb-2',
+            'content' => 'Zkopírovat z předchozí sezóny'
+        );
+
+        $data_logo_hidden = array(
+            'type' => 'hidden',
+            'id' => 'logo_string',
+            'name' => 'logo_string',
+            'value' => ''
+
+        );
+
+        $data_img_hidden = array(
+            'class' => '',
+            'id' => 'logo_img',
+            'class' => 'edit',
+           // 'src' => $uploadPath["logoLeague"],
+            'visibility' => 'hidden'
+        );
+        // var_dump($sezony);
         foreach ($sezony as $sezona) {
             $casSezony = $sezona->start . "-" . $sezona->finish;
             $options[$sezona->id_season] = $casSezony;
@@ -99,18 +123,22 @@
                 $disabled[] = $sezona->id_season;
             }
         }
-       // var_dump($options);
+        // var_dump($options);
 
         ?>
 
         <?= form_input_bs($dataGeneralName, $form["divInputClass"], "Obecný název ligy"); ?>
+        <?= form_dropdown_bs('season', $options, $extra, 'mb-3', "Vyber sezónu", $disabled, $selected) ?>
+        <?= form_button($data_copy_previous_season); ?>
         <?= form_button($data_button_general_name); ?>
         <?= form_input_bs($dataName, $form["divInputClass"], "Název ligy v sezóně"); ?>
+        <?= img($data_img_hidden) ?>
         <?= form_input_bs($dataLogo, $form["divInputClass"], "Logo ligy v této sezóně", 'file', false); ?>
-        <?= form_dropdown_bs('season', $options, $extra, 'mb-3', "Vyber sezónu", $disabled, $selected) ?>
+
         <?= form_dropdown_bs('groups', $optionsGroups, $extraGroups, 'mb-3', "Skupiny", $disabledGroups, $selected) ?>
         <?= form_hidden('id_league', $liga->id_league) ?>
         <?= form_hidden('id_association', $liga->id_association) ?>
+        <?= form_input($data_logo_hidden) ?>
         <div id="groupsDiv"></div>
 
         <?= form_button($data_button_add) ?>
@@ -122,7 +150,7 @@
     </div>
 </div>
 <script>
-   /* $(document).ready(function(){
+    /* $(document).ready(function(){
         $('#add_group').hide();
     });*/
 
@@ -135,7 +163,7 @@
         let groups = $('#groups').val()
         if (groups == 2) {
             let input = '<?= form_input_bs($dataGroups, $form["divInputClass"], "Název skupiny", 'text', true, false);  ?>';
-            let dropDown = '<?= form_dropdown_bs('groupsType[]', $optionsGroupsType, $extraGroupsType, "mb-3", "Typ skupiny", $disabledGroups, $selected,[] , false);  ?>';
+            let dropDown = '<?= form_dropdown_bs('groupsType[]', $optionsGroupsType, $extraGroupsType, "mb-3", "Typ skupiny", $disabledGroups, $selected, [], false);  ?>';
 
 
             $('#groupsDiv').prepend(dropDown);
@@ -154,8 +182,40 @@
 
         $('#groupsDiv').append(input);
         $('#groupsDiv').append(dropDown);
-        
+
     });
+
+    $('#copy_previous').click(function() {
+        let season = $('#league').val();
+        let seasonData = <?= json_encode($sezony); ?>;
+        let id = findPrevious(seasonData, season, 'id_season', 'start');
+        let values = seasonData[id];
+        //console.log(values['logo']);
+        $('#name').val(values['league_name_in_season']);
+        $('#logo_string').val(values['logo']);
+        $('#groups').val(values['groups']);
+        $('#logo_img').attr('visibility', 'visible');
+        let path = "<?= $uploadPath["logoLeague"] ?>" + values['logo'];
+        //console.log(path);
+        $('#logo_img').attr('src', '<?= base_url()?>'+ path);
+        $('#logo').removeAttr('required');
+
+        //console.log(season);
+    });
+
+    function findPrevious(array, value, attr, attr2) {
+        let result = 0;
+        array.forEach(function(value2, index) {
+            if (value == value2[attr]) {
+                if (index > 0) {
+                    result = index - 1;
+                } else {
+                    result = index;
+                }
+            }
+        });
+        return result;
+    }
 </script>
 
 <?= $this->endSection(); ?>

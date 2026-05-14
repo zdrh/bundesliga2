@@ -32,7 +32,7 @@ class Stadium extends BaseBackendController
 
     public function add()
     {
-        $this->data["city"] = $this->city->orderBy('name_de', 'asc')->findAll();
+        $this->data["city"] = $this->city->where('league', 1)->where('country', 1)->orderBy('name_de', 'asc')->findAll();
 
         echo view('backend/stadium/add', $this->data);
     }

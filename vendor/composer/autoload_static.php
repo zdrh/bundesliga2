@@ -7,15 +7,33 @@ namespace Composer\Autoload;
 class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
 {
     public static $files = array (
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'v' => 
+        array (
+            'voku\\helper\\' => 12,
+        ),
+        'o' => 
+        array (
+            'org\\bovigo\\vfs\\' => 15,
+        ),
+        'b' => 
+        array (
+            'bovigo\\vfs\\' => 11,
+        ),
         'T' => 
         array (
             'Tests\\Support\\' => 14,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Php80\\' => 23,
+            'Symfony\\Component\\CssSelector\\' => 30,
         ),
         'P' => 
         array (
@@ -47,9 +65,29 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
     );
 
     public static $prefixDirsPsr4 = array (
+        'voku\\helper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper',
+        ),
+        'org\\bovigo\\vfs\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs',
+        ),
+        'bovigo\\vfs\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mikey179/vfsstream/src',
+        ),
         'Tests\\Support\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests/_support',
+        ),
+        'Symfony\\Polyfill\\Php80\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+        ),
+        'Symfony\\Component\\CssSelector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/css-selector',
         ),
         'Psr\\Log\\' => 
         array (
@@ -89,17 +127,8 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         ),
     );
 
-    public static $prefixesPsr0 = array (
-        'o' => 
-        array (
-            'org\\bovigo\\vfs\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php',
-            ),
-        ),
-    );
-
     public static $classMap = array (
+        'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'CodeIgniter\\API\\ResponseTrait' => __DIR__ . '/..' . '/codeigniter4/framework/system/API/ResponseTrait.php',
         'CodeIgniter\\Autoloader\\Autoloader' => __DIR__ . '/..' . '/codeigniter4/framework/system/Autoloader/Autoloader.php',
         'CodeIgniter\\Autoloader\\FileLocator' => __DIR__ . '/..' . '/codeigniter4/framework/system/Autoloader/FileLocator.php',
@@ -314,6 +343,7 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'CodeIgniter\\HTTP\\CURLRequest' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/CURLRequest.php',
         'CodeIgniter\\HTTP\\ContentSecurityPolicy' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/ContentSecurityPolicy.php',
         'CodeIgniter\\HTTP\\DownloadResponse' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/DownloadResponse.php',
+        'CodeIgniter\\HTTP\\Exceptions\\BadRequestException' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/Exceptions/BadRequestException.php',
         'CodeIgniter\\HTTP\\Exceptions\\HTTPException' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/Exceptions/HTTPException.php',
         'CodeIgniter\\HTTP\\Exceptions\\RedirectException' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/Exceptions/RedirectException.php',
         'CodeIgniter\\HTTP\\Files\\FileCollection' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/Files/FileCollection.php',
@@ -494,6 +524,7 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'DeepCopy\\Matcher\\PropertyTypeMatcher' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Matcher/PropertyTypeMatcher.php',
         'DeepCopy\\Reflection\\ReflectionHelper' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Reflection/ReflectionHelper.php',
         'DeepCopy\\TypeFilter\\Date\\DateIntervalFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/Date/DateIntervalFilter.php',
+        'DeepCopy\\TypeFilter\\Date\\DatePeriodFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/Date/DatePeriodFilter.php',
         'DeepCopy\\TypeFilter\\ReplaceFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/ReplaceFilter.php',
         'DeepCopy\\TypeFilter\\ShallowCopyFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/ShallowCopyFilter.php',
         'DeepCopy\\TypeFilter\\Spl\\ArrayObjectFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/Spl/ArrayObjectFilter.php',
@@ -1477,12 +1508,14 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'PhpParser\\JsonDecoder' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/JsonDecoder.php',
         'PhpParser\\Lexer' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer.php',
         'PhpParser\\Lexer\\Emulative' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/Emulative.php',
+        'PhpParser\\Lexer\\TokenEmulator\\AsymmetricVisibilityTokenEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/AsymmetricVisibilityTokenEmulator.php',
         'PhpParser\\Lexer\\TokenEmulator\\AttributeEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/AttributeEmulator.php',
         'PhpParser\\Lexer\\TokenEmulator\\EnumTokenEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/EnumTokenEmulator.php',
         'PhpParser\\Lexer\\TokenEmulator\\ExplicitOctalEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/ExplicitOctalEmulator.php',
         'PhpParser\\Lexer\\TokenEmulator\\KeywordEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/KeywordEmulator.php',
         'PhpParser\\Lexer\\TokenEmulator\\MatchTokenEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/MatchTokenEmulator.php',
         'PhpParser\\Lexer\\TokenEmulator\\NullsafeTokenEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/NullsafeTokenEmulator.php',
+        'PhpParser\\Lexer\\TokenEmulator\\PropertyTokenEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/PropertyTokenEmulator.php',
         'PhpParser\\Lexer\\TokenEmulator\\ReadonlyFunctionTokenEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/ReadonlyFunctionTokenEmulator.php',
         'PhpParser\\Lexer\\TokenEmulator\\ReadonlyTokenEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/ReadonlyTokenEmulator.php',
         'PhpParser\\Lexer\\TokenEmulator\\ReverseEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/ReverseEmulator.php',
@@ -1514,6 +1547,7 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'PhpParser\\Node\\DeclareItem' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/DeclareItem.php',
         'PhpParser\\Node\\Expr' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr.php',
         'PhpParser\\Node\\Expr\\ArrayDimFetch' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/ArrayDimFetch.php',
+        'PhpParser\\Node\\Expr\\ArrayItem' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/ArrayItem.php',
         'PhpParser\\Node\\Expr\\Array_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/Array_.php',
         'PhpParser\\Node\\Expr\\ArrowFunction' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/ArrowFunction.php',
         'PhpParser\\Node\\Expr\\Assign' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/Assign.php',
@@ -1574,6 +1608,7 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'PhpParser\\Node\\Expr\\ClassConstFetch' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/ClassConstFetch.php',
         'PhpParser\\Node\\Expr\\Clone_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/Clone_.php',
         'PhpParser\\Node\\Expr\\Closure' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/Closure.php',
+        'PhpParser\\Node\\Expr\\ClosureUse' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/ClosureUse.php',
         'PhpParser\\Node\\Expr\\ConstFetch' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/ConstFetch.php',
         'PhpParser\\Node\\Expr\\Empty_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/Empty_.php',
         'PhpParser\\Node\\Expr\\Error' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/Error.php',
@@ -1616,11 +1651,16 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'PhpParser\\Node\\Name\\Relative' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Name/Relative.php',
         'PhpParser\\Node\\NullableType' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/NullableType.php',
         'PhpParser\\Node\\Param' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Param.php',
+        'PhpParser\\Node\\PropertyHook' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/PropertyHook.php',
         'PhpParser\\Node\\PropertyItem' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/PropertyItem.php',
         'PhpParser\\Node\\Scalar' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar.php',
+        'PhpParser\\Node\\Scalar\\DNumber' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/DNumber.php',
+        'PhpParser\\Node\\Scalar\\Encapsed' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/Encapsed.php',
+        'PhpParser\\Node\\Scalar\\EncapsedStringPart' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/EncapsedStringPart.php',
         'PhpParser\\Node\\Scalar\\Float_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/Float_.php',
         'PhpParser\\Node\\Scalar\\Int_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/Int_.php',
         'PhpParser\\Node\\Scalar\\InterpolatedString' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/InterpolatedString.php',
+        'PhpParser\\Node\\Scalar\\LNumber' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/LNumber.php',
         'PhpParser\\Node\\Scalar\\MagicConst' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/MagicConst.php',
         'PhpParser\\Node\\Scalar\\MagicConst\\Class_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/MagicConst/Class_.php',
         'PhpParser\\Node\\Scalar\\MagicConst\\Dir' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/MagicConst/Dir.php',
@@ -1629,6 +1669,7 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'PhpParser\\Node\\Scalar\\MagicConst\\Line' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/MagicConst/Line.php',
         'PhpParser\\Node\\Scalar\\MagicConst\\Method' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/MagicConst/Method.php',
         'PhpParser\\Node\\Scalar\\MagicConst\\Namespace_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/MagicConst/Namespace_.php',
+        'PhpParser\\Node\\Scalar\\MagicConst\\Property' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/MagicConst/Property.php',
         'PhpParser\\Node\\Scalar\\MagicConst\\Trait_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/MagicConst/Trait_.php',
         'PhpParser\\Node\\Scalar\\String_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Scalar/String_.php',
         'PhpParser\\Node\\StaticVar' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/StaticVar.php',
@@ -1643,6 +1684,7 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'PhpParser\\Node\\Stmt\\Class_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Class_.php',
         'PhpParser\\Node\\Stmt\\Const_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Const_.php',
         'PhpParser\\Node\\Stmt\\Continue_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Continue_.php',
+        'PhpParser\\Node\\Stmt\\DeclareDeclare' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/DeclareDeclare.php',
         'PhpParser\\Node\\Stmt\\Declare_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Declare_.php',
         'PhpParser\\Node\\Stmt\\Do_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Do_.php',
         'PhpParser\\Node\\Stmt\\Echo_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Echo_.php',
@@ -1666,7 +1708,9 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'PhpParser\\Node\\Stmt\\Namespace_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Namespace_.php',
         'PhpParser\\Node\\Stmt\\Nop' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Nop.php',
         'PhpParser\\Node\\Stmt\\Property' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Property.php',
+        'PhpParser\\Node\\Stmt\\PropertyProperty' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/PropertyProperty.php',
         'PhpParser\\Node\\Stmt\\Return_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Return_.php',
+        'PhpParser\\Node\\Stmt\\StaticVar' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/StaticVar.php',
         'PhpParser\\Node\\Stmt\\Static_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Static_.php',
         'PhpParser\\Node\\Stmt\\Switch_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Switch_.php',
         'PhpParser\\Node\\Stmt\\TraitUse' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/TraitUse.php',
@@ -1676,6 +1720,7 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'PhpParser\\Node\\Stmt\\Trait_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Trait_.php',
         'PhpParser\\Node\\Stmt\\TryCatch' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/TryCatch.php',
         'PhpParser\\Node\\Stmt\\Unset_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Unset_.php',
+        'PhpParser\\Node\\Stmt\\UseUse' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/UseUse.php',
         'PhpParser\\Node\\Stmt\\Use_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Use_.php',
         'PhpParser\\Node\\Stmt\\While_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/While_.php',
         'PhpParser\\Node\\UnionType' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/UnionType.php',
@@ -1692,6 +1737,7 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'PhpParser\\PrettyPrinterAbstract' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/PrettyPrinterAbstract.php',
         'PhpParser\\PrettyPrinter\\Standard' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/PrettyPrinter/Standard.php',
         'PhpParser\\Token' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Token.php',
+        'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
         'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
         'Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
@@ -1906,6 +1952,57 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/type/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/type/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'Symfony\\Component\\CssSelector\\CssSelectorConverter' => __DIR__ . '/..' . '/symfony/css-selector/CssSelectorConverter.php',
+        'Symfony\\Component\\CssSelector\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/symfony/css-selector/Exception/ExceptionInterface.php',
+        'Symfony\\Component\\CssSelector\\Exception\\ExpressionErrorException' => __DIR__ . '/..' . '/symfony/css-selector/Exception/ExpressionErrorException.php',
+        'Symfony\\Component\\CssSelector\\Exception\\InternalErrorException' => __DIR__ . '/..' . '/symfony/css-selector/Exception/InternalErrorException.php',
+        'Symfony\\Component\\CssSelector\\Exception\\ParseException' => __DIR__ . '/..' . '/symfony/css-selector/Exception/ParseException.php',
+        'Symfony\\Component\\CssSelector\\Exception\\SyntaxErrorException' => __DIR__ . '/..' . '/symfony/css-selector/Exception/SyntaxErrorException.php',
+        'Symfony\\Component\\CssSelector\\Node\\AbstractNode' => __DIR__ . '/..' . '/symfony/css-selector/Node/AbstractNode.php',
+        'Symfony\\Component\\CssSelector\\Node\\AttributeNode' => __DIR__ . '/..' . '/symfony/css-selector/Node/AttributeNode.php',
+        'Symfony\\Component\\CssSelector\\Node\\ClassNode' => __DIR__ . '/..' . '/symfony/css-selector/Node/ClassNode.php',
+        'Symfony\\Component\\CssSelector\\Node\\CombinedSelectorNode' => __DIR__ . '/..' . '/symfony/css-selector/Node/CombinedSelectorNode.php',
+        'Symfony\\Component\\CssSelector\\Node\\ElementNode' => __DIR__ . '/..' . '/symfony/css-selector/Node/ElementNode.php',
+        'Symfony\\Component\\CssSelector\\Node\\FunctionNode' => __DIR__ . '/..' . '/symfony/css-selector/Node/FunctionNode.php',
+        'Symfony\\Component\\CssSelector\\Node\\HashNode' => __DIR__ . '/..' . '/symfony/css-selector/Node/HashNode.php',
+        'Symfony\\Component\\CssSelector\\Node\\NegationNode' => __DIR__ . '/..' . '/symfony/css-selector/Node/NegationNode.php',
+        'Symfony\\Component\\CssSelector\\Node\\NodeInterface' => __DIR__ . '/..' . '/symfony/css-selector/Node/NodeInterface.php',
+        'Symfony\\Component\\CssSelector\\Node\\PseudoNode' => __DIR__ . '/..' . '/symfony/css-selector/Node/PseudoNode.php',
+        'Symfony\\Component\\CssSelector\\Node\\SelectorNode' => __DIR__ . '/..' . '/symfony/css-selector/Node/SelectorNode.php',
+        'Symfony\\Component\\CssSelector\\Node\\Specificity' => __DIR__ . '/..' . '/symfony/css-selector/Node/Specificity.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Handler\\CommentHandler' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Handler/CommentHandler.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Handler\\HandlerInterface' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Handler/HandlerInterface.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Handler\\HashHandler' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Handler/HashHandler.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Handler\\IdentifierHandler' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Handler/IdentifierHandler.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Handler\\NumberHandler' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Handler/NumberHandler.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Handler\\StringHandler' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Handler/StringHandler.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Handler\\WhitespaceHandler' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Handler/WhitespaceHandler.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Parser' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Parser.php',
+        'Symfony\\Component\\CssSelector\\Parser\\ParserInterface' => __DIR__ . '/..' . '/symfony/css-selector/Parser/ParserInterface.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Reader' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Reader.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Shortcut\\ClassParser' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Shortcut/ClassParser.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Shortcut\\ElementParser' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Shortcut/ElementParser.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Shortcut\\EmptyStringParser' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Shortcut/EmptyStringParser.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Shortcut\\HashParser' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Shortcut/HashParser.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Token' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Token.php',
+        'Symfony\\Component\\CssSelector\\Parser\\TokenStream' => __DIR__ . '/..' . '/symfony/css-selector/Parser/TokenStream.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Tokenizer/Tokenizer.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Tokenizer\\TokenizerEscaping' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Tokenizer/TokenizerEscaping.php',
+        'Symfony\\Component\\CssSelector\\Parser\\Tokenizer\\TokenizerPatterns' => __DIR__ . '/..' . '/symfony/css-selector/Parser/Tokenizer/TokenizerPatterns.php',
+        'Symfony\\Component\\CssSelector\\XPath\\Extension\\AbstractExtension' => __DIR__ . '/..' . '/symfony/css-selector/XPath/Extension/AbstractExtension.php',
+        'Symfony\\Component\\CssSelector\\XPath\\Extension\\AttributeMatchingExtension' => __DIR__ . '/..' . '/symfony/css-selector/XPath/Extension/AttributeMatchingExtension.php',
+        'Symfony\\Component\\CssSelector\\XPath\\Extension\\CombinationExtension' => __DIR__ . '/..' . '/symfony/css-selector/XPath/Extension/CombinationExtension.php',
+        'Symfony\\Component\\CssSelector\\XPath\\Extension\\ExtensionInterface' => __DIR__ . '/..' . '/symfony/css-selector/XPath/Extension/ExtensionInterface.php',
+        'Symfony\\Component\\CssSelector\\XPath\\Extension\\FunctionExtension' => __DIR__ . '/..' . '/symfony/css-selector/XPath/Extension/FunctionExtension.php',
+        'Symfony\\Component\\CssSelector\\XPath\\Extension\\HtmlExtension' => __DIR__ . '/..' . '/symfony/css-selector/XPath/Extension/HtmlExtension.php',
+        'Symfony\\Component\\CssSelector\\XPath\\Extension\\NodeExtension' => __DIR__ . '/..' . '/symfony/css-selector/XPath/Extension/NodeExtension.php',
+        'Symfony\\Component\\CssSelector\\XPath\\Extension\\PseudoClassExtension' => __DIR__ . '/..' . '/symfony/css-selector/XPath/Extension/PseudoClassExtension.php',
+        'Symfony\\Component\\CssSelector\\XPath\\Translator' => __DIR__ . '/..' . '/symfony/css-selector/XPath/Translator.php',
+        'Symfony\\Component\\CssSelector\\XPath\\TranslatorInterface' => __DIR__ . '/..' . '/symfony/css-selector/XPath/TranslatorInterface.php',
+        'Symfony\\Component\\CssSelector\\XPath\\XPathExpr' => __DIR__ . '/..' . '/symfony/css-selector/XPath/XPathExpr.php',
+        'Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/..' . '/symfony/polyfill-php80/Php80.php',
+        'Symfony\\Polyfill\\Php80\\PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/PhpToken.php',
         'Tests\\Support\\Database\\Seeds\\ExampleSeeder' => __DIR__ . '/../..' . '/tests/_support/Database/Seeds/ExampleSeeder.php',
         'Tests\\Support\\Libraries\\ConfigReader' => __DIR__ . '/../..' . '/tests/_support/Libraries/ConfigReader.php',
         'Tests\\Support\\Models\\ExampleModel' => __DIR__ . '/../..' . '/tests/_support/Models/ExampleModel.php',
@@ -1917,26 +2014,72 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         'TheSeer\\Tokenizer\\TokenCollectionException' => __DIR__ . '/..' . '/theseer/tokenizer/src/TokenCollectionException.php',
         'TheSeer\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/theseer/tokenizer/src/Tokenizer.php',
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
-        'org\\bovigo\\vfs\\DotDirectory' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/DotDirectory.php',
-        'org\\bovigo\\vfs\\Quota' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/Quota.php',
-        'org\\bovigo\\vfs\\content\\FileContent' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/content/FileContent.php',
-        'org\\bovigo\\vfs\\content\\LargeFileContent' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/content/LargeFileContent.php',
-        'org\\bovigo\\vfs\\content\\SeekableFileContent' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/content/SeekableFileContent.php',
-        'org\\bovigo\\vfs\\content\\StringBasedFileContent' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/content/StringBasedFileContent.php',
-        'org\\bovigo\\vfs\\vfsStream' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStream.php',
-        'org\\bovigo\\vfs\\vfsStreamAbstractContent' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStreamAbstractContent.php',
-        'org\\bovigo\\vfs\\vfsStreamBlock' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStreamBlock.php',
-        'org\\bovigo\\vfs\\vfsStreamContainer' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStreamContainer.php',
-        'org\\bovigo\\vfs\\vfsStreamContainerIterator' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStreamContainerIterator.php',
-        'org\\bovigo\\vfs\\vfsStreamContent' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStreamContent.php',
-        'org\\bovigo\\vfs\\vfsStreamDirectory' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStreamDirectory.php',
-        'org\\bovigo\\vfs\\vfsStreamException' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStreamException.php',
-        'org\\bovigo\\vfs\\vfsStreamFile' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStreamFile.php',
-        'org\\bovigo\\vfs\\vfsStreamWrapper' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStreamWrapper.php',
-        'org\\bovigo\\vfs\\visitor\\vfsStreamAbstractVisitor' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/visitor/vfsStreamAbstractVisitor.php',
-        'org\\bovigo\\vfs\\visitor\\vfsStreamPrintVisitor' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/visitor/vfsStreamPrintVisitor.php',
-        'org\\bovigo\\vfs\\visitor\\vfsStreamStructureVisitor' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/visitor/vfsStreamStructureVisitor.php',
-        'org\\bovigo\\vfs\\visitor\\vfsStreamVisitor' => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php/org/bovigo/vfs/visitor/vfsStreamVisitor.php',
+        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+        'bovigo\\vfs\\BasicFile' => __DIR__ . '/..' . '/mikey179/vfsstream/src/BasicFile.php',
+        'bovigo\\vfs\\DotDirectory' => __DIR__ . '/..' . '/mikey179/vfsstream/src/DotDirectory.php',
+        'bovigo\\vfs\\Quota' => __DIR__ . '/..' . '/mikey179/vfsstream/src/Quota.php',
+        'bovigo\\vfs\\StreamWrapper' => __DIR__ . '/..' . '/mikey179/vfsstream/src/StreamWrapper.php',
+        'bovigo\\vfs\\content\\FileContent' => __DIR__ . '/..' . '/mikey179/vfsstream/src/content/FileContent.php',
+        'bovigo\\vfs\\content\\LargeFileContent' => __DIR__ . '/..' . '/mikey179/vfsstream/src/content/LargeFileContent.php',
+        'bovigo\\vfs\\content\\SeekableFileContent' => __DIR__ . '/..' . '/mikey179/vfsstream/src/content/SeekableFileContent.php',
+        'bovigo\\vfs\\content\\StringBasedFileContent' => __DIR__ . '/..' . '/mikey179/vfsstream/src/content/StringBasedFileContent.php',
+        'bovigo\\vfs\\vfsBlock' => __DIR__ . '/..' . '/mikey179/vfsstream/src/vfsBlock.php',
+        'bovigo\\vfs\\vfsDirectory' => __DIR__ . '/..' . '/mikey179/vfsstream/src/vfsDirectory.php',
+        'bovigo\\vfs\\vfsDirectoryIterator' => __DIR__ . '/..' . '/mikey179/vfsstream/src/vfsDirectoryIterator.php',
+        'bovigo\\vfs\\vfsFile' => __DIR__ . '/..' . '/mikey179/vfsstream/src/vfsFile.php',
+        'bovigo\\vfs\\vfsStream' => __DIR__ . '/..' . '/mikey179/vfsstream/src/vfsStream.php',
+        'bovigo\\vfs\\vfsStreamContainer' => __DIR__ . '/..' . '/mikey179/vfsstream/src/vfsStreamContainer.php',
+        'bovigo\\vfs\\vfsStreamContent' => __DIR__ . '/..' . '/mikey179/vfsstream/src/vfsStreamContent.php',
+        'bovigo\\vfs\\vfsStreamException' => __DIR__ . '/..' . '/mikey179/vfsstream/src/vfsStreamException.php',
+        'bovigo\\vfs\\visitor\\BaseVisitor' => __DIR__ . '/..' . '/mikey179/vfsstream/src/visitor/BaseVisitor.php',
+        'bovigo\\vfs\\visitor\\Printer' => __DIR__ . '/..' . '/mikey179/vfsstream/src/visitor/Printer.php',
+        'bovigo\\vfs\\visitor\\StructureInspector' => __DIR__ . '/..' . '/mikey179/vfsstream/src/visitor/StructureInspector.php',
+        'bovigo\\vfs\\visitor\\vfsStreamVisitor' => __DIR__ . '/..' . '/mikey179/vfsstream/src/visitor/vfsStreamVisitor.php',
+        'org\\bovigo\\vfs\\DotDirectory' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/DotDirectory.php',
+        'org\\bovigo\\vfs\\Quota' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/Quota.php',
+        'org\\bovigo\\vfs\\content\\FileContent' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/content/FileContent.php',
+        'org\\bovigo\\vfs\\content\\LargeFileContent' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/content/LargeFileContent.php',
+        'org\\bovigo\\vfs\\content\\SeekableFileContent' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/content/SeekableFileContent.php',
+        'org\\bovigo\\vfs\\content\\StringBasedFileContent' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/content/StringBasedFileContent.php',
+        'org\\bovigo\\vfs\\vfsStream' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/vfsStream.php',
+        'org\\bovigo\\vfs\\vfsStreamAbstractContent' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/vfsStreamAbstractContent.php',
+        'org\\bovigo\\vfs\\vfsStreamBlock' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/vfsStreamBlock.php',
+        'org\\bovigo\\vfs\\vfsStreamContainer' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/vfsStreamContainer.php',
+        'org\\bovigo\\vfs\\vfsStreamContainerIterator' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/vfsStreamContainerIterator.php',
+        'org\\bovigo\\vfs\\vfsStreamContent' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/vfsStreamContent.php',
+        'org\\bovigo\\vfs\\vfsStreamDirectory' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/vfsStreamDirectory.php',
+        'org\\bovigo\\vfs\\vfsStreamException' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/vfsStreamException.php',
+        'org\\bovigo\\vfs\\vfsStreamFile' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/vfsStreamFile.php',
+        'org\\bovigo\\vfs\\vfsStreamWrapper' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/vfsStreamWrapper.php',
+        'org\\bovigo\\vfs\\visitor\\vfsStreamAbstractVisitor' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/visitor/vfsStreamAbstractVisitor.php',
+        'org\\bovigo\\vfs\\visitor\\vfsStreamPrintVisitor' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/visitor/vfsStreamPrintVisitor.php',
+        'org\\bovigo\\vfs\\visitor\\vfsStreamStructureVisitor' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/visitor/vfsStreamStructureVisitor.php',
+        'org\\bovigo\\vfs\\visitor\\vfsStreamVisitor' => __DIR__ . '/..' . '/mikey179/vfsstream/org/bovigo/vfs/visitor/vfsStreamVisitor.php',
+        'voku\\helper\\AbstractDomParser' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/AbstractDomParser.php',
+        'voku\\helper\\AbstractSimpleHtmlDom' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/AbstractSimpleHtmlDom.php',
+        'voku\\helper\\AbstractSimpleHtmlDomNode' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/AbstractSimpleHtmlDomNode.php',
+        'voku\\helper\\AbstractSimpleXmlDom' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/AbstractSimpleXmlDom.php',
+        'voku\\helper\\AbstractSimpleXmlDomNode' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/AbstractSimpleXmlDomNode.php',
+        'voku\\helper\\DomParserInterface' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/DomParserInterface.php',
+        'voku\\helper\\HtmlDomHelper' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/HtmlDomHelper.php',
+        'voku\\helper\\HtmlDomParser' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/HtmlDomParser.php',
+        'voku\\helper\\SelectorConverter' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SelectorConverter.php',
+        'voku\\helper\\SimpleHtmlAttributes' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleHtmlAttributes.php',
+        'voku\\helper\\SimpleHtmlAttributesInterface' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleHtmlAttributesInterface.php',
+        'voku\\helper\\SimpleHtmlDom' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleHtmlDom.php',
+        'voku\\helper\\SimpleHtmlDomBlank' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleHtmlDomBlank.php',
+        'voku\\helper\\SimpleHtmlDomInterface' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleHtmlDomInterface.php',
+        'voku\\helper\\SimpleHtmlDomNode' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleHtmlDomNode.php',
+        'voku\\helper\\SimpleHtmlDomNodeBlank' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleHtmlDomNodeBlank.php',
+        'voku\\helper\\SimpleHtmlDomNodeInterface' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleHtmlDomNodeInterface.php',
+        'voku\\helper\\SimpleXmlDom' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleXmlDom.php',
+        'voku\\helper\\SimpleXmlDomBlank' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleXmlDomBlank.php',
+        'voku\\helper\\SimpleXmlDomInterface' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleXmlDomInterface.php',
+        'voku\\helper\\SimpleXmlDomNode' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleXmlDomNode.php',
+        'voku\\helper\\SimpleXmlDomNodeBlank' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleXmlDomNodeBlank.php',
+        'voku\\helper\\SimpleXmlDomNodeInterface' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/SimpleXmlDomNodeInterface.php',
+        'voku\\helper\\XmlDomParser' => __DIR__ . '/..' . '/voku/simple_html_dom/src/voku/helper/XmlDomParser.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -1944,7 +2087,6 @@ class ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit7aa20fa0d2ead572d418238fa8afe610::$classMap;
 
         }, null, ClassLoader::class);

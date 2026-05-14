@@ -1,7 +1,14 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     *  @var array $city
+     *  @var array $form
+     *  @var array $tableTemplate
+     *  @var object $pager
+     */
+?>
 <h1>Seznam měst</h1>
 <div class="row">
     <div class="col-md-10">
@@ -12,8 +19,9 @@
             'class' => $form['addClass']." mb-3"
         );
         echo anchor('admin/mesto/pridat', $form['addBtn'], $data);
+        echo filter_input_bs($form['divInputClass']);
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('Název německy','Název česky');
+        $table->setHeading('Název německy','Název česky', 'Stát', 'Ligové');
         foreach ($city as $key =>  $row) {
             $dataEdit = array(
                 'class' => $form['editClass'],
@@ -28,13 +36,18 @@
 
 
             echo "<!-- začátek modalu -->\n";
-            echo form_modal("modal" . $key, $row->id_city, "Smazat město", "Chceš opravdu smazat město " . $row->name_de ."?", "admin/mesto/" . $row->id_city . "/delete");
+            echo form_modal_delete("modal" . $key, $row->id_city, "Smazat město", "Chceš opravdu smazat město " . $row->name_de ."?", "admin/mesto/" . $row->id_city . "/delete");
             echo "<!-- konec modalu -->\n";
             $data = array(
                 'class' => $form['listClass'].' ms-3'
             );
-           
-            $table->addRow($row->name_de, $row->name_cz, $editBtn . $deleteBtn);
+            if($row->league) {
+                $league = "Ano";
+            } else {
+                $league = "Ne";
+            }
+            $country = flagIcon($row->short_name) . $row->name;
+            $table->addRow($row->name_de, $row->name_cz, $country, $league, $editBtn . $deleteBtn);
         }
 
 
@@ -49,4 +62,14 @@
 
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+  $("#filter").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#table tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 <?= $this->endSection(); ?>

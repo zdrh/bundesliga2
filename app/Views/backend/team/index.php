@@ -13,6 +13,7 @@
         );
         echo anchor('admin/tym/pridat', $form['addBtn'], $data);
         echo anchor('admin/tym/import', $form['importBtn'], $data);
+        echo filter_input_bs($form['divInputClass']);
         $table = new \CodeIgniter\View\Table();
         $table->setHeading('Název','Zkratka', 'Založení', 'Zánik', 'Nástupce', '');
         foreach ($tymy as $key =>  $row) {
@@ -45,4 +46,14 @@
 
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+  $("#filter").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#table tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 <?= $this->endSection(); ?>

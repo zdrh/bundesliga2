@@ -2,6 +2,10 @@
 
 All notable changes are documented in this file using the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
+## [3.0.4] - 2024-03-14
+
+No functional changes.
+
 ## [3.0.3] - 2020-09-28
 
 ### Changed
@@ -46,9 +50,10 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 * Initial release
 
-[3.0.3]: https://github.com/sebastianbergmann/comparator/resource-operations/3.0.2...3.0.3
-[3.0.2]: https://github.com/sebastianbergmann/comparator/resource-operations/3.0.1...3.0.2
-[3.0.1]: https://github.com/sebastianbergmann/comparator/resource-operations/3.0.0...3.0.1
-[3.0.0]: https://github.com/sebastianbergmann/comparator/resource-operations/2.0.1...3.0.0
-[2.0.1]: https://github.com/sebastianbergmann/comparator/resource-operations/2.0.0...2.0.1
-[2.0.0]: https://github.com/sebastianbergmann/comparator/resource-operations/1.0.0...2.0.0
+[3.0.4]: https://github.com/sebastianbergmann/resource-operations/compare/3.0.3...3.0.4
+[3.0.3]: https://github.com/sebastianbergmann/resource-operations/compare/3.0.2...3.0.3
+[3.0.2]: https://github.com/sebastianbergmann/resource-operations/compare/3.0.1...3.0.2
+[3.0.1]: https://github.com/sebastianbergmann/resource-operations/compare/3.0.0...3.0.1
+[3.0.0]: https://github.com/sebastianbergmann/resource-operations/compare/2.0.1...3.0.0
+[2.0.1]: https://github.com/sebastianbergmann/resource-operations/compare/2.0.0...2.0.1
+[2.0.0]: https://github.com/sebastianbergmann/resource-operations/compare/1.0.0...2.0.0

@@ -161,23 +161,23 @@ class IonAuthModel
 	/**
 	 * Message (uses lang file)
 	 *
-	 * @var string
+	 * @var array
 	 */
 	protected $messages = [];
 
 	/**
 	 * Error message (uses lang file)
 	 *
-	 * @var string
+	 * @var array
 	 */
 	protected $errors = [];
 
 	/**
-	 * Message templates (single, list).
+	 * Messages templates (single, list).
 	 *
 	 * @var array
 	 */
-	protected $messageTemplates = [];
+	protected $messagesTemplates = [];
 
 	/**
 	 * Caching of users and their groups
@@ -199,6 +199,20 @@ class IonAuthModel
 	 * @var \CodeIgniter\Database\BaseConnection
 	 */
 	protected $db;
+
+	/**
+	 * Table joins
+	 *
+	 * @var array
+	 */
+	protected $join;
+
+	/**
+	 * Hash method
+	 *
+	 * @var string
+	 */
+	protected $hashMethod;
 
 	/**
 	 * Constructor
@@ -279,11 +293,11 @@ class IonAuthModel
 		if ($algo !== false && $params !== false)
 		{
 			$hash = password_hash($password, $algo, $params);
-			
+
 			if (is_null($hash) || $hash === false) {
 				return false;
 			}
-			
+
 			return $hash;
 		}
 
@@ -980,15 +994,17 @@ class IonAuthModel
 			$lastLogin = $this->session->get('last_check');
 			if ($lastLogin + $recheck < time())
 			{
-				$query = $this->db->select('id')
+				$query = $this->db
+								  ->table($this->tables['users'])
+								  ->select('id')
 								  ->where([
 									  $this->identityColumn => $this->session->get('identity'),
 									  'active'              => '1',
 								  ])
 								  ->limit(1)
 								  ->orderBy('id', 'desc')
-								  ->get($this->tables['users']);
-				if ($query->numRows() === 1)
+								  ->get();
+				if ($query->getNumRows() === 1)
 				{
 					$this->session->set('last_check', time());
 				}
@@ -1115,14 +1131,15 @@ class IonAuthModel
 	{
 		if ($this->config->trackLoginAttempts && $this->config->trackLoginIpAddress)
 		{
-			$this->db->select('ip_address');
-			$this->db->where('login', $identity);
-			$this->db->orderBy('id', 'desc');
-			$qres = $this->db->get($this->tables['login_attempts'], 1);
+			$builder = $this->db->table($this->tables['login_attempts']);
+			$builder->select('ip_address');
+			$builder->where('login', $identity);
+			$builder->orderBy('id', 'desc');
+			$qres = $builder->get(1);
 
-			if ($qres->numRows() > 0)
+			if ($qres->getNumRows() > 0)
 			{
-				return $qres->row()->ip_address;
+				return $qres->getRow()->ip_address;
 			}
 		}
 
@@ -1368,7 +1385,7 @@ class IonAuthModel
 	{
 		$this->triggerEvents(['num_rows']);
 
-		$result = $this->response->numRows();
+		$result = $this->response->getNumRows();
 
 		return $result;
 	}

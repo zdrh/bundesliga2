@@ -11,11 +11,14 @@
     },
     "require": {
         "php": "^7.4 || ^8.0",
+        "apalfrey/select2-bootstrap-5-theme": "dev-master",
         "benedmunds/codeigniter-ion-auth": "4.x-dev",
         "codeigniter4/framework": "^4.0",
         "components/font-awesome": "^6.5",
         "istvan-ujjmeszaros/bootstrap-duallistbox": "v4.x-dev",
-        "twbs/bootstrap": "^5.3"
+        "select2/select2": "dev-develop",
+        "twbs/bootstrap": "^5.3",
+        "voku/simple_html_dom": "dev-master"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",

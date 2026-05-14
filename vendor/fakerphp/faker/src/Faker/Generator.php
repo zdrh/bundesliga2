@@ -565,7 +565,7 @@ class Generator
      */
     private $uniqueGenerator;
 
-    public function __construct(ContainerInterface $container = null)
+    public function __construct(?ContainerInterface $container = null)
     {
         $this->container = $container ?: Container\ContainerBuilder::withDefaultExtensions()->build();
     }
@@ -763,6 +763,8 @@ class Generator
      * Get a random MIME type
      *
      * @example 'video/avi'
+     *
+     * @return string
      */
     public function mimeType()
     {
@@ -773,6 +775,8 @@ class Generator
      * Get a random file extension (without a dot)
      *
      * @example avi
+     *
+     * @return string
      */
     public function fileExtension()
     {
@@ -781,6 +785,8 @@ class Generator
 
     /**
      * Get a full path to a new real file on the system.
+     *
+     * @return string
      */
     public function filePath()
     {

@@ -7,7 +7,7 @@ use CodeIgniter\Config\BaseConfig;
 class Main extends BaseConfig
 {
     //vzhled tabulky
-    var $template = array(
+    public $template = array(
         'table_open' => '<table class="table table-bordered">',
         'thead_open' => '<thead>',
         'thead_close' => '</thead>',
@@ -15,7 +15,7 @@ class Main extends BaseConfig
         'heading_row_end' => ' </tr>',
         'heading_cell_start' => '<th>',
         'heading_cell_end' => '</th>',
-        'tbody_open' => '<tbody>',
+        'tbody_open' => '<tbody id=\'table\'>',
         'tbody_close' => '</tbody>',
         'row_start' => '<tr>',
         'row_end'  => '</tr>',
@@ -28,7 +28,7 @@ class Main extends BaseConfig
         'table_close' => '</table>'
     );
 
-    var $templateFixture = array(
+    public $templateFixture = array(
         'table_open' => '<table class="table table-bordered no-margin-bottom">',
         'thead_open' => '<thead>',
         'thead_close' => '</thead>',
@@ -50,7 +50,7 @@ class Main extends BaseConfig
     );
 
     //tlačítka pro přidávání, editaci a mazání a třídy pro daná tlačítka;
-    var $form = array(
+    public $form = array(
         'addBtn' => '<i class="fa-solid fa-circle-plus fa-xs"></i> Přidat',
         'importBtn' => '<i class="fa-solid fa-circle-plus fa-xs"></i> Importovat',
         'editBtn' => '<i class="fa-solid fa-pen fa-2xs"></i> Upravit',
@@ -107,7 +107,9 @@ class Main extends BaseConfig
         'dbEditSuccess' => 'Zaznam se aktualizoval',
         'dbDeleteSuccess' => 'Záznam byl smazán',
         'uploadError' => 'Nepodařilo se nahrát obrázek',
-        'uploadSuccess' => 'Upload proběhl v pořádku'
+        'uploadSuccess' => 'Upload proběhl v pořádku',
+        'dbAddCountSuccess' => 'Počet vložených záznamů: ',
+        'dbAddCountError' => 'Počet vložených záznamů: ',
     );
 
     //relace mezi tabulkami
@@ -139,7 +141,13 @@ class Main extends BaseConfig
         'city_stadium' => 'city.id_city=stadium.id_city',
         'stadium_city' => 'city.id_city=stadium.id_city',
         'team_league_season_stadium' => 'stadium.id_stadium=team_league_season.id_stadium',
-        'stadium_team_league_season' => 'stadium.id_stadium=team_league_season.id_stadium'
+        'stadium_team_league_season' => 'stadium.id_stadium=team_league_season.id_stadium',
+        'player_country' => 'player.country=country.id_country',
+        'country_player' => 'player.country=country.id_country',
+        'player_city' => 'player.born_city=city.id_city',
+        'city_player' => 'player.born_city=city.id_city',
+        'city_country' => 'country.id_country=city.country',
+        'country_city' => 'country.id_country=city.country'
     );
     //smazaané položky nezobrazovat
     public $deletedRows = array(
@@ -149,5 +157,10 @@ class Main extends BaseConfig
     );
     //stránkování
     public $perPage = 20;
+
+
+   
+
+   
 
 }

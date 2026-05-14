@@ -29,7 +29,7 @@ class Team extends BaseBackendController
         $seznamTymu = $this->team->findAll();
         $this->data['tymy'] = $this->arrayLib->addFollower($tymy, $seznamTymu);
         $this->data['pager'] = $this->team->pager;
-        //var_dump($this->data);
+       
         echo view('backend/team/index', $this->data);
     }
 

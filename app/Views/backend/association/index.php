@@ -8,6 +8,10 @@
 
 
         <?php
+        /** @var array $form
+         * @var array $svazy
+         * @var array $tableTemplate
+         */
         $data = array(
             'class' => $form['addClass']." mb-3"
         );
@@ -28,7 +32,7 @@
 
 
             echo "<!-- začátek modalu -->\n";
-            echo form_modal("modal" . $key, $row->id_association, "Smazat svaz", "Chceš opravdu smazat svaz " . $row->general_name ."?", "admin/svaz/" . $row->id_association . "/delete");
+            echo form_modal_delete("modal" . $key, $row->id_association, "Smazat svaz", "Chceš opravdu smazat svaz " . $row->general_name ."?", "admin/svaz/" . $row->id_association . "/delete");
             echo "<!-- konec modalu -->\n";
             $data = array(
                 'class' => $form['listClass'].' ms-3'

@@ -6,6 +6,11 @@
 <div class="row">
     <div class="col-md-4">
         <?php
+        /** 
+        * @var object $svaz
+        * @var array $year
+        * @var array $form
+        */
         echo form_open('admin/svaz/update');
         $dataName = array(
             'name' => 'general_name',
@@ -32,9 +37,9 @@
         );
         ?>
 
-        <?= form_input_bs($dataName, $form["divInputClass"], "Obecný název", "text"); ?>
-        <?= form_input_bs($dataShortName, $form["divInputClass"], "Zkratka asociace", "text"); ?>
-        <?= form_input_bs($dataFounded, $form["divInputClass"], "Rok založení", "number", false); ?>
+        <?= form_input_bs('general_name', $dataName, "Obecný název"); ?>
+        <?= form_input_bs('short_name', $dataShortName, "Zkratka asociace"); ?>
+        <?= form_input_bs('founded', $dataFounded, "Rok založení", "number", false); ?>
         <?= form_hidden('id_association', $svaz->id_association); ?>
         <?= form_hidden('_method', 'PUT'); ?>
         

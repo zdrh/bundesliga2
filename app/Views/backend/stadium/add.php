@@ -40,8 +40,9 @@
         }
 
         $extra = array(
-            'class' => 'form-select',
-            'id' => 'city'
+            'class' => 'form-select select2-basic-single',
+            'id' => 'city',
+            'data-placeholder' => 'Vyber město'
         );
 
         $disabled = array(0 => '');
@@ -77,14 +78,25 @@
 </div>
 
 <script>
-       
+     $(document).ready(function() {
+    $('.select2-basic-single').select2();
+});
+     
     $("button#add_stadium").click(function() {
         
         value = "<hr><?php echo form_input_bs($generalName, $form["divInputClass"], 'Název stadionu', 'text', true, false) . form_input_bs($latitude, $form["divInputClass"], 'Zeměpisná šířka', 'text', true, false). form_input_bs($longtitude, $form["divInputClass"], 'Zeměpisná délka', 'text', true, false).form_dropdown_bs('city[]', $optionsCity, $extra, 'mb-3' ,"Vyber město", $disabled, $selected,[], false);?>";
         newDiv = $("<div></div>").html(value).attr("id", "newDiv");
         $("#stadium_form").append(newDiv);
+        $('.select2-basic-single').select2();
+
 
     });
+
+    $( '#city' ).select2( {
+    theme: "bootstrap-5",
+    width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+    placeholder: $( this ).data( 'placeholder' ),
+} );
 </script>
 
     <?= $this->endSection(); ?>

@@ -40,7 +40,7 @@ abstract class BaseController extends Controller
     *
     * @var array
     */
-   protected $helpers = ['html', 'form', 'myform', 'myhtml'];
+   protected $helpers = ['html', 'form', 'myform', 'myhtml', 'mypokus'];
    protected $ionAuth;
    protected $data;
    protected $mainConfig;

@@ -3,6 +3,12 @@
 <?= $this->section('content'); ?>
 
 <h1>Přidat město</h1>
+<?php
+/**
+ * @var array $country
+ * @var array $form
+ */
+?>
 <div class="row">
     <div class="col-md-4">
         <?php
@@ -21,19 +27,47 @@
             'placeholder' => 'a'
         );
 
+        $optionsCountry = $country;
+        $optionsCountry[''] = "Vyber stát";
+
+        $disabled = array(0 => '');
+        $selected[0] = '';
+
+        $extraCountry = array(
+            'class' => 'form-select',
+            'id' => 'country'
+        );
+
+        $optionsLeague = array(
+            '' => 'Vyber důvod vložení',
+            1 => 'Liga',
+            0 => 'Narození hráče'
+        );
+
+        $extraLeague = array(
+            'class' => 'form-select',
+            'id' => 'league'
+        );
 
         ?>
 
         <div id="city_form">
 
-            <?= form_input_bs($dataNameDe, $form["divInputClass"], "Název německy"); ?>
-
-
-            <?= form_input_bs($dataNameCz, $form["divInputClass"], "Název česky"); ?>
-
+            <?= form_input_bs('name_de[]', $dataNameDe, "Název německy"); ?>
+            <?= form_input_bs('name_cz[]', $dataNameCz, "Název česky"); ?>
+            <?= form_dropdown_bs('country[]', $optionsCountry, $extraCountry, "Vyber stát", $selected, $disabled) ?>
+            <?= form_dropdown_bs('league[]', $optionsLeague, $extraLeague, "Vyber důvod vložení", $selected, $disabled) ?>
 
 
         </div>
+
+        <template id="city">
+            <hr>
+            <?= form_input_bs('name_de[]', $dataNameDe, "Název německy"); ?>
+            <?= form_input_bs('name_cz[]', $dataNameCz, "Název česky"); ?>
+            <?= form_dropdown_bs('country[]', $optionsCountry, $extraCountry, "Vyber stát", $selected, $disabled) ?>
+            <?= form_dropdown_bs('league[]', $optionsLeague, $extraLeague, "Vyber důvod vložení", $selected, $disabled) ?>
+        </template>
         <?php
 
         $data_button_add = array(
@@ -53,16 +87,11 @@
 </div>
 
 <script>
-    //document.getElementById('start-').setAttribute('id', 'start-0');
-    //document.getElementById('finish-').setAttribute('id', 'finish-0');
-       
     $("button#add_city").click(function() {
-        
-        value = "<hr><?php echo form_input_bs($dataNameDe, $form["divInputClass"], 'Název německy', 'text', true, false) . form_input_bs($dataNameCz, $form["divInputClass"], 'Název česky', 'text', true, false);?>";
-        newDiv = $("<div></div>").html(value).attr("id", "newDiv");
-        $("#city_form").append(newDiv);
+        const clone = $($('#city').html());
+        $('#city_form').append(clone);
 
     });
 </script>
 
-    <?= $this->endSection(); ?>
+<?= $this->endSection(); ?>

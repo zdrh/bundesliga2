@@ -15,6 +15,7 @@ use App\Models\Season;
 use App\Models\LeagueSeasonGroup;
 
 use App\Libraries\FileLibrary;
+use App\Libraries\ArrayLibrary;
 use stdClass;
 
 class LeagueSeason extends BaseBackendController
@@ -27,6 +28,8 @@ class LeagueSeason extends BaseBackendController
     var $fileLib;
     var $associationSeason;
     var $leagueSeasonGroup;
+    var $arrayLib;
+
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         parent::initController($request, $response, $logger);
@@ -37,6 +40,7 @@ class LeagueSeason extends BaseBackendController
         $this->associationSeason = new AssociationSeason();
         $this->leagueSeasonGroup = new LeagueSeasonGroup();
         $this->fileLib = new FileLibrary();
+        $this->arrayLib = new ArrayLibrary();
     }
 
     public function index($idLeague)
@@ -55,6 +59,7 @@ class LeagueSeason extends BaseBackendController
        // $this->data['sezony'] = $this->sql->query2($idLeague, $id_association);
        //$this->data['sezony'] = $this->season->join('association_season', 'season.id_season=association_season.id_season', 'inner')->join('league_season', 'league_season.id_assoc_season=association_season.id_assoc_season AND league_season.deleted_at IS NULL' ,'left')->where('association_season.id_association', $id_association)->orderBy('season.start', 'asc')->findAll();
        $this->data['sezony'] = $this->season->join('association_season', 'season.id_season=association_season.id_season', 'inner')->join('league_season', $this->data['join']['league_season_association_season'].' AND league_season.id_league='.$idLeague.' AND league_season.deleted_at IS NULL', 'left')->where('association_season.id_association', $id_association)->orderBy('season.start', 'asc')->findAll();
+       //var_dump($this->data['sezony']);
       //where('league_season.id_league', $idLeague)->
        // var_dump($this->data['sezony']);
         echo view('backend/league_season/add', $this->data);

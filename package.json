@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "flag-icons": "^7.3.2",
     "jquery": "^3.7.1"
   }
 }

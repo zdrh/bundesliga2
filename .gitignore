@@ -92,6 +92,8 @@ phpunit
 
 # Modules Testing
 _modules/*
+node_modules/
+vendor/
 
 # phpenv local config
 .php-version

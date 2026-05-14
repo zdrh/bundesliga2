@@ -11,6 +11,11 @@ $routes->post('login-complete', 'Auth::loginComplete');
 $routes->get('logout', 'Auth::logout');
 
 
+//parsing
+$routes->get('ziskej-kola', 'Parser::getRounds');
+$routes->get('ziskej-zapasy', 'Parser::getMatches');
+$routes->get('ziskej-info', 'Parser::getMatchInfo');
+
 //frontend
 $routes->get('seznam-sezon', 'SeasonF::index');
 $routes->post('sezona/view','SeasonF::view');
@@ -123,5 +128,26 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->put('zapas/update', 'Game::update');
     $routes->delete('zapas/(:num)/delete', 'Game::delete/$1');
 
+    //hráči
+    $routes->get('hrac/pridat', 'Player::add');
+    $routes->get('hrac/import', 'Player::import');
+    $routes->post('hrac/create', 'Player::create');
+    $routes->post('hrac/createimport', 'PLayer::createImport');
+    $routes->get('seznam-hracu', 'Player::index');
+    $routes->get('hrac/(:num)', 'Player::show/$1');
+    $routes->get('hrac/(:num)/edit', 'Player::edit/$1');
+    $routes->put('hrac/update', 'Player::update');
+    $routes->delete('hrac/(:num)/delete', 'Player::delete/$1');
+
+    //země
+    $routes->get('zeme/pridat', 'Country::add');
+    $routes->post('zeme/create', 'Country::create');
+    $routes->get('seznam-zemi', 'Country::index');
+    $routes->get('zeme/(:num)', 'Country::show/$1');
+    $routes->get('zeme/(:num)/edit', 'Country::edit/$1');
+    $routes->put('zeme/update', 'Country::update');
+    $routes->delete('zeme/(:num)/delete', 'Country::delete/$1');
+
     
 });
+

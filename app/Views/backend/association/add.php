@@ -6,6 +6,10 @@
 <div class="row">
     <div class="col-md-4">
         <?php
+        /**
+         * @var array $year
+         * @var array $form
+         */
         echo form_open('admin/svaz/create');
         $dataName = array(
             'name' => 'name',
@@ -32,13 +36,12 @@
         ?>
 
         <div id="association_form">
-            
-            <?= form_input_bs($dataName, $form["divInputClass"], "Obecný název"); ?>
+           
+            <?= form_input_bs('name', $dataName, "Obecný název" ); ?>
 
-            
-            <?= form_input_bs($dataShortName, $form["divInputClass"], "Zkratka svazu"); ?>
+            <?= form_input_bs('short_name', $dataShortName, "Zkratka svazu"); ?>
 
-            <?= form_input_bs($dataFounded, $form["divInputClass"], "Rok založení", "number", false); ?>
+            <?= form_input_bs('founded', $dataFounded, "Rok založení", "number", false); ?>
 
         </div>
         <?php

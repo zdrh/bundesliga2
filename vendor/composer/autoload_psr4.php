@@ -6,7 +6,12 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'voku\\helper\\' => array($vendorDir . '/voku/simple_html_dom/src/voku/helper'),
+    'org\\bovigo\\vfs\\' => array($vendorDir . '/mikey179/vfsstream/org/bovigo/vfs'),
+    'bovigo\\vfs\\' => array($vendorDir . '/mikey179/vfsstream/src'),
     'Tests\\Support\\' => array($baseDir . '/tests/_support'),
+    'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
+    'Symfony\\Component\\CssSelector\\' => array($vendorDir . '/symfony/css-selector'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),

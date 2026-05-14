@@ -1,7 +1,16 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
+<?php
+/**
+ *  @var object $svaz
+ *  @var int $aktualniSezona
+ *  @var array $sezony
+ *  @var array $uploadPath
+ *  @var array $form
+ */
 
+?>
 <h1>Upravit sezónu svazu <?= $svaz->general_name ?></h1>
 <div class="row">
     <div class="col-md-4">
@@ -58,9 +67,9 @@
         
        
         ?>
-        <?= form_input_bs($dataGeneralName, $form["divInputClass"], "Obecný název svazu"); ?>
+        <?= form_input_bs('general_name', $dataGeneralName, "Obecný název svazu"); ?>
         <?= form_button($data_button_general_name); ?>
-        <?= form_input_bs($dataName, $form["divInputClass"], "Název svazu v sezóně"); ?>
+        <?= form_input_bs('name', $dataName, "Název svazu v sezóně"); ?>
         <div>
 
             <?php
@@ -73,8 +82,8 @@
             
             ?>
         </div>
-        <?= form_input_bs($dataLogo, $form["divInputClass"], "Logo svazu v této sezóně", 'file', false); ?>
-        <?= form_dropdown_bs('season', $options, $extra, 'mb-3' ,"Vyber sezónu", $disabled, $selected) ?>
+        <?= form_input_bs('logo', $dataLogo, "Logo svazu v této sezóně", 'file', false); ?>
+        <?= form_dropdown_bs('season', $options, $extra, 'Vyber sezónu', $selected, $disabled) ?>
         <?= form_hidden('id_association', $svaz->id_association) ?>
         <?= form_hidden('id_season', $svaz->id_season) ?>
         <?= form_hidden('_method', 'PUT') ?>

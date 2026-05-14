@@ -50,6 +50,18 @@ class ArrayLibrary
         }
         return $result;
     }
+/**
+ * dostane pole objektů a převed ho na pole, kde klíčem budou hodnoty parametru $key
+ */
+    public function transformArrayToAssociative($array, $key) {
+        $result = array();
+        foreach($array as $row) {
+            $result[$row->$key] = $row;
+        }
+
+        return $result;
+
+    }
     /**
      * dostane dvourozměnrné pole (typicky import z csv), zkontroluje, zda je v každém prvku daný počet podprvků a vrátí pole objektů
      * @param $array -dvourozměrné pole, které se bude testovat

@@ -12,6 +12,8 @@
             'class' => $form['addClass']." mb-3"
         );
         echo anchor('admin/stadion/pridat', $form['addBtn'], $data);
+
+        echo filter_input_bs($form['divInputClass']);
         $table = new \CodeIgniter\View\Table();
         $table->setHeading('Název stadionu','Město', 'Zem. šířka', 'Zem. délka');
         foreach ($stadion as $key =>  $row) {
@@ -49,4 +51,14 @@
 
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+  $("#filter").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#table tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 <?= $this->endSection(); ?>
