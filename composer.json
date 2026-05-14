@@ -13,7 +13,7 @@
         "php": "^7.4 || ^8.0",
         "apalfrey/select2-bootstrap-5-theme": "dev-master",
         "benedmunds/codeigniter-ion-auth": "4.x-dev",
-        "codeigniter4/framework": "^4.0",
+        "codeigniter4/framework": "4.7",
         "components/font-awesome": "^6.5",
         "istvan-ujjmeszaros/bootstrap-duallistbox": "v4.x-dev",
         "select2/select2": "dev-develop",
