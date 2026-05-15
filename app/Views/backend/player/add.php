@@ -3,6 +3,13 @@
 <?= $this->section('content'); ?>
 
 <h1>Přidat hráče</h1>
+<?php
+/**
+ * @var array $country
+ * @var array $city
+ * @var array $form
+ */
+?>
 <div class="row">
     <div class="col-md-4">
         <?php
@@ -77,13 +84,13 @@
 
         <div id="player_form">
 
-            <?= form_input_bs($dataFirstName, $form["divInputClass"], "Jméno hráče"); ?>
-            <?= form_input_bs($dataLastName, $form["divInputClass"], "Příjmení hráče"); ?>
-            <?= form_dropdown_bs('country[]', $optionsCountry, $extraCountry, 'mb-3' ,"Vyber národnost", $disabled, $selected) ?>
-            <?= form_input_bs($dataBorn, $form["divInputClass"], "Datum narození", "date", false); ?>
-            <?= form_dropdown_bs('bornCity[]', $optionsCity, $extraCity, 'mb-3' ,"Vyber město narození", [], $selected) ?>
-            <?= form_dropdown_bs('retire[]', $optionsRetire, $extraRetire, 'mb-3' ,"Ukončil kariéru?", $disabled, $selected) ?>
-            <?= form_input_bs($dataDeath, $form["divInputClass"], "Datum úmrtí", "date", false); ?>
+            <?= form_input_bs('first_name[]', $dataFirstName, "Jméno hráče"); ?>
+            <?= form_input_bs('last_name[]', $dataLastName, "Příjmení hráče"); ?>
+            <?= form_dropdown_bs('country[]', $optionsCountry, $extraCountry, "Vyber národnost", $selected, $disabled) ?>
+            <?= form_input_bs('born[]', $dataBorn, "Datum narození", "date", false); ?>
+            <?= form_dropdown_bs('bornCity[]', $optionsCity, $extraCity, "Vyber město narození", $selected) ?>
+            <?= form_dropdown_bs('retire[]', $optionsRetire, $extraRetire ,"Ukončil kariéru?", $selected, $disabled) ?>
+            <?= form_input_bs('death[]', $dataDeath, "Datum úmrtí", "date", false); ?>
 
 
         </div>
@@ -104,16 +111,23 @@
         ?>
     </div>
 </div>
+<template id="player">
+    <hr>
+    <?= form_input_bs('first_name[]', $dataFirstName, "Jméno hráče"); ?>
+            <?= form_input_bs('last_name[]', $dataLastName, "Příjmení hráče"); ?>
+            <?= form_dropdown_bs('country[]', $optionsCountry, $extraCountry, "Vyber národnost", $selected, $disabled) ?>
+            <?= form_input_bs('born[]', $dataBorn, "Datum narození", "date", false); ?>
+            <?= form_dropdown_bs('bornCity[]', $optionsCity, $extraCity, "Vyber město narození", $selected) ?>
+            <?= form_dropdown_bs('retire[]', $optionsRetire, $extraRetire ,"Ukončil kariéru?", $selected, $disabled) ?>
+            <?= form_input_bs('death[]', $dataDeath, "Datum úmrtí", "date", false); ?>
+</template>
 
 <script>
-    //document.getElementById('start-').setAttribute('id', 'start-0');
-    //document.getElementById('finish-').setAttribute('id', 'finish-0');
        
     $("button#add_player").click(function() {
-        
-        value = "<hr><?php echo form_input_bs($dataFirstName, $form["divInputClass"], 'Jméno hráče', 'text', true, false) . form_input_bs($dataLastName, $form["divInputClass"], 'Příjmení hráče', 'text', true, false). form_dropdown_bs('country[]', $optionsCountry, $extraCountry, 'mb-3' ,"Vyber národnost", $disabled, $selected, [], false) . form_input_bs($dataBorn, $form["divInputClass"], "Datum narození", "date", false, false) . form_dropdown_bs('bornCity[]', $optionsCity, $extraCity, 'mb-3' ,"Vyber město narození", [], $selected, [], false) . form_dropdown_bs('retire[]', $optionsRetire, $extraRetire, 'mb-3' ,"Ukončil kariéru?", $disabled, $selected, [], false) . form_input_bs($dataDeath, $form["divInputClass"], "Datum úmrtí", "date", false, false);?>";
-        newDiv = $("<div></div>").html(value).attr("id", "newDiv");
-        $("#player_form").append(newDiv);
+        const clone = $('#player').contents().clone();
+        $('#player_form').append(clone);
+       
         $('.select2-basic-single').select2({
         theme: 'bootstrap-5'
     });

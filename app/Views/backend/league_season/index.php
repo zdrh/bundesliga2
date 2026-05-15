@@ -1,7 +1,15 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+/**
+ * @var object $liga
+ * @var array $sezony
+ * @var array $uploadPath
+ * @var array $form
+ * @var array $tableTemplate
+ */
+?>
 <h1><?= $liga->name ?></h1>
 
 <h2>Přehled sezón</h2>
@@ -72,7 +80,7 @@
 
 
             echo "<!-- začátek modalu -->\n";
-            echo form_modal("modal" . $key, $row->id_league_season, "Smazat sezonu ligy", "Chceš opravdu smazat sezonu " . $sezonaCas . " pro ligu " . $row->league_name . "?", "admin/liga/" . $liga->id_league . "/sezona/" . $row->id_season . "/delete");
+            echo form_modal_delete("modal" . $key, $row->id_league_season, "Smazat sezonu ligy", "Chceš opravdu smazat sezonu " . $sezonaCas . " pro ligu " . $row->league_name . "?", "admin/liga/" . $liga->id_league . "/sezona/" . $row->id_season . "/delete");
             echo "<!-- konec modalu -->\n";
            
             $table->addRow($sezonaCas, $row->league_name_in_season, $logo, $row->association_name, $skupiny.$pocet, $editBtn . $deleteBtn . $listBtn . $listSeasonBtn);

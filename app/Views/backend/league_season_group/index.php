@@ -1,7 +1,14 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     * @var object $liga
+     * @var array $form
+     * @var array $skupiny
+     * @var array $tableTemplate
+     */
+?>
 <h1>Přehled skupin <?= $liga->league_name_in_season ?> ročník <?= $liga->start  ?>/<?= $liga->finish ?></h1>
 
 
@@ -45,7 +52,7 @@
 
 
             echo "<!-- začátek modalu -->\n";
-            echo form_modal("modal" . $key, $row->id_league_season_group, "Smazat skupinu ligy", "Chceš opravdu smazat skupinu " . $row->groupname . " pro ligu " . $liga->league_name_in_season . "?", "admin/liga/" . $liga->id_league . "/sezona/" . $liga->id_season . "/skupina/".$row->id_league_season_group."/delete");
+            echo form_modal_delete("modal" . $key, $row->id_league_season_group, "Smazat skupinu ligy", "Chceš opravdu smazat skupinu " . $row->groupname . " pro ligu " . $liga->league_name_in_season . "?", "admin/liga/" . $liga->id_league . "/sezona/" . $liga->id_season . "/skupina/".$row->id_league_season_group."/delete");
             echo "<!-- konec modalu -->\n";
            
             $table->addRow($row->groupname, $type , $editBtn . $deleteBtn);

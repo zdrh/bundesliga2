@@ -1,7 +1,15 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     * @var object $league
+     * @var object $league_season
+     * @var array $sezony
+     * @var array $uploadPath
+     * @var array $form
+     */
+?>
 <h1>Editovat sezónu ligy <?= $league->name ?></h1>
 <div class="row">
     <div class="col-md-4">
@@ -105,9 +113,9 @@
 
         ?>
 
-        <?= form_input_bs($dataGeneralName, $form["divInputClass"], "Obecný název ligy"); ?>
+        <?= form_input_bs('general_name', $dataGeneralName, "Obecný název ligy"); ?>
         <?= form_button($data_button_general_name); ?>
-        <?= form_input_bs($dataName, $form["divInputClass"], "Název ligy v sezóně"); ?>
+        <?= form_input_bs('name', $dataName, "Název ligy v sezóně"); ?>
         <div>
 
             <?php
@@ -120,9 +128,9 @@
 
             ?>
         </div>
-        <?= form_input_bs($dataLogo, $form["divInputClass"], "Logo ligy v této sezóně", 'file', false); ?>
-        <?= form_dropdown_bs('season', $options, $extra, 'mb-3', "Vyber sezónu", $disabled, $selected) ?>
-        <?= form_dropdown_bs('groups', $optionsGroups, $extraGroups, 'mb-3', "Skupiny", $disabledGroups, $selectedGroups) ?>
+        <?= form_input_bs('logo', $dataLogo, "Logo ligy v této sezóně", 'file', false); ?>
+        <?= form_dropdown_bs('season', $options, $extra, "Vyber sezónu", $selected, $disabled) ?>
+        <?= form_dropdown_bs('groups', $optionsGroups, $extraGroups, "Skupiny", $selectedGroups, $disabledGroups) ?>
         <?= form_hidden('id_league_season', $league_season->id_league_season) ?>
         <?= form_hidden('id_league', $league->id_league) ?>
         <?= form_hidden('id_assoc_season', $league_season->id_assoc_season) ?>

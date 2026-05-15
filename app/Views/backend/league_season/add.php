@@ -1,14 +1,21 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+/**
+ * @var object $liga
+ * @var array $uploadPath
+ * @var array $sezony
+ * @var array $form
+ * 
+ */
+?>
 <h1>Přidat sezónu ligy <?= $liga->name ?></h1>
 <div class="row">
     <div class="col-md-4">
         <?php
 
         echo form_open_multipart('admin/liga/sezona/create');
-    var_dump($uploadPath["logoLeague"]);
         $dataGeneralName = array(
             'name' => 'general_name',
             'id' => 'general_name',
@@ -109,10 +116,9 @@
         );
 
         $data_img_hidden = array(
-            'class' => '',
             'id' => 'logo_img',
             'class' => 'edit',
-           // 'src' => $uploadPath["logoLeague"],
+            // 'src' => $uploadPath["logoLeague"],
             'visibility' => 'hidden'
         );
         // var_dump($sezony);
@@ -127,15 +133,15 @@
 
         ?>
 
-        <?= form_input_bs($dataGeneralName, $form["divInputClass"], "Obecný název ligy"); ?>
-        <?= form_dropdown_bs('season', $options, $extra, 'mb-3', "Vyber sezónu", $disabled, $selected) ?>
+        <?= form_input_bs('general_name', $dataGeneralName, "Obecný název ligy"); ?>
+        <?= form_dropdown_bs('season', $options, $extra, "Vyber sezónu", $selected, $disabled) ?>
         <?= form_button($data_copy_previous_season); ?>
         <?= form_button($data_button_general_name); ?>
-        <?= form_input_bs($dataName, $form["divInputClass"], "Název ligy v sezóně"); ?>
+        <?= form_input_bs('name', $dataName, "Název ligy v sezóně"); ?>
         <?= img($data_img_hidden) ?>
-        <?= form_input_bs($dataLogo, $form["divInputClass"], "Logo ligy v této sezóně", 'file', false); ?>
+        <?= form_input_bs('logo', $dataLogo, "Logo ligy v této sezóně", 'file', false); ?>
 
-        <?= form_dropdown_bs('groups', $optionsGroups, $extraGroups, 'mb-3', "Skupiny", $disabledGroups, $selected) ?>
+        <?= form_dropdown_bs('groups', $optionsGroups, $extraGroups, "Skupiny", $selected, $disabledGroups) ?>
         <?= form_hidden('id_league', $liga->id_league) ?>
         <?= form_hidden('id_association', $liga->id_association) ?>
         <?= form_input($data_logo_hidden) ?>
@@ -149,11 +155,15 @@
         ?>
     </div>
 </div>
+<template id="group">
+    <?= form_input_bs('groupsList[]', $dataGroups, "Název skupiny", 'text', true);  ?>
+    <?= form_dropdown_bs('groupsType[]', $optionsGroupsType, $extraGroupsType, "Typ skupiny", $selected, $disabledGroups);  ?>
+</template>
+<template id="group-revert">
+    <?= form_dropdown_bs('groupsType[]', $optionsGroupsType, $extraGroupsType, "Typ skupiny", $selected, $disabledGroups);  ?>
+    <?= form_input_bs('groupsList[]', $dataGroups, "Název skupiny", 'text', true);  ?>
+</template>
 <script>
-    /* $(document).ready(function(){
-        $('#add_group').hide();
-    });*/
-
     $("#general_name_button").click(function() {
         let text = $('#general_name').val();
         $('#name').val(text);
@@ -162,12 +172,8 @@
     $("#groups").change(function() {
         let groups = $('#groups').val()
         if (groups == 2) {
-            let input = '<?= form_input_bs($dataGroups, $form["divInputClass"], "Název skupiny", 'text', true, false);  ?>';
-            let dropDown = '<?= form_dropdown_bs('groupsType[]', $optionsGroupsType, $extraGroupsType, "mb-3", "Typ skupiny", $disabledGroups, $selected, [], false);  ?>';
-
-
-            $('#groupsDiv').prepend(dropDown);
-            $('#groupsDiv').prepend(input);
+            const clone = $('#group-revert').contents().clone();
+            $('#groupsDiv').prepend(clone);
             $('#add_group').show();
 
         } else {
@@ -177,12 +183,9 @@
     });
 
     $('#add_group').click(function() {
-        let input = '<?= form_input_bs($dataGroups, $form["divInputClass"], "Název skupiny", 'text', true, false);  ?>';
-        let dropDown = $('<?= form_dropdown_bs('groupsType[]', $optionsGroupsType, $extraGroupsType, "mb-3", "Typ skupiny", $disabledGroups, $selected, [], false);  ?>');
 
-        $('#groupsDiv').append(input);
-        $('#groupsDiv').append(dropDown);
-
+        const clone = $('#group').contents().clone();
+        $('#groupsDiv').append(clone);
     });
 
     $('#copy_previous').click(function() {
@@ -197,7 +200,7 @@
         $('#logo_img').attr('visibility', 'visible');
         let path = "<?= $uploadPath["logoLeague"] ?>" + values['logo'];
         //console.log(path);
-        $('#logo_img').attr('src', '<?= base_url()?>'+ path);
+        $('#logo_img').attr('src', '<?= base_url() ?>' + path);
         $('#logo').removeAttr('required');
 
         //console.log(season);
