@@ -2,6 +2,16 @@
 
 <?= $this->section('content'); ?>
 <?php
+/**
+ * @var object $league
+ * @var int $id
+ * @var object $game
+ * @var array $team
+ * @var object $game_team
+ * @var array $allStadiums
+ * @var object $stadium
+ * @var array $form
+ */
 if ($league->groupname != NULL) {
     $textSkupina = " (skupina " . $league->groupname . ")";
 } else {
@@ -132,24 +142,24 @@ if ($league->groupname != NULL) {
        
         ?>
         <?= form_open('admin/zapas/update'); ?>
-        <?= form_input_bs($dataIdGame, $form["divInputClass"], "Id zápasu", 'text', false); ?>
+        <?= form_input_bs('game_id', $dataIdGame, "Id zápasu", 'text', false); ?>
         <div class="d-flex">
-            <?= form_input_bs($dataDate, $form["divInputClass"], "Datum zápasu", 'date', false); ?>
-            <?= form_input_bs($dataTime, $form["divInputClass"]." ms-3", "Čas zápasu", 'time', false); ?>
+            <?= form_input_bs('date', $dataDate, "Datum zápasu", 'date', false); ?>
+            <?= form_input_bs('time', $dataTime, "Čas zápasu", 'time', false, 'mb-3 ms-3'); ?>
         </div>
         
-        <?= form_dropdown_bs('kolo', $options, $extra, 'mb-3', "Vyber kolo", $disabled, $selected) ?>
-        <?= form_dropdown_bs('home', $optionsHome, $extraHome, 'mb-3', "Domácí tým", $disabled, $selectedHome) ?>
-        <?= form_dropdown_bs('away', $optionsAway, $extraAway, 'mb-3', "Hostující tým", $disabled, $selectedAway) ?>
-        <?= form_dropdown_bs('stadium', $optionsStadium, $extraStadium, 'mb-3', "Stadion", $disabled, $selectedStadium) ?>
-        <?= form_input_bs($dataAttendance, $form["divInputClass"], "Návštěva", 'text', false); ?>
+        <?= form_dropdown_bs('kolo', $options, $extra, "Vyber kolo", $selected, $disabled) ?>
+        <?= form_dropdown_bs('home', $optionsHome, $extraHome, "Domácí tým", $selectedHome, $disabled) ?>
+        <?= form_dropdown_bs('away', $optionsAway, $extraAway, "Hostující tým", $selectedAway, $disabled) ?>
+        <?= form_dropdown_bs('stadium', $optionsStadium, $extraStadium, "Stadion", $selectedStadium, $disabled) ?>
+        <?= form_input_bs('attendance', $dataAttendance, "Návštěva", 'text', false); ?>
         <div class="d-flex">
-            <?= form_input_bs($goalHome, $form["divInputClass"], "Góly domácí", 'number', false); ?>
-            <?= form_input_bs($goalAway, $form["divInputClass"], "Góly hosté", 'number', false); ?>
+            <?= form_input_bs('goal_home', $goalHome, "Góly domácí", 'number', false); ?>
+            <?= form_input_bs('goal_away', $goalAway, "Góly hosté", 'number', false); ?>
         </div>
         <div class="d-flex">
-            <?= form_input_bs($halfHome, $form["divInputClass"], "Poločas domácí", 'text', false); ?>
-            <?= form_input_bs($halfAway, $form["divInputClass"], "Poločas hosté", 'text', false); ?>
+            <?= form_input_bs('half_home', $halfHome, "Poločas domácí", 'text', false); ?>
+            <?= form_input_bs('half_away', $halfAway, "Poločas hosté", 'text', false); ?>
         </div>
         <?= form_hidden('game_id', $id); ?>
         <?= form_hidden('_method', 'PUT'); ?>

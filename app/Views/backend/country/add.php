@@ -3,6 +3,12 @@
 <?= $this->section('content'); ?>
 
 <h1>Přidat stát</h1>
+<?php
+/**
+ *  @var array $form
+ * 
+ */
+?>
 <div class="row">
     <div class="col-md-4">
         <?php
@@ -26,14 +32,15 @@
 
         <div id="country_form">
 
-            <?= form_input_bs($dataName, $form["divInputClass"], "Název státu"); ?>
-
-
-            <?= form_input_bs($dataShortName, $form["divInputClass"], "Zkratka státu"); ?>
-
-
-
+            <?= form_input_bs('name[]', $dataName, "Název státu"); ?>
+            <?= form_input_bs('short_name[]', $dataShortName, "Zkratka státu"); ?>
         </div>
+
+        <template id="country">
+            <hr>
+            <?= form_input_bs('name[]', $dataName, "Název státu"); ?>
+            <?= form_input_bs('short_name[]', $dataShortName, "Zkratka státu"); ?>
+        </template>
         <?php
 
         $data_button_add = array(
@@ -53,16 +60,12 @@
 </div>
 
 <script>
-    //document.getElementById('start-').setAttribute('id', 'start-0');
-    //document.getElementById('finish-').setAttribute('id', 'finish-0');
-       
     $("button#add_country").click(function() {
-        
-        value = "<hr><?php echo form_input_bs($dataName, $form["divInputClass"], 'Název státu', 'text', true, false) . form_input_bs($dataShortName, $form["divInputClass"], 'Zkratka státu', 'text', true, false);?>";
-        newDiv = $("<div></div>").html(value).attr("id", "newDiv");
-        $("#country_form").append(newDiv);
+
+        const clone = $($('#country').html());
+        $('#country_form').append(clone);
 
     });
 </script>
 
-    <?= $this->endSection(); ?>
+<?= $this->endSection(); ?>

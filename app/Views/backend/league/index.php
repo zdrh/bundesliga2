@@ -3,6 +3,13 @@
 <?= $this->section('content'); ?>
 
 <h1>Seznam Lig</h1>
+<?php
+/**
+ * @var array $ligy
+ * @var array $form
+ * @var array $tableTemplate
+ */
+?>
 <div class="row">
     <div class="col-md-10">
 
@@ -28,7 +35,7 @@
 
 
             echo "<!-- začátek modalu -->\n";
-            echo form_modal("modal" . $key, $row->id_association, "Smazat ligu", "Chceš opravdu smazat ligu " . $row->name ."?", "admin/liga/" . $row->id_league . "/delete");
+            echo form_modal_delete("modal" . $key, $row->id_association, "Smazat ligu", "Chceš opravdu smazat ligu " . $row->name ."?", "admin/liga/" . $row->id_league . "/delete");
             echo "<!-- konec modalu -->\n";
             $data = array(
                 'class' => $form['listClass'].' ms-3'

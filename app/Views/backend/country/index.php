@@ -8,6 +8,14 @@
 
 
         <?php
+        /**
+         * @var array $country
+         * @var array $form
+         * @var array $tableTemplate
+         * @var object $pager
+         */
+
+
         $data = array(
             'class' => $form['addClass']." mb-3"
         );
@@ -28,7 +36,7 @@
 
 
             echo "<!-- začátek modalu -->\n";
-            echo form_modal("modal" . $key, $row->id_country, "Smazat stát", "Chceš opravdu smazat stát " . $row->name ."?", "admin/stat/" . $row->id_country . "/delete");
+            echo form_modal_delete("modal" . $key, $row->id_country, "Smazat stát", "Chceš opravdu smazat stát " . $row->name ."?", "admin/stat/" . $row->id_country . "/delete");
             echo "<!-- konec modalu -->\n";
             $data = array(
                 'class' => $form['listClass'].' ms-3'

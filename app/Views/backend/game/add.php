@@ -2,6 +2,12 @@
 
 <?= $this->section('content'); ?>
 <?php
+/**
+ * @var object $skupina
+ * @var array $tymy 
+ * @var int $pocetZapasu
+ * @var array $form
+ */
 if ($skupina->groupname != NULL) {
     $textSkupina = " (skupina " . $skupina->groupname . ")";
 } else {
@@ -79,17 +85,17 @@ $rocnik = $skupina->start . "-" . $skupina->finish;
         ?>
         <div id='round_form'>
             <?= form_open('admin/liga/skupina/zapasy/create'); ?>
-            <?= form_input_bs($dataDate, $form["divInputClass"], "Datum zápasů", 'date', false); ?>
-            <?= form_input_bs($dataTime, $form["divInputClass"], "Čas zápasů", 'time', false); ?>
-            <?= form_dropdown_bs('round', $options, $extra, 'mb-3', "Vyber kolo", $disabled, $selected) ?>
+            <?= form_input_bs('date', $dataDate, "Datum zápasů", 'date', false); ?>
+            <?= form_input_bs('time', $dataTime, $form["divInputClass"], "Čas zápasů", 'time', false); ?>
+            <?= form_dropdown_bs('round', $options, $extra, "Vyber kolo", $selected, $disabled) ?>
             <?php
             for ($i = 0; $i < $pocetZapasu; $i++) {
             ?>
                 <div class="d-flex" id='matches_form'>
-                    <?= form_dropdown_bs('home[]', $optionsHome, $extraHome, 'mb-3 me-1 col-md-4', "Domácí tým", $disabled, $selected) ?>
-                    <?= form_dropdown_bs('away[]', $optionsAway, $extraAway, 'mb-3 me-1 col-md-4', "Hostující tým", $disabled, $selected) ?>
-                    <?= form_input_bs($dataGoalsHome, $form["divInputClass"], "Góly domácí", 'number', false); ?>
-                    <?= form_input_bs($dataGoalsAway, $form["divInputClass"], "Góly hosté", 'number', false); ?>
+                    <?= form_dropdown_bs('home[]', $optionsHome, $extraHome, "Domácí tým", $selected, $disabled, 'mb-3 me-1 col-md-4') ?>
+                    <?= form_dropdown_bs('away[]', $optionsAway, $extraAway, "Hostující tým", $selected, $disabled, 'mb-3 me-1 col-md-4') ?>
+                    <?= form_input_bs('goalsHome[]', $dataGoalsHome, "Góly domácí", 'number', false); ?>
+                    <?= form_input_bs('goalsAway[]', $dataGoalsAway, "Góly hosté", 'number', false); ?>
                 </div>
             <?php
 
@@ -119,7 +125,5 @@ $rocnik = $skupina->start . "-" . $skupina->finish;
         }
     });
 
-
-   // $('select option[value=' + val + ']').attr('disabled', 'disabled').parent().siblings().removeAttr('disabled');
 </script>
 <?= $this->endSection(); ?>

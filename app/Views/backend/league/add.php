@@ -3,6 +3,12 @@
 <?= $this->section('content'); ?>
 
 <h1>Přidat ligu</h1>
+<?php
+    /**
+     * @var array $svazy
+     * @var array $form
+     */
+?>
 <div class="row">
     <div class="col-md-4">
         <?php
@@ -53,18 +59,14 @@
 
         <div id="season_form">
             
-            <?= form_input_bs($dataName, $form["divInputClass"], "Obecný název ligy"); ?>
-            <?= form_dropdown_bs('level', $optionsLevel, $extraLevel, 'mb-3' ,"Vyber úroveň", $disabled, $selected) ?>
-            <?= form_dropdown_bs('active', $optionsActive, $extraActive, 'mb-3' ,"Aktivní soutěž", $disabled, $selected) ?>
-            <?= form_dropdown_bs('association', $optionsAssociation, $extraAssociation, 'mb-3' ,"Organizuje svaz", $disabled, $selected) ?>
+            <?= form_input_bs('name',$dataName, "Obecný název ligy"); ?>
+            <?= form_dropdown_bs('level', $optionsLevel, $extraLevel, "Vyber úroveň",  $selected, $disabled) ?>
+            <?= form_dropdown_bs('active', $optionsActive, $extraActive, "Aktivní soutěž",  $selected, $disabled) ?>
+            <?= form_dropdown_bs('association', $optionsAssociation, $extraAssociation, "Organizuje svaz",  $selected, $disabled) ?>
             <?= form_button($form["submitButton"]) ?>
 
         </div>
         <?php
-
-
-
-       
         
         echo form_close();
         ?>

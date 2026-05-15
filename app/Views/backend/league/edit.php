@@ -3,6 +3,13 @@
 <?= $this->section('content'); ?>
 
 <h1>Editovat ligu</h1>
+<?php
+    /**
+     * @var object $liga
+     * @var array $svazy
+     * @var array $form
+     */
+?>
 <div class="row">
     <div class="col-md-4">
         <?php
@@ -58,10 +65,10 @@
 
         <div id="season_form">
             
-            <?= form_input_bs($dataName, $form["divInputClass"], "Obecný název ligy"); ?>
-            <?= form_dropdown_bs('level', $optionsLevel, $extraLevel, 'mb-3' ,"Vyber úroveň", $disabled, $selectedLevel) ?>
-            <?= form_dropdown_bs('active', $optionsActive, $extraActive, 'mb-3' ,"Aktivní soutěž", $disabled, $selectedActive) ?>
-            <?= form_dropdown_bs('association', $optionsAssociation, $extraAssociation, 'mb-3' ,"Organizuje svaz", $disabled, $selectedAssociation) ?>
+            <?= form_input_bs('name', $dataName, "Obecný název ligy"); ?>
+            <?= form_dropdown_bs('level', $optionsLevel, $extraLevel, "Vyber úroveň", $selectedLevel, $disabled) ?>
+            <?= form_dropdown_bs('active', $optionsActive, $extraActive, "Aktivní soutěž", $selectedActive, $disabled) ?>
+            <?= form_dropdown_bs('association', $optionsAssociation, $extraAssociation, "Organizuje svaz", $selectedAssociation, $disabled) ?>
             <?= form_hidden('league', $liga->id_league) ?>
             <?= form_hidden('_method', 'PUT') ?>
             <?= form_button($form["submitButton"]) ?>
