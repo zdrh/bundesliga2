@@ -14,14 +14,18 @@ use App\Models\Game as G;
 use App\Models\GameTeam;
 use App\Models\Stadium;
 
+use App\Libraries\ArrayLibrary;
+
 class Game extends BaseBackendController
 {
-    var $league_season_group;
-    var $league_season;
-    var $team_league_season;
-    var $game;
-    var $game_team;
-    var $stadium;
+    private object $league_season_group;
+    private object $league_season;
+    private object $team_league_season;
+    private object $game;
+    private object $game_team;
+    private object $stadium;
+
+    private object $arrayLib;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -32,14 +36,18 @@ class Game extends BaseBackendController
         $this->game = new G();
         $this->game_team = new GameTeam();
         $this->stadium = new Stadium();
+
+        $this->arrayLib = new ArrayLibrary();
     }
 
-    public function add($id_group)
+    public function add(int $id_group)
     {
         $this->data['skupina'] = $this->league_season_group->join('league_season', $this->data['join']['league_season_group_league_season'], 'inner')->join('association_season', $this->data['join']['association_season_league_season'], 'inner')->join('season', $this->data['join']['season_association_season'], 'inner')->join('league', $this->data['join']['league_league_season'], 'join')->find($id_group);
         $this->data['tymy'] = $this->team_league_season->join('team', $this->data['join']['team_team_league_season'], 'inner')->where('id_league_season_group', $id_group)->findAll();
         $this->data['pocetZapasu'] = round(Count($this->data['tymy']) / 2, 0, PHP_ROUND_HALF_DOWN);
-
+        $naplanovanaKola = $this->game->select('round')->distinct()->where('id_league_season_group', $id_group)->orderBy('round', 'asc')->findAll();
+        $this->data["naplanovanaKola"] = $this->arrayLib->transformArray($naplanovanaKola, 'round');
+        
         echo view('backend/game/add', $this->data);
     }
 
@@ -107,7 +115,7 @@ class Game extends BaseBackendController
         return redirect()->to('admin/liga/' . $liga->id_league_season . '/info#liga-' . $id_group);
     }
 
-    public function edit($id_game)
+    public function edit(int $id_game)
     {
 
         $this->data["id"] = $id_game;

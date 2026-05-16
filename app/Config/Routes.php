@@ -117,6 +117,7 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->get('liga/(:num)/tym/edit', 'TeamLeagueSeason::editAll/$1'); //chybi
     $routes->put('liga/tym/update', 'TeamLeagueSeason::update');
     $routes->delete('liga/(:num)/tym/(:num)/delete', 'TeamLeagueSeason::delete/$1/$2');
+    $routes->get('liga/(:num)/tym/(:num)/manage', 'TeamLeagueSeason::manageTeam/$1/$2');
 
     //sezony týmu
     $routes->get('tym/(:num)/seznam-sezon', 'TeamSeason::index/$1');

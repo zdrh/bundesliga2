@@ -7,6 +7,7 @@
  * @var array $tymy 
  * @var int $pocetZapasu
  * @var array $form
+ * @var array $naplanovanaKola
  */
 if ($skupina->groupname != NULL) {
     $textSkupina = " (skupina " . $skupina->groupname . ")";
@@ -39,6 +40,8 @@ $rocnik = $skupina->start . "-" . $skupina->finish;
         for ($i = 1; $i < 39; $i++) {
             $options[$i] = $i . ". kolo";
         }
+
+        $disabledRounds = $naplanovanaKola;
         $extra = array(
             'class' => 'form-select',
             'id' => 'round'
@@ -87,7 +90,7 @@ $rocnik = $skupina->start . "-" . $skupina->finish;
             <?= form_open('admin/liga/skupina/zapasy/create'); ?>
             <?= form_input_bs('date', $dataDate, "Datum zápasů", 'date', false); ?>
             <?= form_input_bs('time', $dataTime, "Čas zápasů", 'time', false); ?>
-            <?= form_dropdown_bs('round', $options,$extra, "Vyber kolo", $selected, $disabled) ?>
+            <?= form_dropdown_bs('round', $options,$extra, "Vyber kolo", $selected, $disabledRounds) ?>
             <?php
             for ($i = 0; $i < $pocetZapasu; $i++) {
             ?>

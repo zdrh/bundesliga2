@@ -7,7 +7,7 @@ use App\Models\Team;
 
 class ArrayLibrary
 {
-    var $team;
+    private object $team;
     public function __construct()
     {
         $this->team = new Team();
@@ -16,8 +16,8 @@ class ArrayLibrary
     /**
      * dostane pole objektů a seskupí ho podle daného atributu
      * returnValue: array of array - klíč prvního pole je hodnota $grouped
-     * @param $array - pole objektů, které budeme seskupovat
-     * @param $grouped - atribut, podle kterého budeme seskupovat
+     * @param array $array - pole objektů, které budeme seskupovat
+     * @param string $grouped - atribut, podle kterého budeme seskupovat
      */
 
     public function groupArray($array, $grouped)
@@ -53,7 +53,7 @@ class ArrayLibrary
 /**
  * dostane pole objektů a převed ho na pole, kde klíčem budou hodnoty parametru $key
  */
-    public function transformArrayToAssociative($array, $key) {
+    public function transformArrayToAssociative(array $array, string $key) {
         $result = array();
         foreach($array as $row) {
             $result[$row->$key] = $row;
@@ -162,9 +162,9 @@ class ArrayLibrary
         return $result;
     }
     /**
-     * vezme pole objektů $array a převede ho na pole vhodné do dorpdownu, tj pole, kde klíčem bude hodnota $key a hodnotou $value
+     * vezme pole objektů $array a převede ho na pole vhodné do dropdownu, tj pole, kde klíčem bude hodnota $key a hodnotou $value
      */
-    public function arrayToDropdown($array, $key, $value)
+    public function arrayToDropdown(array $array, string $key, string $value)
     {
         $result = array();
         foreach ($array as $row) {
@@ -177,7 +177,7 @@ class ArrayLibrary
     /**
      * projde pole objektů $array a vytvoří nové pole, kde hodnotami v poli budou hodnoty atributu $attribute
      */
-    public function transformArray($array, $attribute)
+    public function transformArray(array $array, string $attribute)
     {
         $result = array();
         foreach ($array as $row) {
@@ -188,10 +188,10 @@ class ArrayLibrary
     }
     /**
      * projde pole array1 a porovnává s array2. Pokud je daný záznam z array1 i v array2 - nastaví 0, pokud je v array1 a není v array2 - 1 a pokud je v array2 a není v array1 - 2
-     * @param - $array1 - první pole
-     * @param - $array2 - druhé pole
-     * @param - $value - hodnota, do které se budou ukládat hodnoty z pole
-     * @param - $attribute - název atributu, ve kterém budu ukládat hodnotu stavu
+     * @param array $pole1 - první pole
+     * @param array $pole2 - druhé pole
+     * @param string $value - hodnota, do které se budou ukládat hodnoty z pole
+     * @param string $attribute - název atributu, ve kterém budu ukládat hodnotu stavu
      * 
      */
     public function compareArrays($pole1, $pole2, string $value, string $attribute)

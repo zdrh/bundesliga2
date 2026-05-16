@@ -65,7 +65,8 @@ class TeamLeagueSeason extends BaseBackendController
 
     public function showGroup($idGroup)
     {
-        $this->data['tymy'] = $this->team_league_season->select('team_league_season.id_team_league_season, team.general_name as general_name, team_league_season.team_name_in_season, team_league_season.logo, stadium.general_name as stadium_general_name, team_league_season.stadium_name_in_season, city.name_de ')->join('team', $this->data['join']['team_team_league_season'], 'inner')->join('stadium', $this->data['join']['team_league_season_stadium'], 'left')->join('city', $this->data['join']['city_stadium'], 'left')->orderBy('team.general_name', 'asc')->where('id_league_season_group', $idGroup)->findAll();
+        $this->data['tymy'] = $this->team_league_season->select('team_league_season.id_team, team_league_season.id_team_league_season, team.general_name as general_name, team_league_season.team_name_in_season, team_league_season.logo, stadium.general_name as stadium_general_name, team_league_season.stadium_name_in_season, city.name_de ')->join('team', $this->data['join']['team_team_league_season'], 'inner')->join('stadium', $this->data['join']['team_league_season_stadium'], 'left')->join('city', $this->data['join']['city_stadium'], 'left')->orderBy('team.general_name', 'asc')->where('id_league_season_group', $idGroup)->findAll();
+
         $this->data['liga'] = $this->league_season_group->join('league_season', $this->data['join']['league_season_group_league_season'], 'inner')->join('association_season', $this->data['join']['league_season_association_season'], 'inner')->join('season', $this->data['join']['season_association_season'], 'inner')->where($this->delRows['league_season'])->where($this->delRows['association_season'])->find($idGroup);
 
         echo view('backend/team_league_season/showGroup', $this->data);
@@ -200,6 +201,13 @@ class TeamLeagueSeason extends BaseBackendController
     }
 
     public function editAll($idGroup) {
+
+    }
+
+    public function manageTeam($idGroup, $idTeam){
+
+    $this->data['team'] = $this->team_league_season->where('id_league_season_group', $idGroup)->where('id_team', $idTeam)->findAll()[0];
+    echo view('backend/team_league_season/manage', $this->data);
 
     }
 }

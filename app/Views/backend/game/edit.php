@@ -4,7 +4,7 @@
 <?php
 /**
  * @var object $league
- * @var int $id
+ * @var mixed $id
  * @var object $game
  * @var array $team
  * @var object $game_team
@@ -119,27 +119,27 @@ if ($league->groupname != NULL) {
             'value' => $game_team->halftime_opponent
         );
 
-       $optionsStadium = array(
-        '' => 'Vyber stadion'
-       );
+        $optionsStadium = array(
+            '' => 'Vyber stadion'
+        );
 
-       foreach($allStadiums as $row){
-        $optionsStadium[$row->id_stadium] = $row->general_name." - ".$row->name_de;
-       }
+        foreach ($allStadiums as $row) {
+            $optionsStadium[$row->id_stadium] = $row->general_name . " - " . $row->name_de;
+        }
 
-       $disabled = array('');
-       if(is_null($game->id_stadium)) {
-        $selectedStadium = array($stadium->id_stadium);
-       } else {
-        $selectedStadium = array($game->id_stadium);
-       }
-       
+        $disabled = array('');
+        if (is_null($game->id_stadium)) {
+            $selectedStadium = array($stadium->id_stadium);
+        } else {
+            $selectedStadium = array($game->id_stadium);
+        }
 
-       $extraStadium = array(
-        'class' => 'form-select',
-        'id' => 'stadium'
-    );
-       
+
+        $extraStadium = array(
+            'class' => 'form-select',
+            'id' => 'stadium'
+        );
+
         ?>
         <?= form_open('admin/zapas/update'); ?>
         <?= form_input_bs('game_id', $dataIdGame, "Id zápasu", 'text', false); ?>
@@ -147,7 +147,6 @@ if ($league->groupname != NULL) {
             <?= form_input_bs('date', $dataDate, "Datum zápasu", 'date', false); ?>
             <?= form_input_bs('time', $dataTime, "Čas zápasu", 'time', false, 'mb-3 ms-3'); ?>
         </div>
-        
         <?= form_dropdown_bs('kolo', $options, $extra, "Vyber kolo", $selected, $disabled) ?>
         <?= form_dropdown_bs('home', $optionsHome, $extraHome, "Domácí tým", $selectedHome, $disabled) ?>
         <?= form_dropdown_bs('away', $optionsAway, $extraAway, "Hostující tým", $selectedAway, $disabled) ?>
@@ -161,12 +160,11 @@ if ($league->groupname != NULL) {
             <?= form_input_bs('half_home', $halfHome, "Poločas domácí", 'text', false); ?>
             <?= form_input_bs('half_away', $halfAway, "Poločas hosté", 'text', false); ?>
         </div>
-        <?= form_hidden('game_id', $id); ?>
+        <?php
+        ?>
+        <?= form_hidden('game_id', "$id") ?>
         <?= form_hidden('_method', 'PUT'); ?>
-        <?= form_button($form["submitButton"]) ?>
         <?= form_close(); ?>
-
-
     </div>
 </div>
 <script>
