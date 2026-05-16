@@ -1,7 +1,13 @@
 <?= $this->extend('layout/frontend/layout-league'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     * @var object $sezona 
+     * @var array $uploadPath
+     * @var array $tymy
+     */
+?>
 
 
 <h1> <?= $sezona->league_name_in_season ?> - sezóna <?= $sezona->start ?>-<?= $sezona->finish ?></h1>

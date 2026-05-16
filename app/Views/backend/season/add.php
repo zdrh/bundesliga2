@@ -1,7 +1,12 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+/**
+ * @var array $year
+ * @var array $form
+ */
+?>
 <h1>Přidat sezónu</h1>
 <div class="row">
     <div class="col-md-4">
@@ -37,15 +42,16 @@
         ?>
 
         <div id="season_form">
-            <?= form_input_bs($dataStart, $form["divInputClass"], "Začátek", "number", false); ?>
-
-
-            <?= form_input_bs($dataFinish, $form["divInputClass"], "Konec", "number", false); ?>
+            <?= form_input_bs('start[]', $dataStart, "Začátek", "number", false); ?>
+            <?= form_input_bs('finish[]', $dataFinish, "Konec", "number", false); ?>
 
         </div>
+        <tamplate id="season">
+            <hr>
+            <?= form_input_bs('start[]', $dataStart, "Začátek", "number", false); ?>
+            <?= form_input_bs('finish[]', $dataFinish, "Konec", "number", false); ?>
+        </tamplate>
         <?php
-
-
 
         $data_button_add = array(
             'name' => 'add_season',
@@ -67,42 +73,41 @@
     //document.getElementById('finish-').setAttribute('id', 'finish-0');
     key = 1;
     $("#add_season").click(function() {
-        value = "<hr><?php echo form_input_bs($dataStart, $form["divInputClass"], 'Začátek', 'number', false, false) . form_input_bs($dataFinish, $form["divInputClass"], 'Konec', 'number', false, false) ?>";
-        newDiv = $("<div></div>").html(value).attr("id", "newDiv");
-        $("#season_form").append(newDiv);
+    
+        const clone = $($('#season').html());
+        $('#season_form').append(clone);
         $("#start-").attr("id", "start-" + key);
         $("#finish-").attr("id", "finish-" + key);
         key++;
     });
-   // document.getElementById('add_season').addEventListener('click', function() {
+    // document.getElementById('add_season').addEventListener('click', function() {
 
 
-        //newdiv = document.createElement('div');
-        //newdiv.innerHTML = value;
-        //$("#season_form").append(newDiv);
-        //document.getElementById('season_form').appendChild(newdiv);
-        //newdiv.setAttribute('id', 'newdiv');
-        //document.getElementById('start-').setAttribute('id', 'start-'+key);
-        //document.getElementById('finish-').setAttribute('id', 'finish-0'+key);
-        //key++;
+    //newdiv = document.createElement('div');
+    //newdiv.innerHTML = value;
+    //$("#season_form").append(newDiv);
+    //document.getElementById('season_form').appendChild(newdiv);
+    //newdiv.setAttribute('id', 'newdiv');
+    //document.getElementById('start-').setAttribute('id', 'start-'+key);
+    //document.getElementById('finish-').setAttribute('id', 'finish-0'+key);
+    //key++;
     //});
 
     function startFinishSeason() {
-    let id = $(document.activeElement).prop('id');
-    
-    let elValue = parseInt($(document.activeElement).val())+1;
-    let key = id.split("-");
-    if(key[0] == "start") {
-        let classInput = "finish-" + key[1];
-        $('input#'+classInput).val(elValue);
+        let id = $(document.activeElement).prop('id');
+
+        let elValue = parseInt($(document.activeElement).val()) + 1;
+        let key = id.split("-");
+        if (key[0] == "start") {
+            let classInput = "finish-" + key[1];
+            $('input#' + classInput).val(elValue);
+        }
+        //const key = id.split("-")[1];
+        // startValue = Number(startElement.value);
+        // let finishValue = startValue + 1;
+        // console.log(key);
+
     }
-    //const key = id.split("-")[1];
-   // startValue = Number(startElement.value);
-   // let finishValue = startValue + 1;
-   // console.log(key);
-
-}
-
 </script>
 
 <?= $this->endSection(); ?>

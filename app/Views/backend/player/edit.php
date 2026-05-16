@@ -1,7 +1,14 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     * @var object $player
+     * @var array $country
+     * @var array $city
+     * @var array $form
+     */
+?>
 <h1>Upravit hráče</h1>
 <div class="row">
     <div class="col-md-4">
@@ -84,20 +91,18 @@
 
         <div id="player_form">
 
-            <?= form_input_bs($dataFirstName, $form["divInputClass"], "Jméno hráče"); ?>
-            <?= form_input_bs($dataLastName, $form["divInputClass"], "Příjmení hráče"); ?>
-            <?= form_dropdown_bs('country[]', $optionsCountry, $extraCountry, 'mb-3' ,"Vyber národnost", $disabled, $selectedCountry) ?>
-            <?= form_input_bs($dataBorn, $form["divInputClass"], "Datum narození", "date", false); ?>
-            <?= form_dropdown_bs('bornCity[]', $optionsCity, $extraCity, 'mb-3' ,"Vyber město narození", [], $selectedCity) ?>
-            <?= form_dropdown_bs('retire[]', $optionsRetire, $extraRetire, 'mb-3' ,"Ukončil kariéru?", $disabled, $selectedRetire) ?>
-            <?= form_input_bs($dataDeath, $form["divInputClass"], "Datum úmrtí", "date", false); ?>
+            <?= form_input_bs('first_name', $dataFirstName, "Jméno hráče"); ?>
+            <?= form_input_bs('last_name', $dataLastName, "Příjmení hráče"); ?>
+            <?= form_dropdown_bs('country[]', $optionsCountry, $extraCountry, "Vyber národnost", $selectedCountry, $disabled) ?>
+            <?= form_input_bs('born', $dataBorn, "Datum narození", "date", false); ?>
+            <?= form_dropdown_bs('bornCity[]', $optionsCity, $extraCity, "Vyber město narození", $selectedCity) ?>
+            <?= form_dropdown_bs('retire[]', $optionsRetire, $extraRetire, "Ukončil kariéru?", $selectedRetire, $disabled) ?>
+            <?= form_input_bs('death', $dataDeath, "Datum úmrtí", "date", false); ?>
             <?= form_hidden('_method', 'PUT'); ?>
             <?= form_hidden('id_player', $player->id_player); ?>
 
         </div>
         <?php
-
-
         echo form_button($form["submitButton"]);
         echo form_close();
         ?>

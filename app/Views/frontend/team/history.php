@@ -1,7 +1,14 @@
 <?= $this->extend('layout/frontend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     * @var object $team
+     * @var array $history
+     * @var array $uploadPath
+     * @var array $tableTemplate
+     */
+?>
 <h1>Přehled sezón <?= $team->general_name ?></h1>
 <?php
 

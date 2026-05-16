@@ -1,7 +1,14 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     * @var array $form
+     * @var array $stadion
+     * @var array $tableTemplate
+     * @var object $pager
+     */
+?>
 <h1>Seznam stadionů</h1>
 <div class="row">
     <div class="col-md-10">
@@ -30,7 +37,7 @@
 
 
             echo "<!-- začátek modalu -->\n";
-            echo form_modal("modal" . $key, $row->id_stadium, "Smazat stadion", "Chceš opravdu smazat stadion " . $row->general_name ."?", "admin/stadion/" . $row->id_stadium . "/delete");
+            echo form_modal_delete("modal" . $key, $row->id_stadium, "Smazat stadion", "Chceš opravdu smazat stadion " . $row->general_name ."?", "admin/stadion/" . $row->id_stadium . "/delete");
             echo "<!-- konec modalu -->\n";
             $data = array(
                 'class' => $form['listClass'].' ms-3'

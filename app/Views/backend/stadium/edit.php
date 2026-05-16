@@ -1,7 +1,13 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     * @var object $stadion
+     * @var array $city 
+     * @var array $form
+     */
+?>
 <h1>Editovat stadion</h1>
 <div class="row">
     <div class="col-md-4">
@@ -51,14 +57,10 @@
         ?>
 
         <div id="stadium_form">
-
-            <?= form_input_bs($generalName, $form["divInputClass"], "Název stadionu"); ?>
-
-            <?= form_input_bs($latitude, $form["divInputClass"], "Zeměpisná šířka"); ?>
-            <?= form_input_bs($longtitude, $form["divInputClass"], "Zeměpisná délka"); ?>
-            <?= form_dropdown_bs('id_city', $optionsCity, $extra, 'mb-3', "Vyber město", $disabled, $selected) ?>
-
-
+            <?= form_input_bs('general_name', $generalName, "Název stadionu"); ?>
+            <?= form_input_bs('latitude', $latitude, "Zeměpisná šířka"); ?>
+            <?= form_input_bs('longtitude', $longtitude, "Zeměpisná délka"); ?>
+            <?= form_dropdown_bs('id_city', $optionsCity, $extra, "Vyber město", $selected, $disabled) ?>
         </div>
         <?php
 
@@ -69,19 +71,5 @@
         ?>
     </div>
 </div>
-
-<script>
-    $("button#add_stadium").click(function() {
-
-        value = "<hr><?php echo form_input_bs($generalName, $form["divInputClass"], 'Název stadionu', 'text', true, false) . form_input_bs($latitude, $form["divInputClass"], 'Zeměpisná šířka', 'text', true, false) . form_input_bs($longtitude, $form["divInputClass"], 'Zeměpisná délka', 'text', true, false) . form_dropdown_bs('city', $optionsCity, $extra, 'mb-3', "Vyber město", $disabled, $selected, [], false); ?>";
-        newDiv = $("<div></div>").html(value).attr("id", "newDiv");
-        $("#stadium_form").append(newDiv);
-
-    });
-
-    $(document).ready(function() {
-    $('.select2-basic-single').select2();
-});
-</script>
 
 <?= $this->endSection(); ?>

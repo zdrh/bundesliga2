@@ -1,5 +1,8 @@
 <?php
 //var_dump($error);
+/**
+ * @var array $error
+ */
 foreach ($error as $row) {
     if ($row->real) {
 ?>

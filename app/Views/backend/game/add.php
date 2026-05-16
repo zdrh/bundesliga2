@@ -86,8 +86,8 @@ $rocnik = $skupina->start . "-" . $skupina->finish;
         <div id='round_form'>
             <?= form_open('admin/liga/skupina/zapasy/create'); ?>
             <?= form_input_bs('date', $dataDate, "Datum zápasů", 'date', false); ?>
-            <?= form_input_bs('time', $dataTime, $form["divInputClass"], "Čas zápasů", 'time', false); ?>
-            <?= form_dropdown_bs('round', $options, $extra, "Vyber kolo", $selected, $disabled) ?>
+            <?= form_input_bs('time', $dataTime, "Čas zápasů", 'time', false); ?>
+            <?= form_dropdown_bs('round', $options,$extra, "Vyber kolo", $selected, $disabled) ?>
             <?php
             for ($i = 0; $i < $pocetZapasu; $i++) {
             ?>

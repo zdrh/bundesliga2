@@ -2,7 +2,10 @@
     <ul class="navbar-nav">
 
         <?php
-
+    /**
+     * @var array $menu
+     * @var string $profile
+     */
         foreach ($menu as $item) {
         ?>
             <li class="nav-item">

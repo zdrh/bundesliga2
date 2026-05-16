@@ -1,7 +1,14 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     * @var object $tym
+     * @var array $year
+     * @var array $tymy
+     * @var array $form
+     */
+?>
 <h1>Editovat klub <?= $tym->general_name ?></h1>
 <div class="row">
     <div class="col-md-4">
@@ -60,11 +67,11 @@
         ?>
 
 
-        <?= form_input_bs($dataName, $form["divInputClass"], "Obecný název klubu"); ?>
-        <?= form_input_bs($dataShortName, $form["divInputClass"], "Zkratka klubu"); ?>
-        <?= form_input_bs($dataFounded, $form["divInputClass"], "Rok založení", "number", false); ?>
-        <?= form_input_bs($dataDissolved, $form["divInputClass"], "Rok rozpuštění", "number", false); ?>
-        <?= form_dropdown_bs('follower[]', $options, $extra, 'mb-3', 'Vyber nástupce', $disabled, $selected); ?>
+        <?= form_input_bs('name[]', $dataName, "Obecný název klubu"); ?>
+        <?= form_input_bs('short_name[]', $dataShortName, "Zkratka klubu"); ?>
+        <?= form_input_bs('founded[]', $dataFounded, "Rok založení", "number", false); ?>
+        <?= form_input_bs('dissolved[]', $dataDissolved, "Rok rozpuštění", "number", false); ?>
+        <?= form_dropdown_bs('follower[]', $options, $extra, 'Vyber nástupce', $selected, $disabled); ?>
         <?= form_hidden('_method', 'PUT') ?>
         <?= form_hidden('id_team', $tym->id_team) ?>
 

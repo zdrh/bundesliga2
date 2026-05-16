@@ -2,7 +2,13 @@
 
 <?= $this->section('content'); ?>
 <?php
-
+/**
+ * @var object $skupina
+ * @var array $tatoSezonaTymy
+ * @var array $minulaSezonaTymy
+ * @var array $tymy
+ * @var array $form
+ */
 if (!is_null($skupina->groupname)) {
     $groupName = " (skupina " . $skupina->groupname . ")";
 } else {
@@ -34,7 +40,7 @@ $extraGroups = array(
 );
 ?>
 
-<?= form_dropdown_bs('team[]', $tymy, $extraGroups, 'mb-3', "Týmy", $disabledGroups, $selectedGroups) ?>
+<?= form_dropdown_bs('team[]', $tymy, $extraGroups, "Týmy", $selectedGroups, $disabledGroups) ?>
 <?= form_hidden('id_group', $skupina->id_league_season_group); ?>
 <?= form_button($form["submitButton"]) ?>
 

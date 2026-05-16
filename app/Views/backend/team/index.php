@@ -1,7 +1,14 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     * @var array $form
+     * @var array $tymy
+     * @var array $tableTemplate
+     * @var object $pager
+     */
+?>
 <h1>Seznam týmů</h1>
 <div class="row">
     <div class="col-md-10">
@@ -26,7 +33,7 @@
 
 
             echo "<!-- začátek modalu -->\n";
-            echo form_modal("modal" . $key, $row->id_team, "Smazat tým", "Chceš opravdu smazat tým " . $row->general_name ."?", "admin/tym/" . $row->id_team. "/delete");
+            echo form_modal_delete("modal" . $key, $row->id_team, "Smazat tým", "Chceš opravdu smazat tým " . $row->general_name ."?", "admin/tym/" . $row->id_team. "/delete");
             echo "<!-- konec modalu -->\n";
             $data = array(
                 'class' => $form['listClass'].' ms-3'

@@ -38,10 +38,10 @@ class TeamLeagueSeason extends BaseBackendController
         $this->fileLib = new FileLibrary();
     }
 
-    public function index($idLeagueSeason)
+    public function index(int $idLeagueSeason)
     {
         $this->data['liga'] = $this->league_season->join('league', $this->data['join']['league_season_league'], 'inner')->join('association_season', $this->data['join']['association_season_league_season'], 'inner')->join('season', $this->data['join']['association_season_season'], 'inner')->where('association_season.deleted_at IS NULL')->find($idLeagueSeason);
-        $skupiny = $this->league_season_group->where('id_league_season', $idLeagueSeason)->orderBy('regular', 1)->findAll();
+        $skupiny = $this->league_season_group->where('id_league_season', $idLeagueSeason)->orderBy('regular', 'asc')->findAll();
         $this->data['skupiny'] = $this->arrayLib->fillNames($skupiny, $this->data['liga']->league_name_in_season);
 
         $tymy = $this->team_league_season->join('league_season_group', $this->data['join']['league_season_group_team_league_season'], 'inner')->join('league_season', $this->data['join']['league_season_group_league_season'], 'inner')->join('team', $this->data['join']['team_team_league_season'], 'inner')->where('league_season.id_league_season', $idLeagueSeason)->where('league_season_group.deleted_at IS NULL')->where('league_season.deleted_at IS NULL')->findAll();

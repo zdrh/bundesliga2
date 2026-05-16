@@ -1,7 +1,13 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     * @var array $form
+     * @var array $sezony
+     * @var array $tableTemplate
+     */
+?>
 <h1>Seznam sezón</h1>
 <div class="row">
     <div class="col-md-6">
@@ -29,7 +35,7 @@
 
 
             echo "<!-- začátek modalu -->\n";
-            echo form_modal("modal" . $key, $row->id_season, "Smazat sezonu", "Chceš opravdu smazat sezónu " . $row->start . "-" . $row->finish . "?", "admin/sezona/" . $row->id_season . "/delete");
+            echo form_modal_delete("modal" . $key, $row->id_season, "Smazat sezonu", "Chceš opravdu smazat sezónu " . $row->start . "-" . $row->finish . "?", "admin/sezona/" . $row->id_season . "/delete");
             echo "<!-- konec modalu -->\n";
 
 

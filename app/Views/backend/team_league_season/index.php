@@ -1,7 +1,18 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     * @var object $liga
+     * @var array $skupiny
+     * @var array $form
+     * @var array $tableTemplate
+     * @var array $tymy
+     * @var array $zapasy
+     * @var array $tableTemplateFixture
+     * 
+     */
+?>
 <h1>Soutěž <?= $liga->league_name_in_season ?> ročník <?= $liga->start  ?>/<?= $liga->finish ?></h1>
 
 <ul class="nav nav-tabs">
@@ -58,7 +69,7 @@
                 $deleteBtn = "<button type=\"button\" class=\"" . $form['deleteClass'] . " text-black ms-3\" data-bs-toggle=\"modal\" data-bs-target=\"#modal" . $key . "\">" . $form['deleteBtn'] . "</button>";
 
                 echo "<!-- začátek modalu -->\n";
-                echo form_modal("modal" . $key, $row->id_league_season_group, "Smazat skupinu ligy", "Chceš opravdu smazat skupinu " . $row->groupname . " pro ligu " . $liga->league_name_in_season . "?", "admin/liga/" . $liga->id_league . "/sezona/" . $liga->id_season . "/skupina/" . $row->id_league_season_group . "/delete");
+                echo form_modal_delete("modal" . $key, $row->id_league_season_group, "Smazat skupinu ligy", "Chceš opravdu smazat skupinu " . $row->groupname . " pro ligu " . $liga->league_name_in_season . "?", "admin/liga/" . $liga->id_league . "/sezona/" . $liga->id_season . "/skupina/" . $row->id_league_season_group . "/delete");
                 echo "<!-- konec modalu -->\n";
 
 
@@ -191,7 +202,7 @@
                                 $deleteBtn = "<button type=\"button\" class=\"" . $form['deleteClass'] . " text-black ms-1\" data-bs-toggle=\"modal\" data-bs-target=\"#modal_match" . $row4->id_game . "\">" . $form['deleteBtnSmall'] . "</button>";
 
                                 echo "<!-- začátek modalu -->\n";
-                                echo form_modal("modal_match" . $row4->id_game, $row->id_league_season_group, "Smazat zápas", "Chceš opravdu smazat zápas " .$row4->team." - ".$row4->oppo." pro ligu " . $liga->league_name_in_season . "?", "admin/zapas/" . $row4->id_game . "/delete");
+                                echo form_modal_delete("modal_match" . $row4->id_game, $row->id_league_season_group, "Smazat zápas", "Chceš opravdu smazat zápas " .$row4->team." - ".$row4->oppo." pro ligu " . $liga->league_name_in_season . "?", "admin/zapas/" . $row4->id_game . "/delete");
                                 echo "<!-- konec modalu -->\n";
                                 $table->addRow(date('j.n.Y', strtotime($row4->date)), date('H:i', strtotime($row4->time)), $row4->team, $row4->oppo, $result, $editBtn.$deleteBtn);
                             }

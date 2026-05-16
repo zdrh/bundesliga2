@@ -2,6 +2,14 @@
 
 <?= $this->section('content'); ?>
 <?php
+/**
+ * @var object $skupina
+ * @var object $tym
+ * @var array $stadion
+ * @var array $uploadPath
+ * @var array $form
+ * @var string $stadiumName
+ */
 if (!is_null($skupina->groupname)) {
     $groupName = " (skupina " . $skupina->groupname . ")";
 } else {
@@ -95,9 +103,9 @@ if (!is_null($skupina->groupname)) {
         );
 
         ?>
-        <?= form_input_bs($dataName, $form["divInputClass"], "Obecný název"); ?>
+        <?= form_input_bs( 'general_name', $dataName, "Obecný název"); ?>
 
-        <?= form_input_bs($dataSeasonName, $form["divInputClass"], "Název týmu v této sezoně"); ?>
+        <?= form_input_bs('name_in_season', $dataSeasonName, "Název týmu v této sezoně"); ?>
         <?= form_button($data_button_general_name); ?>
         <?php
         if($tym->logo != "") {
@@ -112,9 +120,9 @@ if (!is_null($skupina->groupname)) {
       
         ?>
 
-        <?= form_input_bs($dataLogo, $form["divInputClass"], "Logo týmu v této sezóně", 'file', false); ?>
-        <?= form_dropdown_bs('stadium', $optionsStadium, $extra, 'mb-3', "Vyber stadion", $disabled, $selected) ?>
-        <?= form_input_bs($dataStadiumName, $form["divInputClass"], "Název stadionu v této sezoně"); ?>
+        <?= form_input_bs('logo', $dataLogo, "Logo týmu v této sezóně", 'file', false); ?>
+        <?= form_dropdown_bs('stadium', $optionsStadium, $extra, "Vyber stadion", $selected, $disabled) ?>
+        <?= form_input_bs('stadium_name_in_season', $dataStadiumName, "Název stadionu v této sezoně"); ?>
         <?= form_button($data_button_general_stadium_name); ?>
         <?= form_hidden('id_team_in_season', $tym->id_team_league_season); ?>
         <?= form_hidden('_method', 'PUT') ?>

@@ -1,6 +1,14 @@
 <?= $this->extend('layout/frontend/layout-season'); ?>
 
 <?= $this->section('content'); ?>
+<?php
+  /**
+   * @var object $sezona
+   * @var array $souteze
+   * @var array $uploadPath
+   * @var array $tableTemplate
+   */
+?>
 <h1>Soutěže v sezóně <?= $sezona->start ?>-<?= $sezona->finish ?></h1>
 
 <?php

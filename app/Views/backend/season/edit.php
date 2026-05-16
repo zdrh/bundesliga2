@@ -1,7 +1,13 @@
 <?= $this->extend('layout/backend/layout'); ?>
 
 <?= $this->section('content'); ?>
-
+<?php
+    /**
+     * @var array $year
+     * @var object $sezona
+     * @var array $form
+     */
+?>
 <h1>Editovat sezónu</h1>
 <div class="row">
     <div class="col-md-4">
