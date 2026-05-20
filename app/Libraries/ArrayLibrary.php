@@ -12,6 +12,25 @@ class ArrayLibrary
     {
         $this->team = new Team();
     }
+/**
+ * v rámci pole objektů $array vezme stributy 
+ */
+    public function combineAttributes(array $array, array $sourceAttributes, string $newAttribute, string $delimiter = ' '){
+        $result = [];
+        foreach($array as $row){
+            $new2 = '';
+            foreach($sourceAttributes as $row2){
+                $new2 .= $row->$row2.$delimiter; 
+            }
+           
+            $delka = strlen($delimiter);
+            $new2 = substr($new2, 0, -$delka);
+            $row->$newAttribute = $new2;
+            $result[] = $row;
+        }
+
+        return $result;
+    }
 
     /**
      * dostane pole objektů a seskupí ho podle daného atributu
@@ -69,7 +88,7 @@ class ArrayLibrary
      * 
      * @return - pole objektů, kde vnitřní pole bude objektem a klíče vnitřního pole budou atributy
      */
-    public function testArray($array, $names)
+    public function testArray(array $array, array $names)
     {
         $result = array();
         foreach ($array as $row) {

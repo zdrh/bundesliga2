@@ -9,7 +9,7 @@
      * @var array $form
      */
 ?>
-<h1>Upravit hráče</h1>
+<h1>Upravit osobu</h1>
 <div class="row">
     <div class="col-md-4">
         <?php
@@ -99,7 +99,7 @@
             <?= form_dropdown_bs('retire[]', $optionsRetire, $extraRetire, "Ukončil kariéru?", $selectedRetire, $disabled) ?>
             <?= form_input_bs('death', $dataDeath, "Datum úmrtí", "date", false); ?>
             <?= form_hidden('_method', 'PUT'); ?>
-            <?= form_hidden('id_player', $player->id_player); ?>
+            <?= form_hidden('id_player', $player->id_person); ?>
 
         </div>
         <?php

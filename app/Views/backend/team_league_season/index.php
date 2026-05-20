@@ -2,16 +2,17 @@
 
 <?= $this->section('content'); ?>
 <?php
-    /**
-     * @var object $liga
-     * @var array $skupiny
-     * @var array $form
-     * @var array $tableTemplate
-     * @var array $tymy
-     * @var array $zapasy
-     * @var array $tableTemplateFixture
-     * 
-     */
+/**
+ * @var object $liga
+ * @var array $skupiny
+ * @var array $form
+ * @var array $tableTemplate
+ * @var array $tymy
+ * @var array $zapasy
+ * @var array $tableTemplateFixture
+ * @var array $rozhodci
+ * 
+ */
 ?>
 <h1>Soutěž <?= $liga->league_name_in_season ?> ročník <?= $liga->start  ?>/<?= $liga->finish ?></h1>
 
@@ -185,52 +186,72 @@
                 //generování karet
             ?>
                 <div class="row row-cols-md-2 g-1">
-                  
-                    <?php
-                    if (array_key_exists($row2->id_league_season_group, $zapasy)) {
-                        //var_dump($zapasy[$row2->id_league_season_group]);
-                        //procházíme kola
-                        foreach ($zapasy[$row2->id_league_season_group] as $key3 =>  $row3) {
-                            $table = new \CodeIgniter\View\Table();
-                            $table->setHeading('Datum','Čas', 'Domácí', 'Hosté', 'Výsl.', '');
-                            foreach($row3 as $row4) {
-                                $result = $row4->result_team . ":". $row4->result_opponent;
-                                $dataEdit = array(
-                                    'class' => $form['editClass']
-                                );
-                                $editBtn = anchor('admin/liga/skupina/' . $row2->id_league_season_group . '/zapas/'.$row4->id_game.'/edit', $form['editBtnSmall'], $dataEdit);
-                                $deleteBtn = "<button type=\"button\" class=\"" . $form['deleteClass'] . " text-black ms-1\" data-bs-toggle=\"modal\" data-bs-target=\"#modal_match" . $row4->id_game . "\">" . $form['deleteBtnSmall'] . "</button>";
 
-                                echo "<!-- začátek modalu -->\n";
-                                echo form_modal_delete("modal_match" . $row4->id_game, $row->id_league_season_group, "Smazat zápas", "Chceš opravdu smazat zápas " .$row4->team." - ".$row4->oppo." pro ligu " . $liga->league_name_in_season . "?", "admin/zapas/" . $row4->id_game . "/delete");
-                                echo "<!-- konec modalu -->\n";
-                                $table->addRow(date('j.n.Y', strtotime($row4->date)), date('H:i', strtotime($row4->time)), $row4->team, $row4->oppo, $result, $editBtn.$deleteBtn);
-                            }
-                            $table->setTemplate($tableTemplateFixture);
-                            $textTable = $table->generate();
-                            $textRound = $key3.". kolo";
-                            echo "<div class=\"col\">";
-                            echo card($textRound, $textTable, 'no-padding');
-                            echo "</div>\n";
-                          
-                            
+                <?php
+                if (array_key_exists($row2->id_league_season_group, $zapasy)) {
+                    //var_dump($zapasy[$row2->id_league_season_group]);
+                    //procházíme kola
+                    foreach ($zapasy[$row2->id_league_season_group] as $key3 =>  $row3) {
+                        $table = new \CodeIgniter\View\Table();
+                        $table->setHeading('Datum', 'Čas', 'Domácí', 'Hosté', 'Výsl.', '');
+                        foreach ($row3 as $row4) {
+                            $result = $row4->result_team . ":" . $row4->result_opponent;
+                            $dataEdit = array(
+                                'class' => $form['editClass']
+                            );
+                            $editBtn = anchor('admin/liga/skupina/' . $row2->id_league_season_group . '/zapas/' . $row4->id_game . '/edit', $form['editBtnSmall'], $dataEdit);
+                            $deleteBtn = "<button type=\"button\" class=\"" . $form['deleteClass'] . " text-black ms-1\" data-bs-toggle=\"modal\" data-bs-target=\"#modal_match" . $row4->id_game . "\">" . $form['deleteBtnSmall'] . "</button>";
+
+                            echo "<!-- začátek modalu -->\n";
+                            echo form_modal_delete("modal_match" . $row4->id_game, $row->id_league_season_group, "Smazat zápas", "Chceš opravdu smazat zápas " . $row4->team . " - " . $row4->oppo . " pro ligu " . $liga->league_name_in_season . "?", "admin/zapas/" . $row4->id_game . "/delete");
+                            echo "<!-- konec modalu -->\n";
+                            $table->addRow(date('j.n.Y', strtotime($row4->date)), date('H:i', strtotime($row4->time)), $row4->team, $row4->oppo, $result, $editBtn . $deleteBtn);
                         }
+                        $table->setTemplate($tableTemplateFixture);
+                        $textTable = $table->generate();
+                        $textRound = $key3 . ". kolo";
+                        echo "<div class=\"col\">";
+                        echo card($textRound, $textTable, 'no-padding');
+                        echo "</div>\n";
                     }
-                   
-                    echo "</div>\n";
-                    echo "</div>\n";
                 }
-                    ?>
+
+                echo "</div>\n";
+                echo "</div>\n";
+            }
+                ?>
 
 
-                    
+
 
                 </div>
 
         </div>
         <!--  čtvrtý tab -->
         <div class="tab-pane container fade" id="rules">
+            <h1>Seznam rozhodčích v souteži</h1>
+            <?php
+            $data = array(
+                'class' => $form['addClass'] . " mb-3"
+            );
+            echo anchor('admin/liga/' . $row->id_league_season . '/rozhodci/pridat', $form['addBtn']." rozhodčího do sezóny", $data);
 
+            $table = new \CodeIgniter\View\Table();
+            $table->setHeading('Jméno', 'Město', 'Datum narození', 'Země');
+            foreach ($rozhodci as $row) {
+                $vlajka = "<i class=\"fi fi-".$row->short_name."\"></i>";
+                if(is_null($row->born)){
+                    $born = "";
+                } else {
+                    $born = date('j.n.Y', strtotime($row->born));
+                }
+                $table->addRow(anchor('admin/hrac/' . $liga->id_league_season . '/seznam-rozhodcich', $row->first_name . " " . $row->last_name), $row->name_de, $born , $vlajka." ".$row->name);
+            }
+             $table->setTemplate($tableTemplate);
+            echo $table->generate();
+
+
+            ?>
         </div>
     </div>
 

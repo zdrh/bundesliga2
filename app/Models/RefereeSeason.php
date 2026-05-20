@@ -4,17 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Player extends Model
+class RefereeSeason extends Model
 {
-    protected $table            = 'player';
-    protected $primaryKey       = 'id_player';
+    protected $table            = 'referee_season';
+    protected $primaryKey       = 'id_referee_season';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['first_name', 'last_name', 'born', 'country', 'retire', 'death', 'born_city', ];
+    protected $allowedFields    = ['id_person', 'id_league_season', 'photo'];
 
     protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    protected array $casts = [];
+    protected array $castHandlers = [];
 
     // Dates
     protected $useTimestamps = true;

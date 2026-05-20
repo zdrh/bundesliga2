@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 
-<h1>Přidat hráče</h1>
+<h1>Přidat osobu</h1>
 <?php
 /**
  * @var array $country
@@ -31,7 +31,6 @@
         $dataBorn = array(
             'name' => 'born[]',
             'id' => 'born',
-            'required' => 'required',
             'placeholder' => 'a'
         );
 
@@ -84,8 +83,8 @@
 
         <div id="player_form">
 
-            <?= form_input_bs('first_name[]', $dataFirstName, "Jméno hráče"); ?>
-            <?= form_input_bs('last_name[]', $dataLastName, "Příjmení hráče"); ?>
+            <?= form_input_bs('first_name[]', $dataFirstName, "Jméno osoby"); ?>
+            <?= form_input_bs('last_name[]', $dataLastName, "Příjmení osoby"); ?>
             <?= form_dropdown_bs('country[]', $optionsCountry, $extraCountry, "Vyber národnost", $selected, $disabled) ?>
             <?= form_input_bs('born[]', $dataBorn, "Datum narození", "date", false); ?>
             <?= form_dropdown_bs('bornCity[]', $optionsCity, $extraCity, "Vyber město narození", $selected) ?>

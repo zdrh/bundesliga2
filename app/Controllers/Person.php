@@ -7,31 +7,31 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-use App\Models\Player as P;
+use App\Models\Person as P;
 use App\Models\Country;
 use App\Models\City;
 
 use App\Libraries\AlertLibrary;
 
-class Player extends BaseBackendController
+class Person extends BaseBackendController
 {
-    var $player;
-    var $country;
-    var $city;
-    var $alertLib;
+    private object $person;
+    private object $country;
+    private object $city;
+    private object $alertLib;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         parent::initController($request, $response, $logger);
-        $this->player = new P();
+        $this->person = new P();
         $this->country = new Country();
         $this->city = new City();
         $this->alertLib = new AlertLibrary();
     }
     public function index()
     {
-        $this->data['player'] = $this->player->select('player.id_player, player.first_name, player.last_name, player.born, player.death, player.retire, country.name, city_country.name as city_country, city.name_de, country.short_name')->join('country', $this->data['join']['player_country'], 'left')->join('city', $this->data['join']['player_city'], 'left')->join('country as city_country', 'city_country.id_country=city.country', 'left')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->paginate($this->data['perPage']);
-        $this->data['pager'] = $this->player->pager;
+        $this->data['player'] = $this->person->select('person.id_person, person.first_name, person.last_name, person.born, person.death, person.retire, country.name, city_country.name as city_country, city.name_de, country.short_name')->join('country', $this->data['join']['person_country'], 'left')->join('city', $this->data['join']['person_city'], 'left')->join('country as city_country', 'city_country.id_country=city.country', 'left')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->paginate($this->data['perPage']);
+        $this->data['pager'] = $this->person->pager;
         echo view('backend/player/index', $this->data);
     }
 
@@ -52,10 +52,16 @@ class Player extends BaseBackendController
         $death = $this->request->getPost('death');
         $bornCity = $this->request->getPost('bornCity');
         $retire = $this->request->getPost('retire');
-       
+
         foreach ($first_name as $key => $row) {
-            if ($death[$key] == "") {
-                $death[$key] = NULL;
+            if ($born[$key] == "") {
+                $born[$key] = NULL;
+            }
+
+            foreach ($first_name as $key => $row) {
+                if ($death[$key] == "") {
+                    $death[$key] = NULL;
+                }
             }
             $data = array(
                 'first_name' => $row,
@@ -66,10 +72,9 @@ class Player extends BaseBackendController
                 'born_city' => $bornCity[$key],
                 'retire' => $retire[$key]
             );
-           
-            $result =  $this->player->save($data);
+
+            $result =  $this->person->save($data);
             $alerts[] = $this->alertLib->createAlert($result, 'dbAddCount', $this->country->insertID);
-            
         }
 
         $data2 =  $this->errorMessage->prepareMessage3($alerts);
@@ -78,24 +83,25 @@ class Player extends BaseBackendController
         return redirect()->route('admin/seznam-hracu');
     }
 
-    public function import() {
+    public function import()
+    {
 
         echo view('backend/player/import', $this->data);
     }
 
-    public function createImport() {
-        
-    }
+    public function createImport() {}
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $this->data['country'] = $this->country->orderBy('name', 'asc')->findAll();
         $this->data['city'] = $this->city->orderBy('name_de', 'asc')->findAll();
-        $this->data['player'] = $this->player->find($id);
+        $this->data['player'] = $this->person->find($id);
 
         echo view('backend/player/edit', $this->data);
     }
 
-    public function update() {
+    public function update()
+    {
         $first_name = $this->request->getPost('first_name');
         $last_name = $this->request->getPost('last_name');
         $country = $this->request->getPost('country');
@@ -117,17 +123,15 @@ class Player extends BaseBackendController
             'death' => $death,
             'born_city' => $bornCity,
             'retire' => $retire,
-            'id_player' => $id_player
+            'id_person' => $id_player
         );
-       
-        $result =  $this->player->save($data);
-       // $alerts[] = $this->alertLib->createAlert($result, 'dbEdit', $this->country->insertID);
+
+        $result =  $this->person->save($data);
+        // $alerts[] = $this->alertLib->createAlert($result, 'dbEdit', $this->country->insertID);
 
         $data2[] =  $this->errorMessage->prepareMessage($result, 'dbEdit');
         $this->session->setFlashdata('error', $data2);
 
         return redirect()->route('admin/seznam-hracu');
-
-
     }
 }

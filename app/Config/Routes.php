@@ -130,15 +130,15 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->delete('zapas/(:num)/delete', 'Game::delete/$1');
 
     //hráči
-    $routes->get('hrac/pridat', 'Player::add');
-    $routes->get('hrac/import', 'Player::import');
-    $routes->post('hrac/create', 'Player::create');
-    $routes->post('hrac/createimport', 'PLayer::createImport');
-    $routes->get('seznam-hracu', 'Player::index');
-    $routes->get('hrac/(:num)', 'Player::show/$1');
-    $routes->get('hrac/(:num)/edit', 'Player::edit/$1');
-    $routes->put('hrac/update', 'Player::update');
-    $routes->delete('hrac/(:num)/delete', 'Player::delete/$1');
+    $routes->get('hrac/pridat', 'Person::add');
+    $routes->get('hrac/import', 'Person::import');
+    $routes->post('hrac/create', 'Person::create');
+    $routes->post('hrac/createimport', 'Person::createImport');
+    $routes->get('seznam-hracu', 'Person::index');
+    $routes->get('hrac/(:num)', 'Person::show/$1');
+    $routes->get('hrac/(:num)/edit', 'Person::edit/$1');
+    $routes->put('hrac/update', 'Person::update');
+    $routes->delete('hrac/(:num)/delete', 'Person::delete/$1');
 
     //země
     $routes->get('zeme/pridat', 'Country::add');
@@ -149,6 +149,12 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->put('zeme/update', 'Country::update');
     $routes->delete('zeme/(:num)/delete', 'Country::delete/$1');
 
-    
+    //rozhodčí
+    $routes->get('liga/(:num)/seznam-rozhodcich', 'Referee::index/$1');
+    $routes->get('liga/(:num)/rozhodci/pridat', 'Referee::add/$1');
+    $routes->post('liga/(:num)/rozhodci/create', 'Referee::create/$1');
+    $routes->get('liga/(:num)/rozhodci/(:num)/edit', 'Referee::edit/$1/$2');
+    $routes->put('liga/(:num)/rozhodci/(:num)/update', 'Referee::update');
+    $routes->delete('liga/(:num)/rozhodci/(:num)/delete', 'Referee::delete/$1/$2');
 });
 

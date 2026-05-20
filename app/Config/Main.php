@@ -142,12 +142,16 @@ class Main extends BaseConfig
         'stadium_city' => 'city.id_city=stadium.id_city',
         'team_league_season_stadium' => 'stadium.id_stadium=team_league_season.id_stadium',
         'stadium_team_league_season' => 'stadium.id_stadium=team_league_season.id_stadium',
-        'player_country' => 'player.country=country.id_country',
-        'country_player' => 'player.country=country.id_country',
-        'player_city' => 'player.born_city=city.id_city',
-        'city_player' => 'player.born_city=city.id_city',
+        'person_country' => 'person.country=country.id_country',
+        'country_person' => 'person.country=country.id_country',
+        'person_city' => 'person.born_city=city.id_city',
+        'city_person' => 'person.born_city=city.id_city',
         'city_country' => 'country.id_country=city.country',
-        'country_city' => 'country.id_country=city.country'
+        'country_city' => 'country.id_country=city.country',
+        'league_season_referee_season' => 'league_season.id_league_season=referee_season.id_league_season',
+        'referee_season_league_season' => 'league_season.id_league_season=referee_season.id_league_season',
+        'person_referee_season' => 'referee_season.id_person=person.id_person',
+        'referee_season_person' => 'referee_season.id_person=person.id_person',
     );
     //smazaané položky nezobrazovat
     public $deletedRows = array(
