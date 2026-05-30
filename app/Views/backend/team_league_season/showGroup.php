@@ -8,6 +8,8 @@
      * @var array $tymy
      * @var array $uploadPath
      * @var array $tableTemplate
+     * @var object $lastSeason
+     * @var object $nextSeason
      */
 ?>
 <?php
@@ -19,6 +21,14 @@ if ($liga->groupname != NULL) {
 
 ?>
 <h1>Soutěž <?= $liga->league_name_in_season ?><?= $skupina ?> ročník <?= $liga->start  ?>/<?= $liga->finish ?></h1>
+<?php if (!is_null($lastSeason)) {
+    echo anchor('admin/liga/' . $lastSeason->id_league_season . '/info', 'Předchozí sezóna', ['class' => 'btn btn-primary mb-3 me-3']);
+}
+if (!is_null($nextSeason)) {
+    echo anchor('admin/liga/' . $nextSeason->id_league_season . '/info', 'Další sezóna', ['class' => 'btn btn-primary mb-3 me-3']);
+}
+
+?>
 <h2>Přehled týmů</h2>
 <?php
  $data = array(
@@ -46,7 +56,7 @@ $dataManage = array(
 
        
         
-        $editBtn = anchor('admin/liga/' . $liga->id_league_season_group . '/tym/' . $row->id_team_league_season . '/edit', $form['editBtn'], $data);
+        $editBtn = anchor('admin/liga/' . $liga->id_league_season_group . '/tym/' . $row->id_team . '/edit', $form['editBtn'], $data);
         $deleteBtn = "<button type=\"button\" class=\"" . $form['deleteClass'] . " text-black ms-3 me-3\" data-bs-toggle=\"modal\" data-bs-target=\"#modal" . $key . "\">" . $form['deleteBtn'] . "</button>";
         $manageBtn = anchor('admin/liga/'. $liga->id_league_season_group . '/tym/' . $row->id_team . '/manage', 'Správa týmu', $dataManage);
         $table->addRow($row->general_name, $row->team_name_in_season, $logo, $row->stadium_name_in_season. " - ".$row->name_de, $editBtn.$deleteBtn.$manageBtn);

@@ -113,7 +113,7 @@ class Main extends BaseConfig
     );
 
     //relace mezi tabulkami
-    public $joinTable = array(
+    public array $joinTable = array(
         'season_association_season' => 'season.id_season=association_season.id_season',
         'association_season_season' => 'season.id_season=association_season.id_season',
         'association_association_season' => 'association.id_association=association_season.id_association',
@@ -133,7 +133,7 @@ class Main extends BaseConfig
         'league_season_group_game' => 'league_season_group.id_league_season_group=game.id_league_season_group',
         'game_league_season_group' => 'league_season_group.id_league_season_group=game.id_league_season_group',
         'game_game_team' => 'game.id_game=game_team.id_game',
-        'game_teem_game' => 'game.id_game=game_team.id_game',
+        'game_team_game' => 'game.id_game=game_team.id_game',
         'game_team_me_team_league_season' =>'game_team.id_team_league_season=team_league_season.id_team_league_season',
         'team_league_season_game_team_me' =>'game_team.id_team_league_season=team_league_season.id_team_league_season',
         'game_team_oppo_team_league_season' =>'game_team.id_opponent=team_league_season.id_team_league_season',

@@ -11,11 +11,20 @@
  * @var array $zapasy
  * @var array $tableTemplateFixture
  * @var array $rozhodci
+ * @var object $lastSeasonData
+ * @var object $nextSeasonData
  * 
  */
 ?>
 <h1>Soutěž <?= $liga->league_name_in_season ?> ročník <?= $liga->start  ?>/<?= $liga->finish ?></h1>
+<?php if (!is_null($lastSeasonData)) {
+    echo anchor('admin/liga/' . $lastSeasonData->id_league_season . '/info', 'Předchozí sezóna', ['class' => 'btn btn-primary mb-3 me-3']);
+}
+if (!is_null($nextSeasonData)) {
+    echo anchor('admin/liga/' . $nextSeasonData->id_league_season . '/info', 'Další sezóna', ['class' => 'btn btn-primary mb-3 me-3']);
+}
 
+?>
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link active" data-bs-toggle="tab" href="#groups">Skupiny</a>
@@ -234,20 +243,20 @@
             $data = array(
                 'class' => $form['addClass'] . " mb-3"
             );
-            echo anchor('admin/liga/' . $row->id_league_season . '/rozhodci/pridat', $form['addBtn']." rozhodčího do sezóny", $data);
+            echo anchor('admin/liga/' . $row->id_league_season . '/rozhodci/pridat', $form['addBtn'] . " rozhodčího do sezóny", $data);
 
             $table = new \CodeIgniter\View\Table();
             $table->setHeading('Jméno', 'Město', 'Datum narození', 'Země');
             foreach ($rozhodci as $row) {
-                $vlajka = "<i class=\"fi fi-".$row->short_name."\"></i>";
-                if(is_null($row->born)){
+                $vlajka = "<i class=\"fi fi-" . $row->short_name . "\"></i>";
+                if (is_null($row->born)) {
                     $born = "";
                 } else {
                     $born = date('j.n.Y', strtotime($row->born));
                 }
-                $table->addRow(anchor('admin/hrac/' . $liga->id_league_season . '/seznam-rozhodcich', $row->first_name . " " . $row->last_name), $row->name_de, $born , $vlajka." ".$row->name);
+                $table->addRow(anchor('admin/hrac/' . $liga->id_league_season . '/seznam-rozhodcich', $row->first_name . " " . $row->last_name), $row->name_de, $born, $vlajka . " " . $row->name);
             }
-             $table->setTemplate($tableTemplate);
+            $table->setTemplate($tableTemplate);
             echo $table->generate();
 
 

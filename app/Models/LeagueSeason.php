@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Config\Main;
 
 class LeagueSeason extends Model
 {
+    private object $config;
+    private array $join;
+
     protected $table            = 'league_season';
     protected $primaryKey       = 'id_league_season';
     protected $useAutoIncrement = true;
@@ -39,4 +43,21 @@ class LeagueSeason extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function __construct()
+    {
+        $this->config = new Main();
+        $this->join = $this->config->joinTable;
+        parent::__construct();
+    }
+    public function getLeagueSeasonByStart(int $start, int $idLeague)
+    {
+        $data =  $this->select('season.start, league_season.id_league_season')->join('association_season', $this->join['league_season_association_season'], 'inner')->join('season', $this->join['season_association_season'], 'inner')->where('league_season.deleted_at IS NULL')->where('association_season.deleted_at IS NULL')->where('start', $start)->where('league_season.id_league', $idLeague)->first();
+
+        return $data;
+    }
+
+    public function getLegaueSeasonByGroup(int $idGroup){
+        
+    }
 }

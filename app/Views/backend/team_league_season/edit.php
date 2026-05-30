@@ -9,6 +9,7 @@
  * @var array $uploadPath
  * @var array $form
  * @var string $stadiumName
+ * @var object $lastSeasonData
  */
 if (!is_null($skupina->groupname)) {
     $groupName = " (skupina " . $skupina->groupname . ")";
@@ -18,10 +19,39 @@ if (!is_null($skupina->groupname)) {
 
 ?>
 <h1>Editovat tým <?= $tym->general_name ?> v lize <?= $skupina->league_name_in_season ?><?= $groupName ?> ročník <?= $skupina->start ?>/<?= $skupina->finish  ?></h1>
+<?=  anchor('liga/'.$lastSeasonData->id_league_season.'/info', 'Předchozí sezóna', ['class' => 'btn btn-primary mb-3 me-3']); ?>
+
+
 <div class="row">
     <div class="col-md-4">
-
-
+        <h2>Minulá sezóna</h2>
+        <h5>Název klubu:</h5>
+        <?= $lastSeasonData->team_name_in_season ?>
+        <h5>Logo klubu</h5>
+        <?php
+        $dataLogoLast = array(
+            'class' => 'img-fluid edit',
+            'src' => $uploadPath['logoTeam'] . $lastSeasonData->logo
+        );
+        echo img($dataLogoLast);
+        ?>
+        <h5>Stadion</h5>
+        <?= $lastSeasonData->general_name . " - " . $lastSeasonData->name_de ?>
+        <h5>Nazev stadion v sezóně:</h5>
+        <?= $lastSeasonData->stadium_name_in_season ?>
+        <?php
+        $data_button_use_last_season = array(
+            'name' => 'last_season_button',
+            'id' => 'last_season_button',
+            'type' => 'button',
+            'class' => 'btn btn-primary mt-3',
+            'content' => 'Použít data z minulé sezóny'
+        );
+        ?>
+        <p><?= form_button($data_button_use_last_season); ?></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Tato sezóna</h2>
         <?php
 
         echo form_open_multipart('admin/liga/tym/update');
@@ -66,8 +96,8 @@ if (!is_null($skupina->groupname)) {
             '' => 'Vyber stadion'
         );
 
-        foreach($stadion as $row){
-            $optionsStadium[$row->id_stadium] = $row->general_name." - ".$row->name_de;
+        foreach ($stadion as $row) {
+            $optionsStadium[$row->id_stadium] = $row->general_name . " - " . $row->name_de;
         }
         $extra = array(
             'class' => 'form-select',
@@ -103,40 +133,41 @@ if (!is_null($skupina->groupname)) {
         );
 
         ?>
-        <?= form_input_bs( 'general_name', $dataName, "Obecný název"); ?>
+        <?= form_input_bs('general_name', $dataName, "Obecný název"); ?>
 
         <?= form_input_bs('name_in_season', $dataSeasonName, "Název týmu v této sezoně"); ?>
         <?= form_button($data_button_general_name); ?>
         <?php
-        if($tym->logo != "") {
+        $data = [];
+        if ($tym->logo != "") {
             $data = array(
-                'src' => $uploadPath["logoTeam"].$tym->logo,
+                'src' => $uploadPath["logoTeam"] . $tym->logo,
                 'class' => 'edit'
             );
-            echo "<p>".img($data);
+            echo "<p id='club-logo'>" . img($data);
         } else {
-            echo "<p>Zatím žádné logo nevloženo.</p>";
+            echo "<p id='club-logo'>Zatím žádné logo nevloženo.</p>";
         }
-      
+
         ?>
 
-        <?= form_input_bs('logo', $dataLogo, "Logo týmu v této sezóně", 'file', false); ?>
+        <?= form_input_bs('logo', $dataLogo, "Vložit mové logo týmu v této sezóně", 'file', false); ?>
         <?= form_dropdown_bs('stadium', $optionsStadium, $extra, "Vyber stadion", $selected, $disabled) ?>
         <?= form_input_bs('stadium_name_in_season', $dataStadiumName, "Název stadionu v této sezoně"); ?>
         <?= form_button($data_button_general_stadium_name); ?>
         <?= form_hidden('id_team_in_season', $tym->id_team_league_season); ?>
         <?= form_hidden('_method', 'PUT') ?>
         <p>
-        <?= form_button($form["submitButton"]) ?>
+            <?= form_button($form["submitButton"]) ?>
 
-        <?php
-        echo form_close();
-        ?>
+            <?php
+            echo form_close();
+            ?>
 
     </div>
 </div>
 <script>
-     $("#general_name_button").click(function() {
+    $("#general_name_button").click(function() {
         let text = $('#general_name').val();
         $('#name_in_season').val(text);
     });
@@ -144,8 +175,21 @@ if (!is_null($skupina->groupname)) {
     $("#general_stadium_name_button").click(function() {
         let id = $('#stadium').val();
         let stadium = <?= $stadiumName;  ?>
-        
+
         $('#stadium_name_in_season').val(stadium[id]);
+    });
+
+    $("#last_season_button").click(function() {
+        let name = "<?= $lastSeasonData->team_name_in_season ?>";
+        $('#name_in_season').val(name);
+        let stadium = <?= $lastSeasonData->id_stadium ?>;
+        $('#stadium').val(stadium);
+        let stadiumName = '<?= $lastSeasonData->stadium_name_in_season ?>';
+        $('#stadium_name_in_season').val(stadiumName);
+        let obrazek = '<?= img($dataLogoLast)?>';
+        $('p#club-logo').html(obrazek);
+        let logoPath = '<input type="hidden" name="logoPath" value="<?= $lastSeasonData->logo ?>">';
+        $('p#club-logo').append(logoPath);
     });
 </script>
 
