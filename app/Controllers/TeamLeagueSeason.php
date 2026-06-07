@@ -162,11 +162,16 @@ class TeamLeagueSeason extends BaseBackendController
         $thisSeason = $this->data['skupina']->start;
 
         $lastSeason = $thisSeason - 1;
+        if ($lastSeason < 1945) {
+            $this->data['lastSeasonData'] = NULL;
+        } else {
+            $this->data['lastSeasonData'] = $this->team_league_season->select('team_league_season.*, stadium.*, city.*, league_season_group.id_league_season')->join('stadium', $this->data['join']['team_league_season_stadium'], 'inner')->join('city', $this->data['join']['stadium_city'], 'inner')->join('league_season_group', $this->data['join']['team_league_season_league_season_group'], 'inner')->join('league_season', $this->data['join']['league_season_group_league_season'], 'inner')->join('association_season', $this->data['join']['league_season_association_season'], 'inner')->join('season', $this->data['join']['season_association_season'], 'inner')->where('league_season.deleted_at IS NULL')->where('association_season.deleted_at IS NULL')->where('start', $lastSeason)->where('team_league_season.id_team', $idTeam)->first();
+        }
+      //  $source = $this->
 
 
-        $this->data['lastSeasonData'] = $this->team_league_season->select('team_league_season.*, stadium.*, city.*, league_season_group.id_league_season')->join('stadium', $this->data['join']['team_league_season_stadium'], 'inner')->join('city', $this->data['join']['stadium_city'], 'inner')->join('league_season_group', $this->data['join']['team_league_season_league_season_group'], 'inner')->join('league_season', $this->data['join']['league_season_group_league_season'], 'inner')->join('association_season', $this->data['join']['league_season_association_season'], 'inner')->join('season', $this->data['join']['season_association_season'], 'inner')->where('league_season.deleted_at IS NULL')->where('association_season.deleted_at IS NULL')->where('start', $lastSeason)->where('team_league_season.id_team', $idTeam)->first();
-
-        echo view('backend/team_league_season/edit', $this->data);
+        
+         echo view('backend/team_league_season/edit', $this->data);
     }
 
     public function update()
@@ -205,8 +210,8 @@ class TeamLeagueSeason extends BaseBackendController
             }
 
             $data2[] =  $this->errorMessage->prepareMessage($logoUpload['uploaded'], 'upload');
-        } else{
-            if($logoPath != ""){
+        } else {
+            if ($logoPath != "") {
                 $data['logo'] = $logoPath;
             }
         }

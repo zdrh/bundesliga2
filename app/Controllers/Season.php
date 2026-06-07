@@ -12,7 +12,7 @@ use App\Models\Season as SeasonModel;
 
 class Season extends BaseBackendController
 {
-    var $seasonModel;
+    private object $seasonModel;
     
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {

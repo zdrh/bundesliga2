@@ -4,17 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class TeamLeagueSeason extends Model
+class Source extends Model
 {
-    protected $table            = 'team_league_season';
-    protected $primaryKey       = 'id_team_league_season';
+    protected $table            = 'source';
+    protected $primaryKey       = 'id_source';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['team_name_in_season', 'logo', 'id_league_season_group', 'id_team', 'id_stadium', 'stadium_name_in_season', 'id_source_logo', 'source_logo_note'];
+    protected $allowedFields    = ['name', 'id_source_type'];
 
     protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    protected array $casts = [];
+    protected array $castHandlers = [];
 
     // Dates
     protected $useTimestamps = true;

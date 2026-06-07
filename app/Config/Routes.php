@@ -32,6 +32,21 @@ $routes->get('tym/(:num)/historie', 'TeamF::showHistory/$1');
 $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->get('dashboard', 'Dashboard::index');
 
+    //zdroje
+    $routes->get('seznam-zdroju', 'Source::index');
+    $routes->get('zdroj/pridat', 'Source::add');
+    $routes->post('zdroj/create', 'source::create');
+    $routes->get('zdroj/(:num)/edit', 'Source::edit/$1');
+    $routes->put('zdroj/update', 'Source::update');
+    $routes->delete('zdroj/(:num)/delete', 'Source::delete/$1');
+
+
+    $routes->get('seznam-typu-zdroju', 'SourceType::index');
+    $routes->get('typ-zdroje/pridat', 'SourceType::add');
+    $routes->post('typ-zdroje/create', 'SourceType::create');
+    $routes->get('type-zdroje/(:num)/edit', 'SourceType::edit/$1');
+    $routes->put('typ-zdroje/update', 'SourceType::update');
+    $routes->delete('typ-zdroje/(:num)/delete', 'SourceType::delete/$1');
     //sezóny
     $routes->get('seznam-sezon', 'Season::index');
     $routes->get('sezona/pridat', 'Season::add');
@@ -156,5 +171,7 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->get('liga/(:num)/rozhodci/(:num)/edit', 'Referee::edit/$1/$2');
     $routes->put('liga/(:num)/rozhodci/(:num)/update', 'Referee::update');
     $routes->delete('liga/(:num)/rozhodci/(:num)/delete', 'Referee::delete/$1/$2');
+
+
 });
 

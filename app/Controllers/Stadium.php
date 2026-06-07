@@ -94,7 +94,7 @@ class Stadium extends BaseBackendController
         return redirect()->route('admin/seznam-stadionu');
     }
 
-    public function delete($id_stadion) {
+    public function delete(int $id_stadion) {
         $result = $this->stadium->delete($id_stadion);
 
        

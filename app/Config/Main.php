@@ -61,9 +61,11 @@ class Main extends BaseConfig
         'addClass' => 'btn btn-primary',
         'editClass' => 'btn btn-warning',
         'deleteClass' => 'btn btn-danger',
+        'manageClass' => 'btn btn-secondary',
         'listClass' => 'btn btn-info',
         'divInputClass' => "mb-3",
-        
+        'manageBtn' => '<i class="fa-solid fa-gear"></i> Správa',
+
         'submitButton' => array(
             'name' => 'send',
             'id' => 'send',
@@ -152,6 +154,8 @@ class Main extends BaseConfig
         'referee_season_league_season' => 'league_season.id_league_season=referee_season.id_league_season',
         'person_referee_season' => 'referee_season.id_person=person.id_person',
         'referee_season_person' => 'referee_season.id_person=person.id_person',
+        'source_source_type' => 'source.id_source_type=source_type.id_source_type',
+        'source_type_source' => 'source.id_source_type=source_type.id_source_type',
     );
     //smazaané položky nezobrazovat
     public $deletedRows = array(

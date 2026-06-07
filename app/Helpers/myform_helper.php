@@ -295,13 +295,8 @@ if (! function_exists('form_dropdown_option_bs')) {
     /**
      * jen de facto privátní metoda, kterou voláme zevnitř dropdown helperu
      */
-    function form_dropdown_option_bs(
-        string $value,
-        string $label,
-        array $selected = [],
-        array $disabledOptions = [],
-        array $hiddenOptions = []
-    ): string {
+    function form_dropdown_option_bs(string $value, string $label, array $selected = [], array $disabledOptions = [], array $hiddenOptions = []): string 
+    {
         $attributes = [
             'value' => $value,
         ];
